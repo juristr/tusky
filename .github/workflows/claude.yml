@@ -24,12 +24,18 @@ jobs:
       github.event.workflow_run.conclusion == 'failure' &&
       github.event.workflow_run.pull_requests[0]
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+          fetch-depth: 0
+
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          #   track_progress: true
           additional_permissions: |
             actions: read
+          claude_args: "--allowedTools 'Read,Glob,Grep,Edit,Write,Bash(gh:*),Bash(git:*),Bash(npm:*),Bash(npx:*)'"
           prompt: |
             CI workflow "${{ github.event.workflow_run.name }}" failed.
 
@@ -42,12 +48,9 @@ jobs:
             1. Get workflow run details and download failed job logs
             2. Analyze root cause of failure
             3. Examine relevant source code
-            4. Propose specific fix with reasoning
+            4. Implement the fix and commit it to the PR branch
 
-            IMPORTANT: Do NOT make code changes or create commits. Only provide analysis and recommendations in your comment:
-            - Root cause
-            - Proposed solution with code examples
-            - Why fix will work
+            Fix the issue and push the commit directly to the PR branch.
 
   # Handle issue/PR comments
   comment-handler:
