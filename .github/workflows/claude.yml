@@ -1,0 +1,38 @@
+name: Claude Auto-Fix
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_run:
+    workflows: ['CI'] # Name of your CI workflow
+    types:
+      - completed
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  # Handle CI failures
+  ci-auto-fix:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: 'The CI failed. Analyze the failure logs and propose a fix.'
+
+  # Handle issue/PR comments
+  comment-handler:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issue_comment' &&
+      github.event.action == 'created' &&
+      contains(github.event.comment.body, '@claude')
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: ${{ github.event.comment.body }}
