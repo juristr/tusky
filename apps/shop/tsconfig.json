@@ -3,24 +3,6 @@
   "include": [],
   "references": [
     {
-      "path": "../../packages/orders/feat-cancel-order"
-    },
-    {
-      "path": "../../packages/orders/feat-past-orders"
-    },
-    {
-      "path": "../../packages/orders/feat-current-orders"
-    },
-    {
-      "path": "../../packages/orders/feat-create-order"
-    },
-    {
-      "path": "../../packages/products/feat-product-list"
-    },
-    {
-      "path": "../../packages/products/feat-product-detail"
-    },
-    {
       "path": "./tsconfig.app.json"
     },
     {
