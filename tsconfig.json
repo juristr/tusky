@@ -47,6 +47,9 @@
     },
     {
       "path": "./apps/api"
+    },
+    {
+      "path": "./packages/backend/api-dtos"
     }
   ]
 }
