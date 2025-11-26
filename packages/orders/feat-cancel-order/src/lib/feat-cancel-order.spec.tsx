@@ -1,6 +1,5 @@
-import React from 'react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { FeatCancelOrder } from './feat-cancel-order';
 
 describe('FeatCancelOrder Component', () => {
@@ -65,7 +64,7 @@ describe('FeatCancelOrder Component', () => {
         'show_result'
       ];
       
-      for (const step of confirmationSteps) {
+      for (const _step of confirmationSteps) {
         await new Promise(resolve => setTimeout(resolve, 50));
       }
       
@@ -81,7 +80,7 @@ describe('FeatCancelOrder Component', () => {
       try {
         await mockCancelOrder('ORD-456');
       } catch (error) {
-        expect(error.message).toBe('Cannot cancel shipped order');
+        expect((error as Error).message).toBe('Cannot cancel shipped order');
       }
     });
 
@@ -113,7 +112,7 @@ describe('FeatCancelOrder Component', () => {
       await new Promise(resolve => setTimeout(resolve, 550));
       const stateChanges = ['idle', 'loading', 'confirming', 'cancelling', 'success'];
       
-      for (const state of stateChanges) {
+      for (const _state of stateChanges) {
         await new Promise(resolve => setTimeout(resolve, 50));
       }
       

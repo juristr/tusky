@@ -13,9 +13,7 @@
     },
     "./package.json": "./package.json"
   },
-  "dependencies": {
-    "@tusky/utils": "workspace:*"
-  },
+  "dependencies": {},
   "nx": {
     "tags": [
       "scope:orders",

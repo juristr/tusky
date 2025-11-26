@@ -1,11 +1,10 @@
-import React from 'react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { FeatProductDetail } from './feat-product-detail';
 
 // Mock dependencies
 vi.mock('@tusky/data-access-products', () => ({
-  dataAccessProducts: vi.fn(() => 'mocked-products-data'),
+  getProducts: vi.fn(() => [{ id: 1 }, { id: 2 }]),
 }));
 
 vi.mock('@tusky/ui-product-detail', () => ({
@@ -39,9 +38,7 @@ describe('FeatProductDetail Component', () => {
     it('should show data access value', async () => {
       await new Promise((resolve) => setTimeout(resolve, 300));
       render(<FeatProductDetail />);
-      expect(
-        screen.getByText('Data access value: mocked-products-data')
-      ).toBeTruthy();
+      expect(screen.getByText('Data access value: 2 products')).toBeTruthy();
     });
 
     it('should render product detail UI component', async () => {
@@ -167,7 +164,8 @@ describe('FeatProductDetail Component', () => {
 
     it('should validate stock before adding to cart', async () => {
       await new Promise((resolve) => setTimeout(resolve, 400));
-      const checkStock = (requested, available) => requested <= available;
+      const checkStock = (requested: number, available: number) =>
+        requested <= available;
 
       expect(checkStock(2, 5)).toBe(true);
       expect(checkStock(10, 5)).toBe(false);
@@ -197,11 +195,14 @@ describe('FeatProductDetail Component', () => {
         { category: 'Technical', name: 'Battery', value: '3000mAh' },
       ];
 
-      const grouped = specs.reduce((acc, spec) => {
-        if (!acc[spec.category]) acc[spec.category] = [];
-        acc[spec.category].push(spec);
-        return acc;
-      }, {});
+      const grouped = specs.reduce(
+        (acc: Record<string, typeof specs>, spec) => {
+          if (!acc[spec.category]) acc[spec.category] = [];
+          acc[spec.category].push(spec);
+          return acc;
+        },
+        {}
+      );
 
       expect(Object.keys(grouped)).toHaveLength(2);
     });
@@ -211,10 +212,10 @@ describe('FeatProductDetail Component', () => {
     it('should lazy load images', async () => {
       await new Promise((resolve) => setTimeout(resolve, 600));
       const images = ['main.jpg', 'alt1.jpg', 'alt2.jpg', 'alt3.jpg'];
-      let loadedImages = [];
+      const loadedImages: string[] = [];
 
       // Simulate viewport intersection
-      const loadImage = (img) => {
+      const loadImage = (img: string) => {
         loadedImages.push(img);
       };
 

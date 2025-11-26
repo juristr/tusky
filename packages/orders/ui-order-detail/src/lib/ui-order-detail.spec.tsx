@@ -1,4 +1,3 @@
-import React from 'react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import { UiOrderDetail } from './ui-order-detail';
@@ -59,13 +58,6 @@ describe('UiOrderDetail Component', () => {
     it('should simulate order information display', async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
       const { container } = render(<UiOrderDetail />);
-      // Simulate order details that would be passed as props in real implementation
-      const mockOrderData = {
-        orderId: 'ORD-12345',
-        status: 'Processing',
-        items: ['Product A', 'Product B'],
-        total: 149.99,
-      };
       expect(container).toBeTruthy();
     });
 
@@ -78,7 +70,7 @@ describe('UiOrderDetail Component', () => {
         'Delivered',
         'Cancelled',
       ];
-      for (const status of statuses) {
+      for (const _status of statuses) {
         render(<UiOrderDetail />);
         cleanup();
       }

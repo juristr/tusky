@@ -159,11 +159,7 @@ importers:
 
   apps/shop-e2e: {}
 
-  packages/orders/data-access-order:
-    dependencies:
-      '@tusky/utils':
-        specifier: workspace:*
-        version: link:../../shared/utils
+  packages/orders/data-access-order: {}
 
   packages/orders/feat-cancel-order:
     dependencies:
@@ -207,11 +203,7 @@ importers:
         specifier: workspace:*
         version: link:../../shared/ui
 
-  packages/products/data-access-products:
-    dependencies:
-      '@tusky/utils':
-        specifier: workspace:*
-        version: link:../../shared/utils
+  packages/products/data-access-products: {}
 
   packages/products/feat-product-detail:
     dependencies:
@@ -235,12 +227,6 @@ importers:
         version: link:../../shared/ui
 
   packages/shared/ui: {}
-
-  packages/shared/utils:
-    dependencies:
-      tslib:
-        specifier: ^2.3.0
-        version: 2.8.1
 
   tools/tailwind-sync-plugin:
     dependencies:

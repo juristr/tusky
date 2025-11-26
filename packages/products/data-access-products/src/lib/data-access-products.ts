@@ -1,5 +1,3 @@
-import { utils } from '@tusky/utils';
-
 export interface Product {
   id: number;
   name: string;
@@ -95,8 +93,4 @@ export function getProducts(): Product[] {
 
 export function getProductById(id: number): Product | undefined {
   return products.find((product) => product.id === id);
-}
-
-export function dataAccessProducts(): string {
-  return `data-access-products: ${utils()}`;
 }

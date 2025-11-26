@@ -1,10 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { dataAccessOrder } from './data-access-order';
 
-vi.mock('@tusky/utils', () => ({
-  utils: vi.fn(() => 'mocked-utils'),
-}));
-
 describe('Order Data Access Layer', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -18,7 +14,7 @@ describe('Order Data Access Layer', () => {
     it('should return formatted string with utils', async () => {
       await new Promise((resolve) => setTimeout(resolve, 200));
       const result = dataAccessOrder();
-      expect(result).toBe('data-access-order: mocked-utils');
+      expect(result).toBe('data-access-order');
     });
 
     it('should handle multiple sequential calls', async () => {
@@ -27,32 +23,19 @@ describe('Order Data Access Layer', () => {
       for (let i = 0; i < 10; i++) {
         results.push(dataAccessOrder());
       }
-      expect(
-        results.every((r) => r === 'data-access-order: mocked-utils')
-      ).toBe(true);
+      expect(results.every((r) => r === 'data-access-order')).toBe(true);
     });
   });
 
   describe('Order operations', () => {
     it('should simulate order creation', async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const mockOrder = {
-        id: '123',
-        items: ['product1', 'product2'],
-        total: 99.99,
-      };
       const result = dataAccessOrder();
       expect(result).toBeDefined();
     });
 
     it('should simulate order retrieval', async () => {
       await new Promise((resolve) => setTimeout(resolve, 400));
-      const orders = Array(5)
-        .fill(null)
-        .map((_, i) => ({
-          id: `order-${i}`,
-          status: 'pending',
-        }));
       const result = dataAccessOrder();
       expect(result).toContain('data-access-order');
     });
@@ -60,7 +43,7 @@ describe('Order Data Access Layer', () => {
     it('should simulate order update operations', async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
       const updateStatuses = ['pending', 'processing', 'shipped', 'delivered'];
-      for (const status of updateStatuses) {
+      for (const _status of updateStatuses) {
         const result = dataAccessOrder();
         expect(result).toBeTruthy();
       }
@@ -95,7 +78,7 @@ describe('Order Data Access Layer', () => {
     it('should validate data integrity', async () => {
       await new Promise((resolve) => setTimeout(resolve, 450));
       const result = dataAccessOrder();
-      expect(result).toMatch(/^data-access-order:/);
+      expect(result).toMatch(/^data-access-order/);
     });
   });
 });

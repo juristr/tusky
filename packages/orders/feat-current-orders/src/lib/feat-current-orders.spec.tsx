@@ -1,4 +1,3 @@
-import React from 'react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { FeatCurrentOrders } from './feat-current-orders';
@@ -188,7 +187,7 @@ describe('FeatCurrentOrders Component', () => {
       try {
         await mockFetchOrders();
       } catch (error) {
-        expect(error.message).toBe('Network error');
+        expect((error as Error).message).toBe('Network error');
       }
     });
 

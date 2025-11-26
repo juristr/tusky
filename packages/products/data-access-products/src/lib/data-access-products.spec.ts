@@ -1,36 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import {
-  dataAccessProducts,
-  getProducts,
-  getProductById,
-  products,
-  type Product,
-} from './data-access-products';
-
-vi.mock('@tusky/utils', () => ({
-  utils: vi.fn(() => 'mocked-utils'),
-}));
+import { getProducts, getProductById } from './data-access-products';
 
 describe('Products Data Access Layer', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  describe('dataAccessProducts function', () => {
-    it('should return formatted string with utils', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      const result = dataAccessProducts();
-      expect(result).toBe('data-access-products: mocked-utils');
-    });
-
-    it('should be idempotent', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      const results = [];
-      for (let i = 0; i < 5; i++) {
-        results.push(dataAccessProducts());
-      }
-      expect(new Set(results).size).toBe(1);
-    });
   });
 
   describe('getProducts function', () => {
