@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify';
+import '@fastify/swagger';
 import { productsService } from '@tusky/service-products';
 
 export async function productsRoutes(fastify: FastifyInstance) {

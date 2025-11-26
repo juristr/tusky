@@ -1,25 +1,44 @@
 import * as path from 'path';
 import { FastifyInstance } from 'fastify';
 import AutoLoad from '@fastify/autoload';
+import cors from '@fastify/cors';
+import swagger from '@fastify/swagger';
+import swaggerUi from '@fastify/swagger-ui';
+import { productsRoutes } from '@tusky/api-products';
 
 /* eslint-disable-next-line */
 export interface AppOptions {}
 
 export async function app(fastify: FastifyInstance, opts: AppOptions) {
-  // Place here your custom code!
+  // CORS
+  await fastify.register(cors, {
+    origin: true,
+  });
 
-  // Do not touch the following lines
+  // Swagger
+  await fastify.register(swagger, {
+    openapi: {
+      info: {
+        title: 'Tusky Shop API',
+        version: '1.0.0',
+      },
+    },
+  });
 
-  // This loads all plugins defined in plugins
-  // those should be support plugins that are reused
-  // through your application
+  await fastify.register(swaggerUi, {
+    routePrefix: '/docs',
+  });
+
+  // Load plugins
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
     options: { ...opts },
   });
 
-  // This loads all plugins defined in routes
-  // define your routes in one of these
+  // Register product routes
+  await fastify.register(productsRoutes);
+
+  // Load other routes
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
     options: { ...opts },

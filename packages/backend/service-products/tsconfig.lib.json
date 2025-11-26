@@ -12,5 +12,12 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../data-products/tsconfig.lib.json"
+    },
+    {
+      "path": "../api-dtos/tsconfig.lib.json"
+    }
+  ]
 }
