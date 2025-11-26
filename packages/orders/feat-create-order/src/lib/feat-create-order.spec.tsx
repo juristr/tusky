@@ -1,6 +1,5 @@
-import React from 'react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { FeatCreateOrder } from './feat-create-order';
 
 // Mock dependencies
@@ -70,8 +69,8 @@ describe('FeatCreateOrder Component', () => {
 
     it('should validate order data before submission', async () => {
       await new Promise((resolve) => setTimeout(resolve, 400));
-      const validateOrder = (order) => {
-        return order.items?.length > 0 && order.total > 0;
+      const validateOrder = (order: { items?: string[]; total: number }) => {
+        return (order.items?.length ?? 0) > 0 && order.total > 0;
       };
 
       const validOrder = { items: ['item1'], total: 50 };
@@ -91,7 +90,7 @@ describe('FeatCreateOrder Component', () => {
         'confirm_order',
       ];
 
-      for (const step of steps) {
+      for (const _step of steps) {
         await new Promise((resolve) => setTimeout(resolve, 80));
       }
 
@@ -102,8 +101,12 @@ describe('FeatCreateOrder Component', () => {
   describe('Form validation', () => {
     it('should validate required fields', async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
-      const requiredFields = ['email', 'shipping_address', 'payment_method'];
-      const formData = {
+      const requiredFields = [
+        'email',
+        'shipping_address',
+        'payment_method',
+      ] as const;
+      const formData: Record<string, string> = {
         email: 'test@example.com',
         shipping_address: '123 Test St',
         payment_method: 'credit_card',
@@ -172,7 +175,7 @@ describe('FeatCreateOrder Component', () => {
       try {
         await mockSubmitOrder({});
       } catch (error) {
-        expect(error.message).toBe('Network error');
+        expect((error as Error).message).toBe('Network error');
       }
     });
 

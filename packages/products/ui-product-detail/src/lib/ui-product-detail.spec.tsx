@@ -1,6 +1,5 @@
-import React from 'react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { UiProductDetail } from './ui-product-detail';
 
 // Mock the @tusky/ui component
@@ -65,7 +64,7 @@ describe('UiProductDetail Component', () => {
         { color: 'Blue', size: 'Premium', price: 349.99 },
       ];
 
-      for (const variant of variants) {
+      for (const _variant of variants) {
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 
@@ -163,8 +162,6 @@ describe('UiProductDetail Component', () => {
   describe('Performance testing', () => {
     it('should render large product descriptions efficiently', async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const longDescription = 'Lorem ipsum '.repeat(100);
-
       const start = performance.now();
       render(<UiProductDetail />);
       const duration = performance.now() - start;
@@ -220,7 +217,7 @@ describe('UiProductDetail Component', () => {
       await new Promise((resolve) => setTimeout(resolve, 450));
       const loadingStates = ['initial', 'loading', 'loaded', 'error'];
 
-      for (const state of loadingStates) {
+      for (const _state of loadingStates) {
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 

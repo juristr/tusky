@@ -34,9 +34,6 @@
       "path": "./packages/shared/ui"
     },
     {
-      "path": "./packages/shared/utils"
-    },
-    {
       "path": "./packages/orders/feat-past-orders"
     },
     {
