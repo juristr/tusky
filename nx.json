@@ -17,9 +17,7 @@
     {
       "plugin": "@nx/js/typescript",
       "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
+        "typecheck": { "targetName": "typecheck" },
         "build": {
           "targetName": "build",
           "configName": "tsconfig.lib.json",
@@ -53,20 +51,11 @@
         "typecheckTargetName": "typecheck"
       }
     },
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
-    }
+    { "plugin": "@nx/playwright/plugin", "options": { "targetName": "e2e" } }
   ],
   "targetDefaults": {
-    "test": {
-      "dependsOn": ["^build"]
-    },
-    "dev": {
-      "dependsOn": ["^build"]
-    },
+    "test": { "dependsOn": ["^build"] },
+    "dev": { "dependsOn": ["^build"] },
     "@nx/js:tsc": {
       "cache": true,
       "dependsOn": ["^build"],
@@ -81,14 +70,8 @@
         "linter": "none",
         "bundler": "vite"
       },
-      "component": {
-        "style": "css"
-      },
-      "library": {
-        "style": "css",
-        "linter": "none",
-        "unitTestRunner": "none"
-      }
+      "component": { "style": "css" },
+      "library": { "style": "css", "linter": "none", "unitTestRunner": "none" }
     }
   },
   "owners": {
@@ -130,5 +113,7 @@
         "projects": ["tag:type:util"]
       }
     ]
-  }
+  },
+  "nxCloudId": "6926c507617840ee119e9fa7",
+  "nxCloudUrl": "https://staging.nx.app"
 }
