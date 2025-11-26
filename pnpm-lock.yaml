@@ -138,22 +138,22 @@ importers:
 
   apps/shop:
     dependencies:
-      '@aishop/feat-cancel-order':
+      '@tusky/feat-cancel-order':
         specifier: workspace:*
         version: link:../../packages/orders/feat-cancel-order
-      '@aishop/feat-create-order':
+      '@tusky/feat-create-order':
         specifier: workspace:*
         version: link:../../packages/orders/feat-create-order
-      '@aishop/feat-current-orders':
+      '@tusky/feat-current-orders':
         specifier: workspace:*
         version: link:../../packages/orders/feat-current-orders
-      '@aishop/feat-past-orders':
+      '@tusky/feat-past-orders':
         specifier: workspace:*
         version: link:../../packages/orders/feat-past-orders
-      '@aishop/feat-product-detail':
+      '@tusky/feat-product-detail':
         specifier: workspace:*
         version: link:../../packages/products/feat-product-detail
-      '@aishop/feat-product-list':
+      '@tusky/feat-product-list':
         specifier: workspace:*
         version: link:../../packages/products/feat-product-list
 
@@ -161,76 +161,76 @@ importers:
 
   packages/orders/data-access-order:
     dependencies:
-      '@aishop/utils':
+      '@tusky/utils':
         specifier: workspace:*
         version: link:../../shared/utils
 
   packages/orders/feat-cancel-order:
     dependencies:
-      '@aishop/data-access-order':
+      '@tusky/data-access-order':
         specifier: workspace:*
         version: link:../data-access-order
-      '@aishop/ui-order-detail':
+      '@tusky/ui-order-detail':
         specifier: workspace:*
         version: link:../ui-order-detail
 
   packages/orders/feat-create-order:
     dependencies:
-      '@aishop/data-access-order':
+      '@tusky/data-access-order':
         specifier: workspace:*
         version: link:../data-access-order
-      '@aishop/ui-order-detail':
+      '@tusky/ui-order-detail':
         specifier: workspace:*
         version: link:../ui-order-detail
 
   packages/orders/feat-current-orders:
     dependencies:
-      '@aishop/data-access-order':
+      '@tusky/data-access-order':
         specifier: workspace:*
         version: link:../data-access-order
-      '@aishop/ui-order-detail':
+      '@tusky/ui-order-detail':
         specifier: workspace:*
         version: link:../ui-order-detail
 
   packages/orders/feat-past-orders:
     dependencies:
-      '@aishop/data-access-order':
+      '@tusky/data-access-order':
         specifier: workspace:*
         version: link:../data-access-order
-      '@aishop/ui-order-detail':
+      '@tusky/ui-order-detail':
         specifier: workspace:*
         version: link:../ui-order-detail
 
   packages/orders/ui-order-detail:
     dependencies:
-      '@aishop/ui':
+      '@tusky/ui':
         specifier: workspace:*
         version: link:../../shared/ui
 
   packages/products/data-access-products:
     dependencies:
-      '@aishop/utils':
+      '@tusky/utils':
         specifier: workspace:*
         version: link:../../shared/utils
 
   packages/products/feat-product-detail:
     dependencies:
-      '@aishop/data-access-products':
+      '@tusky/data-access-products':
         specifier: workspace:*
         version: link:../data-access-products
-      '@aishop/ui-product-detail':
+      '@tusky/ui-product-detail':
         specifier: workspace:*
         version: link:../ui-product-detail
 
   packages/products/feat-product-list:
     dependencies:
-      '@aishop/data-access-products':
+      '@tusky/data-access-products':
         specifier: workspace:*
         version: link:../data-access-products
 
   packages/products/ui-product-detail:
     dependencies:
-      '@aishop/ui':
+      '@tusky/ui':
         specifier: workspace:*
         version: link:../../shared/ui
 

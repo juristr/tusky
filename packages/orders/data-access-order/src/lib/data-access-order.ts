@@ -1,4 +1,4 @@
-import { utils } from '@aishop/utils';
+import { utils } from '@tusky/utils';
 
 export function dataAccessOrder(): string {
   return `data-access-order: ${utils()}`;

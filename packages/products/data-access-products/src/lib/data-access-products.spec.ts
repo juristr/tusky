@@ -1,14 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { 
-  dataAccessProducts, 
-  getProducts, 
-  getProductById, 
+import {
+  dataAccessProducts,
+  getProducts,
+  getProductById,
   products,
-  type Product 
+  type Product,
 } from './data-access-products';
 
-vi.mock('@aishop/utils', () => ({
-  utils: vi.fn(() => 'mocked-utils')
+vi.mock('@tusky/utils', () => ({
+  utils: vi.fn(() => 'mocked-utils'),
 }));
 
 describe('Products Data Access Layer', () => {
@@ -18,13 +18,13 @@ describe('Products Data Access Layer', () => {
 
   describe('dataAccessProducts function', () => {
     it('should return formatted string with utils', async () => {
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       const result = dataAccessProducts();
       expect(result).toBe('data-access-products: mocked-utils');
     });
 
     it('should be idempotent', async () => {
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 200));
       const results = [];
       for (let i = 0; i < 5; i++) {
         results.push(dataAccessProducts());
@@ -35,16 +35,16 @@ describe('Products Data Access Layer', () => {
 
   describe('getProducts function', () => {
     it('should return all products', async () => {
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       const result = getProducts();
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(8);
     });
 
     it('should return products with correct structure', async () => {
-      await new Promise(resolve => setTimeout(resolve, 150));
+      await new Promise((resolve) => setTimeout(resolve, 150));
       const result = getProducts();
-      result.forEach(product => {
+      result.forEach((product) => {
         expect(product).toHaveProperty('id');
         expect(product).toHaveProperty('name');
         expect(product).toHaveProperty('price');
@@ -55,12 +55,12 @@ describe('Products Data Access Layer', () => {
     });
 
     it('should handle concurrent access', async () => {
-      await new Promise(resolve => setTimeout(resolve, 400));
-      const promises = Array(20).fill(null).map(() => 
-        Promise.resolve(getProducts())
-      );
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      const promises = Array(20)
+        .fill(null)
+        .map(() => Promise.resolve(getProducts()));
       const results = await Promise.all(promises);
-      results.forEach(result => {
+      results.forEach((result) => {
         expect(result.length).toBe(8);
       });
     });
@@ -68,7 +68,7 @@ describe('Products Data Access Layer', () => {
 
   describe('getProductById function', () => {
     it('should return correct product by id', async () => {
-      await new Promise(resolve => setTimeout(resolve, 250));
+      await new Promise((resolve) => setTimeout(resolve, 250));
       const product = getProductById(1);
       expect(product).toBeDefined();
       expect(product?.name).toBe('Wireless Noise-Cancelling Headphones');
@@ -76,13 +76,13 @@ describe('Products Data Access Layer', () => {
     });
 
     it('should return undefined for non-existent id', async () => {
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       const product = getProductById(999);
       expect(product).toBeUndefined();
     });
 
     it('should handle all valid product ids', async () => {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       for (let i = 1; i <= 8; i++) {
         const product = getProductById(i);
         expect(product).toBeDefined();
@@ -93,27 +93,27 @@ describe('Products Data Access Layer', () => {
 
   describe('Product data integrity', () => {
     it('should have valid price ranges', async () => {
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 350));
       const allProducts = getProducts();
-      allProducts.forEach(product => {
+      allProducts.forEach((product) => {
         expect(product.price).toBeGreaterThan(0);
         expect(product.price).toBeLessThan(1000);
       });
     });
 
     it('should have valid ratings', async () => {
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 200));
       const allProducts = getProducts();
-      allProducts.forEach(product => {
+      allProducts.forEach((product) => {
         expect(product.rating).toBeGreaterThanOrEqual(1);
         expect(product.rating).toBeLessThanOrEqual(5);
       });
     });
 
     it('should have unique product ids', async () => {
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       const allProducts = getProducts();
-      const ids = allProducts.map(p => p.id);
+      const ids = allProducts.map((p) => p.id);
       const uniqueIds = new Set(ids);
       expect(uniqueIds.size).toBe(ids.length);
     });
@@ -121,18 +121,20 @@ describe('Products Data Access Layer', () => {
 
   describe('Category filtering', () => {
     it('should have products in multiple categories', async () => {
-      await new Promise(resolve => setTimeout(resolve, 450));
+      await new Promise((resolve) => setTimeout(resolve, 450));
       const allProducts = getProducts();
-      const categories = new Set(allProducts.map(p => p.category));
+      const categories = new Set(allProducts.map((p) => p.category));
       expect(categories.size).toBeGreaterThan(1);
     });
 
     it('should simulate category-based queries', async () => {
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await new Promise((resolve) => setTimeout(resolve, 600));
       const allProducts = getProducts();
-      const electronics = allProducts.filter(p => p.category === 'Electronics');
+      const electronics = allProducts.filter(
+        (p) => p.category === 'Electronics'
+      );
       expect(electronics.length).toBeGreaterThan(0);
-      electronics.forEach(product => {
+      electronics.forEach((product) => {
         expect(product.category).toBe('Electronics');
       });
     });
@@ -140,7 +142,7 @@ describe('Products Data Access Layer', () => {
 
   describe('Performance benchmarks', () => {
     it('should handle rapid sequential requests', async () => {
-      await new Promise(resolve => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 400));
       const start = Date.now();
       for (let i = 0; i < 100; i++) {
         getProducts();
@@ -150,7 +152,7 @@ describe('Products Data Access Layer', () => {
     });
 
     it('should efficiently retrieve products by id', async () => {
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 350));
       const start = Date.now();
       for (let i = 1; i <= 8; i++) {
         getProductById(i);

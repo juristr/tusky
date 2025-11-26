@@ -1,4 +1,4 @@
-import { ProductGrid } from '@aishop/feat-product-list';
+import { ProductGrid } from '@tusky/feat-product-list';
 
 export function HomePage() {
   return (

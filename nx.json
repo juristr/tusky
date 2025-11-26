@@ -8,7 +8,10 @@
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/src/test-setup.[jt]s"
     ],
-    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
+    "sharedGlobals": [
+      "{workspaceRoot}/.github/workflows/ci.yml",
+      "{workspaceRoot}/.github/workflows/ci.yml"
+    ]
   },
   "plugins": [
     {
@@ -127,7 +130,5 @@
         "projects": ["tag:type:util"]
       }
     ]
-  },
-  "nxCloudId": "68c3fd231ccca32b3cd73bac",
-  "nxCloudUrl": "https://staging.nx.app"
+  }
 }

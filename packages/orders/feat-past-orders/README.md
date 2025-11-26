@@ -1,4 +1,4 @@
-# @aishop/feat-past-orders
+# @tusky/feat-past-orders
 
 A React library for handling and displaying past orders in the AI Shop application.
 
@@ -11,7 +11,7 @@ A React library for handling and displaying past orders in the AI Shop applicati
 ## Usage
 
 ```tsx
-import { FeatPastOrders } from '@aishop/feat-past-orders';
+import { FeatPastOrders } from '@tusky/feat-past-orders';
 
 export function MyComponent() {
   return (
@@ -24,8 +24,8 @@ export function MyComponent() {
 
 ## Dependencies
 
-- @aishop/data-access-order
-- @aishop/ui-order-detail
+- @tusky/data-access-order
+- @tusky/ui-order-detail
 
 ## Development
 
@@ -33,4 +33,4 @@ This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 
-Run `nx test @aishop/feat-past-orders` to execute the unit tests via [Vitest](https://vitest.dev/).
+Run `nx test @tusky/feat-past-orders` to execute the unit tests via [Vitest](https://vitest.dev/).

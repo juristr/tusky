@@ -1,10 +1,10 @@
 {
-  "name": "@aishop/shop-e2e",
+  "name": "@tusky/shop-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@aishop/shop"
+      "@tusky/shop"
     ]
   }
 }

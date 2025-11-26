@@ -1,4 +1,4 @@
-import { FeatPastOrders } from '@aishop/feat-past-orders';
+import { FeatPastOrders } from '@tusky/feat-past-orders';
 
 export function PastOrdersPage() {
   return (

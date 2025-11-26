@@ -1,5 +1,5 @@
 import ProductCard from './ProductCard';
-import { getProducts } from '@aishop/data-access-products';
+import { getProducts } from '@tusky/data-access-products';
 
 export function ProductGrid() {
   const products = getProducts();

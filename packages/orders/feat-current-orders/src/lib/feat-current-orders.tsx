@@ -1,6 +1,6 @@
 import styles from './feat-current-orders.module.css';
-import { dataAccessOrder } from '@aishop/data-access-order';
-import { UiOrderDetail } from '@aishop/ui-order-detail';
+import { dataAccessOrder } from '@tusky/data-access-order';
+import { UiOrderDetail } from '@tusky/ui-order-detail';
 
 export function FeatCurrentOrders() {
   return (

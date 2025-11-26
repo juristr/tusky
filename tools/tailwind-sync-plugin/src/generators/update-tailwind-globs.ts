@@ -5,7 +5,7 @@ import { join } from 'path';
 export async function updateTailwindGlobsGenerator(
   tree: Tree
 ): Promise<SyncGeneratorResult> {
-  const appName = '@aishop/shop';
+  const appName = '@tusky/shop';
 
   const projectGraph = await createProjectGraphAsync();
   const shopProject = projectGraph.nodes[appName];

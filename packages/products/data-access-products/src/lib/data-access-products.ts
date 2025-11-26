@@ -1,4 +1,4 @@
-import { utils } from '@aishop/utils';
+import { utils } from '@tusky/utils';
 
 export interface Product {
   id: number;
@@ -94,7 +94,7 @@ export function getProducts(): Product[] {
 }
 
 export function getProductById(id: number): Product | undefined {
-  return products.find(product => product.id === id);
+  return products.find((product) => product.id === id);
 }
 
 export function dataAccessProducts(): string {

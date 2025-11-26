@@ -4,7 +4,7 @@ This workspace demonstrates an efficient Tailwind CSS setup using Nx Sync Genera
 
 ## Overview
 
-The workspace contains an e-commerce application (`@aishop/shop`) with multiple feature libraries organized by domain (orders, products, shared). To optimize Tailwind CSS compilation, we've implemented a custom Nx Sync Generator that dynamically updates the Tailwind configuration to only scan files from libraries that are actual dependencies of the shop application.
+The workspace contains an e-commerce application (`@tusky/shop`) with multiple feature libraries organized by domain (orders, products, shared). To optimize Tailwind CSS compilation, we've implemented a custom Nx Sync Generator that dynamically updates the Tailwind configuration to only scan files from libraries that are actual dependencies of the shop application.
 
 ## Key Features
 
@@ -17,6 +17,7 @@ The workspace contains an e-commerce application (`@aishop/shop`) with multiple 
 ### What is an Nx Sync Generator?
 
 Sync generators are a powerful Nx feature that ensures your workspace stays in sync by running checks and applying updates automatically. They can be triggered:
+
 - Before specific tasks (like `build` or `serve`)
 - Globally for all projects
 - On-demand via `nx sync`
@@ -25,7 +26,7 @@ Learn more: [Nx Sync Generator Documentation](https://nx.dev/extending-nx/recipe
 
 ### Implementation Details
 
-Our sync generator (`@aishop/tailwind-sync-plugin:update-tailwind-globs`) performs the following:
+Our sync generator (`@tusky/tailwind-sync-plugin:update-tailwind-globs`) performs the following:
 
 1. **Analyzes Project Graph**: Uses Nx's project graph to determine all dependencies of the shop application
 2. **Generates Glob Patterns**: Creates specific glob patterns for each dependency
@@ -34,22 +35,26 @@ Our sync generator (`@aishop/tailwind-sync-plugin:update-tailwind-globs`) perfor
 ### How to Create a Sync Generator
 
 1. **Install Nx Plugin Tools**:
+
    ```bash
    nx add @nx/plugin
    ```
 
 2. **Create a Local Plugin**:
+
    ```bash
    nx g @nx/plugin:plugin tools/tailwind-sync-plugin
    ```
 
 3. **Generate the Sync Generator**:
+
    ```bash
    nx g @nx/plugin:generator --name=update-tailwind-globs --path=tools/tailwind-sync-plugin/src/generators/update-tailwind-globs
    ```
 
 4. **Implement the Generator**:
    The generator (located at `tools/tailwind-sync-plugin/src/generators/update-tailwind-globs.ts`) uses the Nx DevKit API to:
+
    - Access the project graph
    - Traverse dependencies
    - Generate and update configuration files
@@ -61,10 +66,10 @@ Our sync generator (`@aishop/tailwind-sync-plugin:update-tailwind-globs`) perfor
      "nx": {
        "targets": {
          "build": {
-           "syncGenerators": ["@aishop/tailwind-sync-plugin:update-tailwind-globs"]
+           "syncGenerators": ["@tusky/tailwind-sync-plugin:update-tailwind-globs"]
          },
          "serve": {
-           "syncGenerators": ["@aishop/tailwind-sync-plugin:update-tailwind-globs"]
+           "syncGenerators": ["@tusky/tailwind-sync-plugin:update-tailwind-globs"]
          }
        }
      }
@@ -74,8 +79,9 @@ Our sync generator (`@aishop/tailwind-sync-plugin:update-tailwind-globs`) perfor
 ### Usage
 
 The sync generator runs automatically when you:
-- Run `nx serve @aishop/shop`
-- Run `nx build @aishop/shop`
+
+- Run `nx serve @tusky/shop`
+- Run `nx build @tusky/shop`
 - Manually run `nx sync`
 
 If the workspace is out of sync, you'll see a message indicating changes were made. The generator only updates the config when dependencies have changed.
@@ -118,16 +124,16 @@ tools/
 
 ```bash
 # Run the shop application (triggers sync generator)
-nx serve @aishop/shop
+nx serve @tusky/shop
 
 # Build the shop application (triggers sync generator)
-nx build @aishop/shop
+nx build @tusky/shop
 
 # Manually sync the workspace
 nx sync
 
 # Build the sync generator plugin
-nx build @aishop/tailwind-sync-plugin
+nx build @tusky/tailwind-sync-plugin
 ```
 
 ## Further Reading

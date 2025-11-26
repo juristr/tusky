@@ -1,5 +1,5 @@
 import styles from './ui-product-detail.module.css';
-import { Ui } from '@aishop/ui';
+import { Ui } from '@tusky/ui';
 
 export function UiProductDetail() {
   return (

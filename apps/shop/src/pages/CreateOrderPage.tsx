@@ -1,4 +1,4 @@
-import { FeatCreateOrder } from '@aishop/feat-create-order';
+import { FeatCreateOrder } from '@tusky/feat-create-order';
 
 export function CreateOrderPage() {
   return (

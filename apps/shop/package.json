@@ -1,15 +1,15 @@
 {
-  "name": "@aishop/shop",
+  "name": "@tusky/shop",
   "version": "0.0.1",
   "type": "module",
   "private": true,
   "dependencies": {
-    "@aishop/feat-product-detail": "workspace:*",
-    "@aishop/feat-product-list": "workspace:*",
-    "@aishop/feat-create-order": "workspace:*",
-    "@aishop/feat-current-orders": "workspace:*",
-    "@aishop/feat-past-orders": "workspace:*",
-    "@aishop/feat-cancel-order": "workspace:*"
+    "@tusky/feat-product-detail": "workspace:*",
+    "@tusky/feat-product-list": "workspace:*",
+    "@tusky/feat-create-order": "workspace:*",
+    "@tusky/feat-current-orders": "workspace:*",
+    "@tusky/feat-past-orders": "workspace:*",
+    "@tusky/feat-cancel-order": "workspace:*"
   },
   "devDependencies": {},
   "nx": {
@@ -19,12 +19,12 @@
     "targets": {
       "build": {
         "syncGenerators": [
-          "@aishop/tailwind-sync-plugin:update-tailwind-globs"
+          "@tusky/tailwind-sync-plugin:update-tailwind-globs"
         ]
       },
       "serve": {
         "syncGenerators": [
-          "@aishop/tailwind-sync-plugin:update-tailwind-globs"
+          "@tusky/tailwind-sync-plugin:update-tailwind-globs"
         ]
       }
     }

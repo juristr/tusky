@@ -1,5 +1,5 @@
 {
-  "name": "@aishop/data-access-order",
+  "name": "@tusky/data-access-order",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@aishop/utils": "workspace:*"
+    "@tusky/utils": "workspace:*"
   },
   "nx": {
     "tags": [

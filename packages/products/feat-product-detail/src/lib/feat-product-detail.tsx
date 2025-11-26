@@ -1,6 +1,6 @@
 import styles from './feat-product-detail.module.css';
-import { dataAccessProducts } from '@aishop/data-access-products';
-import { UiProductDetail } from '@aishop/ui-product-detail';
+import { dataAccessProducts } from '@tusky/data-access-products';
+import { UiProductDetail } from '@tusky/ui-product-detail';
 
 export function FeatProductDetail() {
   return (

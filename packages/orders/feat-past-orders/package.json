@@ -1,5 +1,5 @@
 {
-  "name": "@aishop/feat-past-orders",
+  "name": "@tusky/feat-past-orders",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -14,8 +14,8 @@
     }
   },
   "dependencies": {
-    "@aishop/data-access-order": "workspace:*",
-    "@aishop/ui-order-detail": "workspace:*"
+    "@tusky/data-access-order": "workspace:*",
+    "@tusky/ui-order-detail": "workspace:*"
   },
   "nx": {
     "tags": [

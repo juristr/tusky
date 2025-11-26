@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import OrdersPage from './pages/OrdersPage';
 import PastOrdersPage from './pages/PastOrdersPage';
 import CreateOrderPage from './pages/CreateOrderPage';
-import { ProductDetailPage } from '@aishop/feat-product-detail';
+import { ProductDetailPage } from '@tusky/feat-product-detail';
 
 export function App() {
   return (

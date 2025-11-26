@@ -1,5 +1,5 @@
-import { FeatCurrentOrders } from '@aishop/feat-current-orders';
-import { FeatCancelOrder } from '@aishop/feat-cancel-order';
+import { FeatCurrentOrders } from '@tusky/feat-current-orders';
+import { FeatCancelOrder } from '@tusky/feat-cancel-order';
 
 export function OrdersPage() {
   return (
