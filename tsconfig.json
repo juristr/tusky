@@ -50,6 +50,15 @@
     },
     {
       "path": "./packages/backend/api-dtos"
+    },
+    {
+      "path": "./packages/backend/data-products"
+    },
+    {
+      "path": "./packages/backend/service-products"
+    },
+    {
+      "path": "./packages/backend/api-products"
     }
   ]
 }
