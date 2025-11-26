@@ -14,8 +14,8 @@
     }
   },
   "dependencies": {
-    "@aishop/data-access-order": "*",
-    "@aishop/ui-order-detail": "*"
+    "@aishop/data-access-order": "workspace:*",
+    "@aishop/ui-order-detail": "workspace:*"
   },
   "nx": {
     "tags": [

@@ -13,7 +13,9 @@
     },
     "./package.json": "./package.json"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@aishop/utils": "workspace:*"
+  },
   "nx": {
     "tags": [
       "scope:products",

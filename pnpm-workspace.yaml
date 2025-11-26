@@ -1,0 +1,7 @@
+packages:
+  - 'apps/*'
+  - 'packages/orders/*'
+  - 'packages/products/*'
+  - 'packages/shared/*'
+  - 'tools/*'
+  - 'packages/*'

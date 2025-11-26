@@ -4,12 +4,12 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@aishop/feat-product-detail": "*",
-    "@aishop/feat-product-list": "*",
-    "@aishop/feat-create-order": "*",
-    "@aishop/feat-current-orders": "*",
-    "@aishop/feat-past-orders": "*",
-    "@aishop/feat-cancel-order": "*"
+    "@aishop/feat-product-detail": "workspace:*",
+    "@aishop/feat-product-list": "workspace:*",
+    "@aishop/feat-create-order": "workspace:*",
+    "@aishop/feat-current-orders": "workspace:*",
+    "@aishop/feat-past-orders": "workspace:*",
+    "@aishop/feat-cancel-order": "workspace:*"
   },
   "devDependencies": {},
   "nx": {

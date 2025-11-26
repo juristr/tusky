@@ -50,15 +50,6 @@
     "vite-plugin-dts": "4.5.4",
     "vitest": "^3.0.0"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/orders/*",
-    "packages/products/*",
-    "packages/shared/*",
-    "testtailwindapp",
-    "tools/*",
-    "packages/*"
-  ],
   "overrides": {
     "ajv": "^8.0.0"
   }

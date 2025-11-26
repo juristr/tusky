@@ -12,7 +12,8 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@aishop/data-access-order": "0.0.1"
+    "@aishop/data-access-order": "workspace:*",
+    "@aishop/ui-order-detail": "workspace:*"
   },
   "nx": {
     "tags": [

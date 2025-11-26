@@ -11,6 +11,9 @@
     },
     "./package.json": "./package.json"
   },
+  "dependencies": {
+    "@aishop/ui": "workspace:*"
+  },
   "nx": {
     "tags": [
       "scope:products",

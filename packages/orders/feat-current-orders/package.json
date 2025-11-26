@@ -11,6 +11,10 @@
     },
     "./package.json": "./package.json"
   },
+  "dependencies": {
+    "@aishop/data-access-order": "workspace:*",
+    "@aishop/ui-order-detail": "workspace:*"
+  },
   "nx": {
     "tags": [
       "scope:orders",

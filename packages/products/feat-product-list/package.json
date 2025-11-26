@@ -12,7 +12,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@aishop/data-access-products": "*"
+    "@aishop/data-access-products": "workspace:*"
   },
   "nx": {
     "tags": [
