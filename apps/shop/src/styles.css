@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @source "../../../packages/orders/data-access-order";
 @source "../../../packages/orders/feat-cancel-order";
@@ -11,10 +11,6 @@
 @source "../../../packages/products/feat-product-list";
 @source "../../../packages/products/ui-product-detail";
 @source "../../../packages/shared/ui";
-
-
-
-
 
 /* Custom styles for glitch effect */
 @keyframes glitch {
