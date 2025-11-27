@@ -2,6 +2,9 @@
   "name": "@tusky/shop-e2e",
   "version": "0.0.1",
   "private": true,
+  "dependencies": {
+    "eslint-plugin-playwright": "^1.6.2"
+  },
   "nx": {
     "implicitDependencies": [
       "@tusky/shop"

@@ -1,7 +1,8 @@
 packages:
   - 'apps/*'
-  - 'packages/orders/*'
-  - 'packages/products/*'
+  - 'packages/frontend/orders/*'
+  - 'packages/frontend/products/*'
+  - 'packages/frontend/*'
   - 'packages/shared/*'
   - 'tools/*'
   - 'packages/*'

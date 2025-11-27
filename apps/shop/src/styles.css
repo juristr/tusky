@@ -1,15 +1,15 @@
 @import 'tailwindcss';
 
-@source "../../../packages/orders/data-access-order";
-@source "../../../packages/orders/feat-cancel-order";
-@source "../../../packages/orders/feat-create-order";
-@source "../../../packages/orders/feat-current-orders";
-@source "../../../packages/orders/feat-past-orders";
-@source "../../../packages/orders/ui-order-detail";
-@source "../../../packages/products/data-access-products";
-@source "../../../packages/products/feat-product-detail";
-@source "../../../packages/products/feat-product-list";
-@source "../../../packages/products/ui-product-detail";
+@source "../../../packages/frontend/orders/data-access-order";
+@source "../../../packages/frontend/orders/feat-cancel-order";
+@source "../../../packages/frontend/orders/feat-create-order";
+@source "../../../packages/frontend/orders/feat-current-orders";
+@source "../../../packages/frontend/orders/feat-past-orders";
+@source "../../../packages/frontend/orders/ui-order-detail";
+@source "../../../packages/frontend/products/data-access-products";
+@source "../../../packages/frontend/products/feat-product-detail";
+@source "../../../packages/frontend/products/feat-product-list";
+@source "../../../packages/frontend/products/ui-product-detail";
 @source "../../../packages/shared/ui";
 
 /* Custom styles for glitch effect */
