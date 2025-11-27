@@ -90,7 +90,7 @@ describe('FeatCreateOrder Component', () => {
         'confirm_order',
       ];
 
-      for (const _step of steps) {
+      for (let i = 0; i < steps.length; i++) {
         await new Promise((resolve) => setTimeout(resolve, 80));
       }
 
@@ -194,8 +194,11 @@ describe('FeatCreateOrder Component', () => {
   describe('Integration with dependencies', () => {
     it('should integrate with data access layer', async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const { dataAccessOrder } = await import('@tusky/data-access-order');
-      expect(dataAccessOrder()).toBe('mocked-order-data');
+      // Mock is already set up at the top of file via vi.mock
+      render(<FeatCreateOrder />);
+      expect(
+        screen.getByText('Data access value: mocked-order-data')
+      ).toBeTruthy();
     });
 
     it('should maintain component hierarchy', async () => {

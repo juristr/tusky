@@ -11,3 +11,5 @@
 - If the user needs help with an Nx configuration or project graph error, use the `nx_workspace` tool to get any errors
 
 <!-- nx configuration end-->
+
+Run `pnpm nx format:write` after every change to adjust formatting.

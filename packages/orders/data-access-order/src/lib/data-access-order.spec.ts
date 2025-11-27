@@ -43,10 +43,10 @@ describe('Order Data Access Layer', () => {
     it('should simulate order update operations', async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
       const updateStatuses = ['pending', 'processing', 'shipped', 'delivered'];
-      for (const _status of updateStatuses) {
+      updateStatuses.forEach(() => {
         const result = dataAccessOrder();
         expect(result).toBeTruthy();
-      }
+      });
     });
   });
 

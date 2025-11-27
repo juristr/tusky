@@ -64,7 +64,7 @@ describe('UiProductDetail Component', () => {
         { color: 'Blue', size: 'Premium', price: 349.99 },
       ];
 
-      for (const _variant of variants) {
+      for (let i = 0; i < variants.length; i++) {
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 
@@ -128,7 +128,7 @@ describe('UiProductDetail Component', () => {
       };
 
       const validSpecs = Object.entries(incompleteSpecs).filter(
-        ([_, value]) => value != null
+        ([, value]) => value != null
       );
 
       expect(validSpecs).toHaveLength(1);
@@ -217,7 +217,7 @@ describe('UiProductDetail Component', () => {
       await new Promise((resolve) => setTimeout(resolve, 450));
       const loadingStates = ['initial', 'loading', 'loaded', 'error'];
 
-      for (const _state of loadingStates) {
+      for (let i = 0; i < loadingStates.length; i++) {
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 

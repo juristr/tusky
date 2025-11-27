@@ -70,10 +70,10 @@ describe('UiOrderDetail Component', () => {
         'Delivered',
         'Cancelled',
       ];
-      for (const _status of statuses) {
+      statuses.forEach(() => {
         render(<UiOrderDetail />);
         cleanup();
-      }
+      });
       expect(statuses.length).toBe(5);
     });
   });

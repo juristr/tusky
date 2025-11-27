@@ -22,7 +22,8 @@ export async function updateTailwindGlobsGenerator(
   const visited = new Set<string>();
 
   while (queue.length > 0) {
-    const current = queue.shift()!;
+    const current = queue.shift();
+    if (!current) continue;
     if (visited.has(current)) continue;
     visited.add(current);
 
