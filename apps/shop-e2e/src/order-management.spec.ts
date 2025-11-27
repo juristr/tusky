@@ -17,7 +17,7 @@ test('page has proper responsive layout', async ({ page }) => {
   await page.goto('/');
 
   // Check main element has proper classes
-  await expect(page.locator('main')).toHaveClass(/flex-grow/);
+  await expect(page.locator('main')).toHaveClass(/grow/);
   await expect(page.locator('main')).toHaveClass(/container/);
   await expect(page.locator('main')).toHaveClass(/mx-auto/);
 });
