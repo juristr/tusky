@@ -59,6 +59,9 @@
     },
     {
       "path": "./packages/backend/api-products"
+    },
+    {
+      "path": "./apps/apitest"
     }
   ]
 }
