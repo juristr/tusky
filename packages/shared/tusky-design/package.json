@@ -13,10 +13,18 @@
       "default": "./dist/index.js"
     }
   },
+  "scripts": {
+    "test-storybook": "vitest --config=vitest.config.storybook.ts"
+  },
   "nx": {
     "tags": [
       "scope:shared",
       "type:ui"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-vitest": "^10.1.0",
+    "@vitest/browser": "^3.2.4",
+    "playwright": "^1.57.0"
   }
 }
