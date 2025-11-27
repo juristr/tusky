@@ -64,7 +64,7 @@ describe('FeatCancelOrder Component', () => {
         'show_result',
       ];
 
-      for (const _step of confirmationSteps) {
+      for (let i = 0; i < confirmationSteps.length; i++) {
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 
@@ -120,7 +120,7 @@ describe('FeatCancelOrder Component', () => {
         'success',
       ];
 
-      for (const _state of stateChanges) {
+      for (let i = 0; i < stateChanges.length; i++) {
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 

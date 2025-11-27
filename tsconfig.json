@@ -44,6 +44,21 @@
     },
     {
       "path": "./apps/shop-e2e"
+    },
+    {
+      "path": "./apps/api"
+    },
+    {
+      "path": "./packages/backend/api-dtos"
+    },
+    {
+      "path": "./packages/backend/data-products"
+    },
+    {
+      "path": "./packages/backend/service-products"
+    },
+    {
+      "path": "./packages/backend/api-products"
     }
   ]
 }

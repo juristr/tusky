@@ -144,7 +144,7 @@ describe('FeatCurrentOrders Component', () => {
       };
 
       const activeChannels = Object.entries(notificationSettings)
-        .filter(([_, enabled]) => enabled)
+        .filter(([, enabled]) => enabled)
         .map(([channel]) => channel);
 
       expect(activeChannels).toEqual(['email', 'push']);

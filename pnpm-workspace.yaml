@@ -5,3 +5,4 @@ packages:
   - 'packages/shared/*'
   - 'tools/*'
   - 'packages/*'
+  - 'packages/backend/*'
