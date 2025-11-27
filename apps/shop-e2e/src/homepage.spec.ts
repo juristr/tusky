@@ -13,21 +13,28 @@ test('product grid is displayed on homepage', async ({ page }) => {
   await expect(page.locator('section').first()).toBeVisible();
 });
 
-test('product grid has products listed', async ({ page }) => {
+test('product grid has products listed with all required elements', async ({
+  page,
+}) => {
   await page.goto('/');
 
   // Wait for product grid to load
   const productGrid = page.getByTestId('product-grid');
   await expect(productGrid).toBeVisible();
 
-  // Verify that products are listed in the grid
+  // Verify that all 8 products are listed
   const productCards = productGrid.locator('> div');
-  await expect(productCards).not.toHaveCount(0);
+  await expect(productCards).toHaveCount(8);
 
-  // Verify that at least one product has required elements
+  // Verify first product has all required elements
   const firstProduct = productCards.first();
   await expect(firstProduct.locator('img')).toBeVisible();
   await expect(firstProduct.locator('h3')).toBeVisible();
+
+  // Verify product has category, price, and rating stars
+  await expect(firstProduct.locator('text=Electronics')).toBeVisible();
+  await expect(firstProduct.locator('text=$249.99')).toBeVisible();
+  await expect(firstProduct.locator('text=★').first()).toBeVisible();
 });
 
 test('filter buttons are functional', async ({ page }) => {
