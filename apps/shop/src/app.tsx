@@ -13,7 +13,7 @@ export function App() {
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
-        <main className="flex-grow container mx-auto px-4 py-8">
+        <main className="grow container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
