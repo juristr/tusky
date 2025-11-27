@@ -5,12 +5,33 @@ import { productsRoutes } from './products.routes';
 vi.mock('@tusky/service-products', () => ({
   productsService: {
     getAll: vi.fn().mockReturnValue([
-      { id: 1, name: 'Test', price: 99, rating: 5, image: 'x.jpg', category: 'A' },
-      { id: 2, name: 'Test2', price: 49, rating: 4, image: 'y.jpg', category: 'B' },
+      {
+        id: 1,
+        name: 'Test',
+        price: 99,
+        rating: 5,
+        image: 'x.jpg',
+        category: 'A',
+      },
+      {
+        id: 2,
+        name: 'Test2',
+        price: 49,
+        rating: 4,
+        image: 'y.jpg',
+        category: 'B',
+      },
     ]),
     getById: vi.fn().mockImplementation((id: number) => {
       if (id === 1) {
-        return { id: 1, name: 'Test', price: 99, rating: 5, image: 'x.jpg', category: 'A' };
+        return {
+          id: 1,
+          name: 'Test',
+          price: 99,
+          rating: 5,
+          image: 'x.jpg',
+          category: 'A',
+        };
       }
       return undefined;
     }),

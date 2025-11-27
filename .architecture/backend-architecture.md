@@ -88,40 +88,42 @@ apps/api
 
 ## Layer Responsibilities
 
-| Layer | Package | Responsibility |
-|-------|---------|----------------|
-| API | `@tusky/api-products` | HTTP routes, request/response handling, validation schemas |
-| Service | `@tusky/service-products` | Business logic, orchestration |
-| Data | `@tusky/data-products` | Data access, repository pattern |
-| DTOs | `@tusky/api-dtos` | Shared TypeScript interfaces |
+| Layer   | Package                   | Responsibility                                             |
+| ------- | ------------------------- | ---------------------------------------------------------- |
+| API     | `@tusky/api-products`     | HTTP routes, request/response handling, validation schemas |
+| Service | `@tusky/service-products` | Business logic, orchestration                              |
+| Data    | `@tusky/data-products`    | Data access, repository pattern                            |
+| DTOs    | `@tusky/api-dtos`         | Shared TypeScript interfaces                               |
 
 ## API Endpoints
 
-| Method | Endpoint | Description | Response |
-|--------|----------|-------------|----------|
-| GET | `/api/products` | List all products | `Product[]` |
-| GET | `/api/products/:id` | Get product by ID | `Product` or 404 |
-| GET | `/docs` | Swagger UI | HTML |
-| GET | `/docs/json` | OpenAPI spec | JSON |
+| Method | Endpoint            | Description       | Response         |
+| ------ | ------------------- | ----------------- | ---------------- |
+| GET    | `/api/products`     | List all products | `Product[]`      |
+| GET    | `/api/products/:id` | Get product by ID | `Product` or 404 |
+| GET    | `/docs`             | Swagger UI        | HTML             |
+| GET    | `/docs/json`        | OpenAPI spec      | JSON             |
 
 ## Configuration
 
 ### CORS
+
 - Enabled for all origins (`origin: true`)
 
 ### Swagger
+
 - OpenAPI 3.0.3
 - UI available at `/docs`
 - JSON spec at `/docs/json`
 
 ## Testing Strategy
 
-| Package | Test Type | Coverage |
-|---------|-----------|----------|
-| `@tusky/data-products` | Unit | Repository methods |
-| `@tusky/service-products` | Unit | Service with mocked repository |
-| `@tusky/api-products` | Unit | Routes with mocked service |
-| `apps/api` | Integration | Full HTTP request/response cycle |
+| Package                   | Test Type   | Coverage                         |
+| ------------------------- | ----------- | -------------------------------- |
+| `@tusky/data-products`    | Unit        | Repository methods               |
+| `@tusky/service-products` | Unit        | Service with mocked repository   |
+| `@tusky/api-products`     | Unit        | Routes with mocked service       |
+| `apps/api`                | Integration | Full HTTP request/response cycle |
 
 ## Commands
 

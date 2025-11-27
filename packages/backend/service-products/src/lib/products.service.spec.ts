@@ -29,9 +29,11 @@ describe('ProductsService', () => {
   beforeEach(() => {
     mockRepo = {
       findAll: vi.fn().mockReturnValue(mockProducts),
-      findById: vi.fn().mockImplementation((id: number) =>
-        mockProducts.find((p) => p.id === id)
-      ),
+      findById: vi
+        .fn()
+        .mockImplementation((id: number) =>
+          mockProducts.find((p) => p.id === id)
+        ),
     } as unknown as ProductsRepository;
 
     service = new ProductsService(mockRepo);
