@@ -22,7 +22,7 @@
           "@tusky/tailwind-sync-plugin:update-tailwind-globs"
         ]
       },
-      "serve": {
+      "dev": {
         "syncGenerators": [
           "@tusky/tailwind-sync-plugin:update-tailwind-globs"
         ]

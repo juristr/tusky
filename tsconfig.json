@@ -7,37 +7,7 @@
       "path": "./apps/shop"
     },
     {
-      "path": "./packages/orders/data-access-order"
-    },
-    {
-      "path": "./packages/orders/feat-create-order"
-    },
-    {
-      "path": "./packages/orders/feat-current-orders"
-    },
-    {
-      "path": "./packages/orders/ui-order-detail"
-    },
-    {
-      "path": "./packages/products/data-access-products"
-    },
-    {
-      "path": "./packages/products/feat-product-detail"
-    },
-    {
-      "path": "./packages/products/feat-product-list"
-    },
-    {
-      "path": "./packages/products/ui-product-detail"
-    },
-    {
       "path": "./packages/shared/ui"
-    },
-    {
-      "path": "./packages/orders/feat-past-orders"
-    },
-    {
-      "path": "./packages/orders/feat-cancel-order"
     },
     {
       "path": "./tools/tailwind-sync-plugin"
@@ -59,6 +29,36 @@
     },
     {
       "path": "./packages/backend/api-products"
+    },
+    {
+      "path": "./packages/frontend/products/data-access-products"
+    },
+    {
+      "path": "./packages/frontend/products/feat-product-detail"
+    },
+    {
+      "path": "./packages/frontend/orders/feat-current-orders"
+    },
+    {
+      "path": "./packages/frontend/products/feat-product-list"
+    },
+    {
+      "path": "./packages/frontend/products/ui-product-detail"
+    },
+    {
+      "path": "./packages/frontend/orders/data-access-order"
+    },
+    {
+      "path": "./packages/frontend/orders/feat-cancel-order"
+    },
+    {
+      "path": "./packages/frontend/orders/feat-create-order"
+    },
+    {
+      "path": "./packages/frontend/orders/feat-past-orders"
+    },
+    {
+      "path": "./packages/frontend/orders/ui-order-detail"
     }
   ]
 }
