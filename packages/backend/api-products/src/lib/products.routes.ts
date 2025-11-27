@@ -1,9 +1,8 @@
-import { FastifyInstance } from 'fastify';
-import '@fastify/swagger';
+import { FastifyInstance, RouteShorthandOptions } from 'fastify';
 import { productsService } from '@tusky/service-products';
 
 export async function productsRoutes(fastify: FastifyInstance) {
-  fastify.get('/api/products', {
+  const getAllProductsOpts: RouteShorthandOptions = {
     schema: {
       tags: ['products'],
       summary: 'Get all products',
@@ -25,12 +24,13 @@ export async function productsRoutes(fastify: FastifyInstance) {
         },
       },
     },
-    handler: async () => {
-      return productsService.getAll();
-    },
+  };
+
+  fastify.get('/api/products', getAllProductsOpts, async () => {
+    return productsService.getAll();
   });
 
-  fastify.get<{ Params: { id: string } }>('/api/products/:id', {
+  const getProductByIdOpts: RouteShorthandOptions = {
     schema: {
       tags: ['products'],
       summary: 'Get product by ID',
@@ -62,7 +62,12 @@ export async function productsRoutes(fastify: FastifyInstance) {
         },
       },
     },
-    handler: async (request, reply) => {
+  };
+
+  fastify.get<{ Params: { id: string } }>(
+    '/api/products/:id',
+    getProductByIdOpts,
+    async (request, reply) => {
       const id = parseInt(request.params.id, 10);
       const product = productsService.getById(id);
       if (!product) {
@@ -70,6 +75,6 @@ export async function productsRoutes(fastify: FastifyInstance) {
         return { message: 'Product not found' };
       }
       return product;
-    },
-  });
+    }
+  );
 }
