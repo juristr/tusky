@@ -53,16 +53,17 @@ export async function updateTailwindGlobsGenerator(
   const stylesPath = 'apps/shop/src/styles.css';
   const currentContent = tree.read(stylesPath)?.toString() || '';
 
-  // Find where to insert the @source directives (after @import "tailwindcss";)
-  const importIndex = currentContent.indexOf('@import "tailwindcss";');
-  if (importIndex === -1) {
+  // Find where to insert the @source directives (after @import "tailwindcss"; or @import 'tailwindcss';)
+  const importRegex = /@import\s+['"]tailwindcss['"];/;
+  const importMatch = currentContent.match(importRegex);
+  if (!importMatch) {
     return {
-      outOfSyncMessage: 'Could not find @import "tailwindcss"; in styles.css',
+      outOfSyncMessage:
+        'Could not find @import "tailwindcss"; or @import \'tailwindcss\'; in styles.css',
     };
   }
-
-  // Extract existing @source directives
-  const sourceRegex = /@source\s+"[^"]+";/g;
+  // Extract existing @source directives (handle both quote styles)
+  const sourceRegex = /@source\s+["'][^"']+["'];/g;
   const existingSourcesMatch = currentContent.match(sourceRegex) || [];
   const existingSources = new Set(existingSourcesMatch.map((s) => s.trim()));
 
@@ -76,12 +77,12 @@ export async function updateTailwindGlobsGenerator(
     let cleanedContent = currentContent;
 
     // Remove @source lines (including newlines)
-    cleanedContent = cleanedContent.replace(/\n@source\s+"[^"]+";/g, '');
+    cleanedContent = cleanedContent.replace(/\n@source\s+["'][^"']+["'];/g, '');
 
     // Find the import line again in cleaned content
-    const cleanImportIndex = cleanedContent.indexOf('@import "tailwindcss";');
+    const cleanImportMatch = cleanedContent.match(importRegex);
     const cleanImportEndIndex =
-      cleanedContent.indexOf('\n', cleanImportIndex) + 1;
+      cleanedContent.indexOf('\n', cleanImportMatch!.index!) + 1;
 
     // Insert new @source directives after the import
     const beforeImport = cleanedContent.substring(0, cleanImportEndIndex);
