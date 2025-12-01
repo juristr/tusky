@@ -13,6 +13,9 @@
   },
   "devDependencies": {},
   "nx": {
+    "implicitDependencies": [
+      "@tusky/api"
+    ],
     "tags": [
       "type:app"
     ],
