@@ -1,9 +1,15 @@
+import { useState, useEffect } from 'react';
 import styles from './feat-product-detail.module.css';
-import { getProducts } from '@tusky/data-access-products';
+import { getProducts, Product } from '@tusky/data-access-products';
 import { UiProductDetail } from '@tusky/ui-product-detail';
 
 export function FeatProductDetail() {
-  const products = getProducts();
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    getProducts().then(setProducts);
+  }, []);
+
   return (
     <div className={styles['container']}>
       <h1>Welcome to FeatProductDetail!</h1>
