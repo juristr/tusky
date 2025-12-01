@@ -19,9 +19,6 @@
       "path": "./apps/api"
     },
     {
-      "path": "./packages/backend/api-dtos"
-    },
-    {
       "path": "./packages/backend/data-products"
     },
     {
@@ -62,6 +59,9 @@
     },
     {
       "path": "./packages/shared/tusky-design"
+    },
+    {
+      "path": "./packages/shared/api-types"
     }
   ]
 }

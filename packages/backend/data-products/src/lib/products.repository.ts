@@ -1,4 +1,4 @@
-import { Product } from '@tusky/api-dtos';
+import { Product } from '@tusky/api-types';
 
 const products: Product[] = [
   {
