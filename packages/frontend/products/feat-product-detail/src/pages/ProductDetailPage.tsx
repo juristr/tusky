@@ -1,10 +1,27 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductById } from '@tusky/data-access-products';
+import { getProductById, Product } from '@tusky/data-access-products';
 import { ProductDetail } from '../lib/ProductDetail';
 
 export function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const productId = id ? parseInt(id, 10) : null;
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!productId) {
+      setLoading(false);
+      return;
+    }
+
+    getProductById(productId)
+      .then((p) => setProduct(p ?? null))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [productId]);
 
   if (!productId) {
     return (
@@ -22,7 +39,24 @@ export function ProductDetailPage() {
     );
   }
 
-  const product = getProductById(productId);
+  if (loading) {
+    return (
+      <div
+        className="max-w-7xl mx-auto px-4 py-8"
+        data-testid="product-loading"
+      >
+        <div className="text-center">Loading product...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-8" data-testid="product-error">
+        <div className="text-center text-red-600">Error: {error}</div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -42,7 +76,6 @@ export function ProductDetailPage() {
     );
   }
 
-  // Transform the product data to match ProductDetail component expectations
   const productDetailData = {
     id: product.id.toString(),
     name: product.name,
@@ -51,9 +84,9 @@ export function ProductDetailPage() {
     description: `Experience the excellence of ${
       product.name
     }. This premium ${product.category.toLowerCase()} product has been carefully crafted to meet your highest expectations.`,
-    images: [product.image], // In a real app, you'd have multiple images
+    images: [product.image],
     rating: product.rating,
-    reviewCount: Math.floor(Math.random() * 1000) + 100, // Mock review count
+    reviewCount: Math.floor(Math.random() * 1000) + 100,
     features: [
       'Premium quality materials',
       'Satisfaction guaranteed',

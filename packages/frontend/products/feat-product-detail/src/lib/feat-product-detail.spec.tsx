@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { FeatProductDetail } from './feat-product-detail';
 
 // Mock dependencies
 vi.mock('@tusky/data-access-products', () => ({
-  getProducts: vi.fn(() => [{ id: 1 }, { id: 2 }]),
+  getProducts: vi.fn(() => Promise.resolve([{ id: 1 }, { id: 2 }])),
 }));
 
 vi.mock('@tusky/ui-product-detail', () => ({
@@ -36,9 +36,10 @@ describe('FeatProductDetail Component', () => {
     });
 
     it('should show data access value', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
       render(<FeatProductDetail />);
-      expect(screen.getByText('Data access value: 2 products')).toBeTruthy();
+      await waitFor(() => {
+        expect(screen.getByText('Data access value: 2 products')).toBeTruthy();
+      });
     });
 
     it('should render product detail UI component', async () => {
