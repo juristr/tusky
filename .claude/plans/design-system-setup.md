@@ -8,9 +8,24 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 
 `packages/shared/tusky-design/` - Storybook 10.1.0 + React 19 + Vite already configured
 
+## Progress Summary
+
+| Phase | Component   | Status  | Stories | Tests |
+| ----- | ----------- | ------- | ------- | ----- |
+| 1     | Button      | DONE    | 10      | pass  |
+| 2     | Badge       | DONE    | 4       | pass  |
+| 3     | Rating      | DONE    | 8       | pass  |
+| 4     | Price       | DONE    | 7       | pass  |
+| 5     | IconButton  | DONE    | 6       | pass  |
+| 6     | Refactoring | PENDING | -       | -     |
+
+**Total: 35 Storybook tests passing**
+
+**Branch:** `build-design-system`
+
 ---
 
-# Phase 1: Button Component
+# Phase 1: Button Component - DONE
 
 ## 1. Button
 
@@ -29,20 +44,11 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 
 **Props:** `variant`, `size`, `disabled`, `children`, `leftIcon`, `rightIcon`, `onClick`
 
-### Steps
-
-1. Create `packages/shared/tusky-design/src/lib/Button/` folder
-2. Implement `Button.tsx` with all variants
-3. Create `Button.stories.tsx` with stories for each variant
-4. Add interaction test (click handler verification)
-5. Export from `index.ts`
-6. Verify with `pnpm nx storybook tusky-design`
-7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
-8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
+**Commit:** `4c3e709 feat(tusky-design): add Button component w/ variants`
 
 ---
 
-# Phase 2: Badge Component
+# Phase 2: Badge Component - DONE
 
 ## 2. Badge
 
@@ -59,20 +65,11 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 
 **Props:** `variant`, `children`
 
-### Steps
-
-1. Create `packages/shared/tusky-design/src/lib/Badge/` folder
-2. Implement `Badge.tsx` with all variants
-3. Create `Badge.stories.tsx` with stories for each variant
-4. Add interaction test (render verification)
-5. Export from `index.ts`
-6. Verify with `pnpm nx storybook tusky-design`
-7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
-8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
+**Commit:** `faf8f80 feat(tusky-design): add Badge component`
 
 ---
 
-# Phase 3: Rating Component
+# Phase 3: Rating Component - DONE
 
 ## 3. Rating
 
@@ -83,20 +80,16 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 
 **Props:** `value` (0-5), `showCount`, `count`, `size`
 
-### Steps
+**Implementation notes:**
 
-1. Create `packages/shared/tusky-design/src/lib/Rating/` folder
-2. Implement `Rating.tsx` with star display logic
-3. Create `Rating.stories.tsx` with various rating values
-4. Add interaction test (correct star rendering)
-5. Export from `index.ts`
-6. Verify with `pnpm nx storybook tusky-design`
-7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
-8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
+- Uses `lucide-react` Star icon
+- Sizes: sm/md/lg
+
+**Commit:** `2231706 feat(tusky-design): add Rating component`
 
 ---
 
-# Phase 4: Price Component
+# Phase 4: Price Component - DONE
 
 ## 4. Price
 
@@ -107,20 +100,11 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 
 **Props:** `price`, `originalPrice`, `showDiscount`, `size`
 
-### Steps
-
-1. Create `packages/shared/tusky-design/src/lib/Price/` folder
-2. Implement `Price.tsx` with sale/discount logic
-3. Create `Price.stories.tsx` with regular and sale prices
-4. Add interaction test (correct price formatting)
-5. Export from `index.ts`
-6. Verify with `pnpm nx storybook tusky-design`
-7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
-8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
+**Commit:** `6a9e1fd feat(tusky-design): add Price component`
 
 ---
 
-# Phase 5: IconButton Component
+# Phase 5: IconButton Component - DONE
 
 ## 5. IconButton
 
@@ -131,20 +115,11 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 
 **Props:** `icon`, `label`, `onClick`, `active`
 
-### Steps
-
-1. Create `packages/shared/tusky-design/src/lib/IconButton/` folder
-2. Implement `IconButton.tsx` with active state
-3. Create `IconButton.stories.tsx` with different icons
-4. Add interaction test (click and active state)
-5. Export from `index.ts`
-6. Verify with `pnpm nx storybook tusky-design`
-7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
-8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
+**Commit:** `e41d148 feat(tusky-design): add IconButton component`
 
 ---
 
-# Phase 6: Refactor Existing Components
+# Phase 6: Refactor Existing Components - PENDING
 
 ## Refactoring Plan
 
@@ -253,10 +228,10 @@ export const ClickTest: Story = {
 - Tailwind CSS (already in use across codebase)
 - Use `clsx` for conditional classes
 
-## Dependencies to Add
+## Dependencies Added
 
-- `clsx` for class merging (add to tusky-design)
-- `lucide-react` for icons (already in project)
+- `clsx` added to tusky-design package.json
+- `lucide-react` already in project (used by Rating, IconButton)
 
 ## Critical Files
 
@@ -265,3 +240,8 @@ export const ClickTest: Story = {
 - `packages/shared/tusky-design/src/index.ts`
 - `packages/frontend/products/feat-product-list/src/lib/ProductCard.tsx`
 - `packages/frontend/products/feat-product-detail/src/lib/ProductDetail.tsx`
+
+## Known Issues / Notes
+
+- Storybook cache sometimes causes flaky tests when adding new deps (lucide-react). Fix: `rm -rf node_modules/.cache/storybook` and rerun.
+- One pre-existing lint warning in `.storybook/main.ts` (no-explicit-any) - not related to design system work.
