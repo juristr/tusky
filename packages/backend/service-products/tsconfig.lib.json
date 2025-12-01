@@ -18,7 +18,7 @@
       "path": "../data-products/tsconfig.lib.json"
     },
     {
-      "path": "../api-dtos/tsconfig.lib.json"
+      "path": "../../shared/api-types/tsconfig.lib.json"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { Product } from '@tusky/api-dtos';
+import { Product } from '@tusky/api-types';
 import { ProductsRepository, productsRepository } from '@tusky/data-products';
 
 export class ProductsService {

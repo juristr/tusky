@@ -1,5 +1,5 @@
 {
-  "name": "@tusky/api-dtos",
+  "name": "@tusky/api-types",
   "version": "0.0.1",
   "private": true,
   "type": "module",
