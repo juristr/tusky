@@ -1,4 +1,5 @@
-import { ShoppingCart, Heart, Share2, Star } from 'lucide-react';
+import { ShoppingCart, Heart, Share2 } from 'lucide-react';
+import { Rating, Price, Button, IconButton } from '@tusky/tusky-design';
 import { useState } from 'react';
 
 interface ProductDetailProps {
@@ -19,12 +20,6 @@ interface ProductDetailProps {
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-
-  const discount = product.originalPrice
-    ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
-      )
-    : 0;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8" data-testid="product-detail">
@@ -74,43 +69,21 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </h1>
 
             {/* Rating */}
-            <div className="flex items-center gap-2 mt-2">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-5 h-5 ${
-                      i < Math.floor(product.rating)
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-              <span className="text-sm text-gray-600">
-                {product.rating} ({product.reviewCount} reviews)
-              </span>
-            </div>
+            <Rating
+              value={product.rating}
+              showCount
+              count={product.reviewCount}
+              className="mt-2"
+            />
           </div>
 
           {/* Price */}
-          <div className="space-y-1">
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900">
-                ${product.price.toFixed(2)}
-              </span>
-              {product.originalPrice && (
-                <>
-                  <span className="text-xl text-gray-500 line-through">
-                    ${product.originalPrice.toFixed(2)}
-                  </span>
-                  <span className="text-sm font-semibold text-green-600">
-                    {discount}% off
-                  </span>
-                </>
-              )}
-            </div>
-          </div>
+          <Price
+            price={product.price}
+            originalPrice={product.originalPrice}
+            showDiscount
+            size="lg"
+          />
 
           {/* Description */}
           <div className="prose prose-sm text-gray-600">
@@ -157,30 +130,28 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors"
+              <Button
+                variant="secondary"
+                size="lg"
+                leftIcon={<ShoppingCart className="w-5 h-5" />}
                 disabled={!product.inStock}
+                className="flex-1"
               >
-                <ShoppingCart className="w-5 h-5" />
                 Add to Cart
-              </button>
+              </Button>
 
-              <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+              <Button variant="danger" size="lg" className="flex-1">
                 Buy Now
-              </button>
+              </Button>
             </div>
 
             {/* Additional actions */}
             <div className="flex gap-4 pt-2">
-              <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
-                <Heart className="w-5 h-5" />
-                <span className="text-sm">Add to Wishlist</span>
-              </button>
-
-              <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
-                <Share2 className="w-5 h-5" />
-                <span className="text-sm">Share</span>
-              </button>
+              <IconButton
+                icon={<Heart className="w-5 h-5" />}
+                label="Add to Wishlist"
+              />
+              <IconButton icon={<Share2 className="w-5 h-5" />} label="Share" />
             </div>
           </div>
 

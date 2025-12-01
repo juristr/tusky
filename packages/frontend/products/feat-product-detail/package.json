@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tusky/data-access-products": "workspace:*",
+    "@tusky/tusky-design": "workspace:*",
     "@tusky/ui-product-detail": "workspace:*"
   },
   "nx": {

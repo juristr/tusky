@@ -339,6 +339,9 @@ importers:
       '@tusky/data-access-products':
         specifier: workspace:*
         version: link:../data-access-products
+      '@tusky/tusky-design':
+        specifier: workspace:*
+        version: link:../../../shared/tusky-design
       '@tusky/ui-product-detail':
         specifier: workspace:*
         version: link:../ui-product-detail
@@ -348,6 +351,9 @@ importers:
       '@tusky/data-access-products':
         specifier: workspace:*
         version: link:../data-access-products
+      '@tusky/tusky-design':
+        specifier: workspace:*
+        version: link:../../../shared/tusky-design
 
   packages/frontend/products/ui-product-detail:
     dependencies:
@@ -14631,7 +14637,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/node@20.19.9)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@22.1.0)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.1)
+      vitest: 3.2.4(@types/node@20.19.9)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@22.1.0)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.1)
 
   '@vitest/utils@3.2.4':
     dependencies:

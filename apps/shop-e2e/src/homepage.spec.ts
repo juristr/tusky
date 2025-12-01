@@ -31,10 +31,10 @@ test('product grid has products listed with all required elements', async ({
   await expect(firstProduct.locator('img')).toBeVisible();
   await expect(firstProduct.locator('h3')).toBeVisible();
 
-  // Verify product has category, price, and rating stars
+  // Verify product has category, price, and rating
   await expect(firstProduct.locator('text=Electronics')).toBeVisible();
   await expect(firstProduct.locator('text=$249.99')).toBeVisible();
-  await expect(firstProduct.locator('text=★').first()).toBeVisible();
+  await expect(firstProduct.getByTestId('rating-stars')).toBeVisible();
 });
 
 test('filter buttons are functional', async ({ page }) => {

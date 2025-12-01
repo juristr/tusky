@@ -12,7 +12,8 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tusky/data-access-products": "workspace:*"
+    "@tusky/data-access-products": "workspace:*",
+    "@tusky/tusky-design": "workspace:*"
   },
   "nx": {
     "tags": [
