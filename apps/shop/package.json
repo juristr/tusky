@@ -25,6 +25,15 @@
       "dev": {
         "syncGenerators": [
           "@tusky/tailwind-sync-plugin:update-tailwind-globs"
+        ],
+        "dependsOn": [
+          {
+            "projects": [
+              "@tusky/api"
+            ],
+            "target": "serve",
+            "params": "forward"
+          }
         ]
       }
     }
