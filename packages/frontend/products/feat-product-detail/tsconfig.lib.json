@@ -34,6 +34,9 @@
       "path": "../ui-product-detail/tsconfig.lib.json"
     },
     {
+      "path": "../../../shared/tusky-design/tsconfig.lib.json"
+    },
+    {
       "path": "../data-access-products/tsconfig.lib.json"
     }
   ]
