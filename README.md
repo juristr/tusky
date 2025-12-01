@@ -142,3 +142,4 @@ nx build @tusky/tailwind-sync-plugin
 - [Nx Project Graph](https://nx.dev/concepts/mental-model#the-project-graph)
 - [Tailwind CSS Configuration](https://tailwindcss.com/docs/configuration)
 - [Nx DevKit API](https://nx.dev/packages/devkit)
+- [Nx.dev](https://nx.dev)
