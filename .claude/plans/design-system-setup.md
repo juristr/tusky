@@ -37,6 +37,8 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 4. Add interaction test (click handler verification)
 5. Export from `index.ts`
 6. Verify with `pnpm nx storybook tusky-design`
+7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
+8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
 
 ---
 
@@ -65,6 +67,8 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 4. Add interaction test (render verification)
 5. Export from `index.ts`
 6. Verify with `pnpm nx storybook tusky-design`
+7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
+8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
 
 ---
 
@@ -87,6 +91,8 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 4. Add interaction test (correct star rendering)
 5. Export from `index.ts`
 6. Verify with `pnpm nx storybook tusky-design`
+7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
+8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
 
 ---
 
@@ -109,6 +115,8 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 4. Add interaction test (correct price formatting)
 5. Export from `index.ts`
 6. Verify with `pnpm nx storybook tusky-design`
+7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
+8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
 
 ---
 
@@ -131,6 +139,8 @@ Extract atomic components from existing codebase into `@tusky/tusky-design` libr
 4. Add interaction test (click and active state)
 5. Export from `index.ts`
 6. Verify with `pnpm nx storybook tusky-design`
+7. Run `pnpm nx test-storybook tusky-design` - ensure interaction tests pass
+8. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
 
 ---
 
@@ -170,7 +180,8 @@ Replace inline implementations with:
 2. Refactor `ProductCard.tsx` to use design system components
 3. Refactor `ProductDetail.tsx` to use design system components
 4. Run existing tests to verify no regressions
-5. Run `pnpm nx format:write`
+5. Run `pnpm nx run-many -t build test lint` - ensure CI checks pass
+6. Run `pnpm nx format:write`
 
 ---
 
