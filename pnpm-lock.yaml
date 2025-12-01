@@ -326,7 +326,11 @@ importers:
         specifier: workspace:*
         version: link:../../../shared/ui
 
-  packages/frontend/products/data-access-products: {}
+  packages/frontend/products/data-access-products:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
 
   packages/frontend/products/feat-product-detail:
     dependencies:
