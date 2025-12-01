@@ -1,137 +1,92 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { getProducts, getProductById } from './data-access-products';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { getProducts, getProductById, Product } from './data-access-products';
+
+const mockProducts: Product[] = [
+  {
+    id: 1,
+    name: 'Test Product 1',
+    price: 99.99,
+    rating: 5,
+    image: 'test1.jpg',
+    category: 'Electronics',
+  },
+  {
+    id: 2,
+    name: 'Test Product 2',
+    price: 49.99,
+    rating: 4,
+    image: 'test2.jpg',
+    category: 'Fashion',
+  },
+];
 
 describe('Products Data Access Layer', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  describe('getProducts function', () => {
-    it('should return all products', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      const result = getProducts();
-      expect(Array.isArray(result)).toBe(true);
-      expect(result.length).toBe(8);
-    });
-
-    it('should return products with correct structure', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 150));
-      const result = getProducts();
-      result.forEach((product) => {
-        expect(product).toHaveProperty('id');
-        expect(product).toHaveProperty('name');
-        expect(product).toHaveProperty('price');
-        expect(product).toHaveProperty('rating');
-        expect(product).toHaveProperty('image');
-        expect(product).toHaveProperty('category');
-      });
-    });
-
-    it('should handle concurrent access', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 400));
-      const promises = Array(20)
-        .fill(null)
-        .map(() => Promise.resolve(getProducts()));
-      const results = await Promise.all(promises);
-      results.forEach((result) => {
-        expect(result.length).toBe(8);
-      });
-    });
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
-  describe('getProductById function', () => {
-    it('should return correct product by id', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 250));
-      const product = getProductById(1);
-      expect(product).toBeDefined();
-      expect(product?.name).toBe('Wireless Noise-Cancelling Headphones');
-      expect(product?.price).toBe(249.99);
-    });
+  describe('getProducts', () => {
+    it('should fetch and return all products', async () => {
+      vi.spyOn(global, 'fetch').mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockProducts),
+      } as Response);
 
-    it('should return undefined for non-existent id', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      const product = getProductById(999);
-      expect(product).toBeUndefined();
-    });
-
-    it('should handle all valid product ids', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      for (let i = 1; i <= 8; i++) {
-        const product = getProductById(i);
-        expect(product).toBeDefined();
-        expect(product?.id).toBe(i);
-      }
-    });
-  });
-
-  describe('Product data integrity', () => {
-    it('should have valid price ranges', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 350));
-      const allProducts = getProducts();
-      allProducts.forEach((product) => {
-        expect(product.price).toBeGreaterThan(0);
-        expect(product.price).toBeLessThan(1000);
-      });
-    });
-
-    it('should have valid ratings', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      const allProducts = getProducts();
-      allProducts.forEach((product) => {
-        expect(product.rating).toBeGreaterThanOrEqual(1);
-        expect(product.rating).toBeLessThanOrEqual(5);
-      });
-    });
-
-    it('should have unique product ids', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      const allProducts = getProducts();
-      const ids = allProducts.map((p) => p.id);
-      const uniqueIds = new Set(ids);
-      expect(uniqueIds.size).toBe(ids.length);
-    });
-  });
-
-  describe('Category filtering', () => {
-    it('should have products in multiple categories', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 450));
-      const allProducts = getProducts();
-      const categories = new Set(allProducts.map((p) => p.category));
-      expect(categories.size).toBeGreaterThan(1);
-    });
-
-    it('should simulate category-based queries', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      const allProducts = getProducts();
-      const electronics = allProducts.filter(
-        (p) => p.category === 'Electronics'
+      const result = await getProducts();
+      expect(result).toEqual(mockProducts);
+      expect(fetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/products')
       );
-      expect(electronics.length).toBeGreaterThan(0);
-      electronics.forEach((product) => {
-        expect(product.category).toBe('Electronics');
-      });
+    });
+
+    it('should throw error on failed fetch', async () => {
+      vi.spyOn(global, 'fetch').mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+      } as Response);
+
+      await expect(getProducts()).rejects.toThrow('Failed to fetch products');
     });
   });
 
-  describe('Performance benchmarks', () => {
-    it('should handle rapid sequential requests', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 400));
-      const start = Date.now();
-      for (let i = 0; i < 100; i++) {
-        getProducts();
-      }
-      const duration = Date.now() - start;
-      expect(duration).toBeLessThan(1000);
+  describe('getProductById', () => {
+    it('should fetch and return product by id', async () => {
+      vi.spyOn(global, 'fetch').mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve(mockProducts[0]),
+      } as Response);
+
+      const result = await getProductById(1);
+      expect(result).toEqual(mockProducts[0]);
+      expect(fetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/products/1')
+      );
     });
 
-    it('should efficiently retrieve products by id', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 350));
-      const start = Date.now();
-      for (let i = 1; i <= 8; i++) {
-        getProductById(i);
-      }
-      const duration = Date.now() - start;
-      expect(duration).toBeLessThan(100);
+    it('should return undefined for 404', async () => {
+      vi.spyOn(global, 'fetch').mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+      } as Response);
+
+      const result = await getProductById(999);
+      expect(result).toBeUndefined();
+    });
+
+    it('should throw error on other failures', async () => {
+      vi.spyOn(global, 'fetch').mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+      } as Response);
+
+      await expect(getProductById(1)).rejects.toThrow(
+        'Failed to fetch product'
+      );
     });
   });
 });

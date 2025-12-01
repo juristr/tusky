@@ -1,8 +1,37 @@
+import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { getProducts } from '@tusky/data-access-products';
+import { getProducts, Product } from '@tusky/data-access-products';
 
 export function ProductGrid() {
-  const products = getProducts();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getProducts()
+      .then(setProducts)
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div data-testid="product-grid-loading" className="text-center py-8">
+        Loading products...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div
+        data-testid="product-grid-error"
+        className="text-center py-8 text-red-600"
+      >
+        Error: {error}
+      </div>
+    );
+  }
 
   return (
     <div
