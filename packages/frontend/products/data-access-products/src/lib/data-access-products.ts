@@ -1,12 +1,6 @@
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  rating: number;
-  image: string;
-  category: string;
-}
+import { Product } from '@tusky/api-types';
+
+export type { Product };
 
 export const products: Product[] = [
   {
