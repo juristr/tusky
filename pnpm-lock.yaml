@@ -246,12 +246,6 @@ importers:
         specifier: ^1.6.2
         version: 1.8.3(eslint@9.39.1(jiti@2.6.1))
 
-  packages/backend/api-dtos:
-    dependencies:
-      tslib:
-        specifier: ^2.3.0
-        version: 2.8.1
-
   packages/backend/api-products:
     dependencies:
       '@fastify/swagger':
@@ -269,18 +263,18 @@ importers:
 
   packages/backend/data-products:
     dependencies:
-      '@tusky/api-dtos':
+      '@tusky/api-types':
         specifier: workspace:*
-        version: link:../api-dtos
+        version: link:../../shared/api-types
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/backend/service-products:
     dependencies:
-      '@tusky/api-dtos':
+      '@tusky/api-types':
         specifier: workspace:*
-        version: link:../api-dtos
+        version: link:../../shared/api-types
       '@tusky/data-products':
         specifier: workspace:*
         version: link:../data-products
@@ -360,6 +354,12 @@ importers:
       '@tusky/ui':
         specifier: workspace:*
         version: link:../../../shared/ui
+
+  packages/shared/api-types:
+    dependencies:
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
   packages/shared/tusky-design:
     dependencies:

@@ -15,7 +15,7 @@
     }
   },
   "dependencies": {
-    "@tusky/api-dtos": "workspace:*",
+    "@tusky/api-types": "workspace:*",
     "tslib": "^2.3.0"
   }
 }
