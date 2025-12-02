@@ -7,8 +7,4 @@
 
 <!-- nx configuration end-->
 
-- use Nx generators to setup new projects whenever possible.
-
-## After concluding your work
-
-Run `pnpm nx format:write` after every change to adjust formatting.
+- prefer the use of Nx generators to create new projects in this workspace.
