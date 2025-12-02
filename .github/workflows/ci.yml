@@ -29,7 +29,7 @@ jobs:
           run_install: false
 
       - name: start Nx Cloud task distribution
-        run: pnpm dlx nx start-ci-run --distribute-on="3 linux-medium-js" --auto-apply-fixes="*format*,*sync*" --stop-agents-after="lint,test,build,typecheck,e2e-ci"
+        run: pnpm dlx nx start-ci-run --distribute-on="3 linux-medium-js" --auto-apply-fixes="*format*,*sync*" --stop-agents-after="lint,test,build,typecheck,e2e-ci,test-storybook"
 
       # Cache node_modules
       - uses: actions/setup-node@v4
