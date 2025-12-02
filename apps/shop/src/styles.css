@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+@source "../../../apps/api";
+@source "../../../packages/backend/api-products";
+@source "../../../packages/backend/data-products";
+@source "../../../packages/backend/service-products";
 @source "../../../packages/frontend/orders/data-access-order";
 @source "../../../packages/frontend/orders/feat-cancel-order";
 @source "../../../packages/frontend/orders/feat-create-order";
@@ -13,6 +17,7 @@
 @source "../../../packages/shared/api-types";
 @source "../../../packages/shared/tusky-design";
 @source "../../../packages/shared/ui";
+
 
 /* Custom styles for glitch effect */
 @keyframes glitch {
