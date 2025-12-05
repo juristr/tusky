@@ -321,11 +321,7 @@ importers:
         specifier: workspace:*
         version: link:../ui-order-detail
 
-  packages/frontend/orders/ui-order-detail:
-    dependencies:
-      '@tusky/ui':
-        specifier: workspace:*
-        version: link:../../../shared/ui
+  packages/frontend/orders/ui-order-detail: {}
 
   packages/frontend/products/data-access-products:
     dependencies:
@@ -354,11 +350,7 @@ importers:
         specifier: workspace:*
         version: link:../../../shared/tusky-design
 
-  packages/frontend/products/ui-product-detail:
-    dependencies:
-      '@tusky/ui':
-        specifier: workspace:*
-        version: link:../../../shared/ui
+  packages/frontend/products/ui-product-detail: {}
 
   packages/shared/api-types:
     dependencies:
@@ -381,8 +373,6 @@ importers:
       playwright:
         specifier: ^1.57.0
         version: 1.57.0
-
-  packages/shared/ui: {}
 
   tools/tailwind-sync-plugin:
     dependencies:

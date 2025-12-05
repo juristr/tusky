@@ -2,11 +2,6 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import { UiOrderDetail } from './ui-order-detail';
 
-// Mock the @tusky/ui component
-vi.mock('@tusky/ui', () => ({
-  Ui: () => <div data-testid="mock-ui">Mocked UI Component</div>,
-}));
-
 describe('UiOrderDetail Component', () => {
   beforeEach(() => {
     cleanup();
@@ -28,12 +23,6 @@ describe('UiOrderDetail Component', () => {
       await new Promise((resolve) => setTimeout(resolve, 150));
       render(<UiOrderDetail />);
       expect(screen.getByText('Welcome to UiOrderDetail!')).toBeTruthy();
-    });
-
-    it('should include the shared Ui component', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      render(<UiOrderDetail />);
-      expect(screen.getByTestId('mock-ui')).toBeTruthy();
     });
   });
 
@@ -111,19 +100,11 @@ describe('UiOrderDetail Component', () => {
   });
 
   describe('Integration with shared components', () => {
-    it('should properly compose with Ui component', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      const { container } = render(<UiOrderDetail />);
-      const uiComponent = container.querySelector('[data-testid="mock-ui"]');
-      expect(uiComponent).toBeTruthy();
-      expect(uiComponent?.textContent).toBe('Mocked UI Component');
-    });
-
     it('should maintain component hierarchy', async () => {
       await new Promise((resolve) => setTimeout(resolve, 250));
       const { container } = render(<UiOrderDetail />);
       const rootDiv = container.firstChild as HTMLElement;
-      expect(rootDiv.children.length).toBe(2); // h1 and Ui component
+      expect(rootDiv.children.length).toBe(1);
     });
   });
 

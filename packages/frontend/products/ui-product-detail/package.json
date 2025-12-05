@@ -11,9 +11,7 @@
     },
     "./package.json": "./package.json"
   },
-  "dependencies": {
-    "@tusky/ui": "workspace:*"
-  },
+  "dependencies": {},
   "nx": {
     "tags": [
       "scope:products",

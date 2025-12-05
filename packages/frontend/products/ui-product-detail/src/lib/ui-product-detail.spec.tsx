@@ -2,11 +2,6 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { UiProductDetail } from './ui-product-detail';
 
-// Mock the @tusky/ui component
-vi.mock('@tusky/ui', () => ({
-  Ui: () => <div data-testid="mock-ui">Mocked UI Component</div>,
-}));
-
 describe('UiProductDetail Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -27,12 +22,6 @@ describe('UiProductDetail Component', () => {
       await new Promise((resolve) => setTimeout(resolve, 150));
       render(<UiProductDetail />);
       expect(screen.getByText('Welcome to UiProductDetail!')).toBeTruthy();
-    });
-
-    it('should include shared UI component', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      render(<UiProductDetail />);
-      expect(screen.getByTestId('mock-ui')).toBeTruthy();
     });
   });
 

@@ -7,9 +7,6 @@
       "path": "./apps/shop"
     },
     {
-      "path": "./packages/shared/ui"
-    },
-    {
       "path": "./tools/tailwind-sync-plugin"
     },
     {
