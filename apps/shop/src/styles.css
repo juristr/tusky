@@ -17,7 +17,6 @@
 @source "../../../packages/shared/api-types";
 @source "../../../packages/shared/tusky-design";
 
-
 /* Custom styles for glitch effect */
 @keyframes glitch {
   0% {
