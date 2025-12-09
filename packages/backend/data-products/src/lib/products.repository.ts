@@ -25,7 +25,7 @@ const products: Product[] = [
     name: 'Leather Crossbody Bag',
     price: 79.99,
     originalPrice: 99.99,
-    rating: 4,
+    rating: 2,
     image:
       'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     category: 'Fashion',

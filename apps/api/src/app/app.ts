@@ -5,6 +5,7 @@ import cors from '@fastify/cors';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { productsRoutes } from '@tusky/api-products';
+import { ratingsRoutes } from '@tusky/api-ratings';
 
 /* eslint-disable-next-line */
 export interface AppOptions {}
@@ -37,6 +38,9 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
 
   // Register product routes
   await fastify.register(productsRoutes);
+
+  // Register ratings routes
+  await fastify.register(ratingsRoutes);
 
   // Load other routes
   fastify.register(AutoLoad, {
