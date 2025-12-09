@@ -5,7 +5,21 @@ export class RatingsService {
   constructor(private repo: RatingsRepository = ratingsRepository) {}
 
   getRatingByProductId(productId: number): ProductRating | undefined {
-    return this.repo.findByProductId(productId);
+    const userRatings = this.repo.findByProductId(productId);
+
+    if (userRatings.length === 0) {
+      return undefined;
+    }
+
+    const totalRatings = userRatings.length;
+    const sumRatings = userRatings.reduce((sum, r) => sum + r.rating, 0);
+    const averageRating = Math.round((sumRatings / totalRatings) * 10) / 10;
+
+    return {
+      productId,
+      averageRating,
+      totalRatings,
+    };
   }
 }
 

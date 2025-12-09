@@ -77,7 +77,7 @@ export function ProductDetailPage() {
   }
 
   const productDetailData = {
-    id: product.id.toString(),
+    id: product.id,
     name: product.name,
     price: product.price,
     originalPrice: product.originalPrice,
@@ -85,8 +85,6 @@ export function ProductDetailPage() {
       product.name
     }. This premium ${product.category.toLowerCase()} product has been carefully crafted to meet your highest expectations.`,
     images: [product.image],
-    rating: product.rating,
-    reviewCount: Math.floor(Math.random() * 1000) + 100,
     features: [
       'Premium quality materials',
       'Satisfaction guaranteed',
