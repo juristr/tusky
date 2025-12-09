@@ -17,8 +17,11 @@
 @source "../../../packages/frontend/products/feat-product-detail";
 @source "../../../packages/frontend/products/feat-product-list";
 @source "../../../packages/frontend/products/ui-product-detail";
+@source "../../../packages/frontend/ratings/data-access-ratings";
+@source "../../../packages/frontend/ratings/ui-ratings";
 @source "../../../packages/shared/api-types";
 @source "../../../packages/shared/tusky-design";
+
 
 
 /* Custom styles for glitch effect */

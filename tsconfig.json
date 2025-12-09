@@ -68,6 +68,12 @@
     },
     {
       "path": "./packages/backend/api-ratings"
+    },
+    {
+      "path": "./packages/frontend/ratings/data-access-ratings"
+    },
+    {
+      "path": "./packages/frontend/ratings/ui-ratings"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "extends": "../../../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "out-tsc/feat-product-detail",
+    "outDir": "dist",
     "types": [
       "node",
       "@nx/react/typings/cssmodule.d.ts",
@@ -9,12 +9,13 @@
     ],
     "rootDir": "src",
     "jsx": "react-jsx",
-    "tsBuildInfoFile": "out-tsc/feat-product-detail/tsconfig.lib.tsbuildinfo"
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
   },
   "exclude": [
     "out-tsc",
     "dist",
     "jest.config.ts",
+    "jest.config.cts",
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
     "src/**/*.spec.tsx",
@@ -22,25 +23,15 @@
     "src/**/*.spec.js",
     "src/**/*.test.js",
     "src/**/*.spec.jsx",
-    "src/**/*.test.jsx",
-    "vite.config.ts",
-    "vite.config.mts",
-    "vitest.config.ts",
-    "vitest.config.mts"
+    "src/**/*.test.jsx"
   ],
   "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
   "references": [
     {
-      "path": "../../ratings/ui-ratings/tsconfig.lib.json"
-    },
-    {
-      "path": "../ui-product-detail/tsconfig.lib.json"
-    },
-    {
       "path": "../../../shared/tusky-design/tsconfig.lib.json"
     },
     {
-      "path": "../data-access-products/tsconfig.lib.json"
+      "path": "../data-access-ratings/tsconfig.lib.json"
     }
   ]
 }
