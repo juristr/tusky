@@ -77,7 +77,7 @@ export function ProductDetailPage() {
   }
 
   const productDetailData = {
-    id: product.id.toString(),
+    id: product.id,
     name: product.name,
     price: product.price,
     originalPrice: product.originalPrice,
