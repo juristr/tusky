@@ -43,6 +43,14 @@ export const ZeroStars: Story = {
   args: { value: 0 },
 };
 
+export const HalfStar: Story = {
+  args: { value: 3.5 },
+};
+
+export const FourAndHalf: Story = {
+  args: { value: 4.5 },
+};
+
 export const StarRenderTest: Story = {
   args: { value: 3 },
   play: async ({ canvasElement }) => {
@@ -51,5 +59,18 @@ export const StarRenderTest: Story = {
     const emptyStars = canvas.getAllByTestId('star-empty');
     await expect(filledStars).toHaveLength(3);
     await expect(emptyStars).toHaveLength(2);
+  },
+};
+
+export const HalfStarRenderTest: Story = {
+  args: { value: 3.7 },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const filledStars = canvas.getAllByTestId('star-filled');
+    const halfStar = canvas.getByTestId('star-half');
+    const emptyStars = canvas.getAllByTestId('star-empty');
+    await expect(filledStars).toHaveLength(3);
+    await expect(halfStar).toBeInTheDocument();
+    await expect(emptyStars).toHaveLength(1);
   },
 };

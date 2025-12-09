@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { Star } from 'lucide-react';
+import { Star, StarHalf } from 'lucide-react';
 
 export type RatingSize = 'sm' | 'md' | 'lg';
 
@@ -30,19 +30,38 @@ export function Rating({
   size = 'md',
   className,
 }: RatingProps) {
-  const stars = [...Array(5)].map((_, i) => i < Math.floor(value));
+  const fullStars = Math.floor(value);
+  const hasHalfStar = value - fullStars >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (
     <div className={clsx('flex items-center gap-1', className)}>
       <div className="flex items-center" data-testid="rating-stars">
-        {stars.map((filled, i) => (
+        {[...Array(fullStars)].map((_, i) => (
           <Star
-            key={i}
+            key={`full-${i}`}
             className={clsx(
               sizeStyles[size],
-              filled ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+              'fill-yellow-400 text-yellow-400'
             )}
-            data-testid={filled ? 'star-filled' : 'star-empty'}
+            data-testid="star-filled"
+          />
+        ))}
+        {hasHalfStar && (
+          <StarHalf
+            key="half"
+            className={clsx(
+              sizeStyles[size],
+              'fill-yellow-400 text-yellow-400'
+            )}
+            data-testid="star-half"
+          />
+        )}
+        {[...Array(emptyStars)].map((_, i) => (
+          <Star
+            key={`empty-${i}`}
+            className={clsx(sizeStyles[size], 'text-gray-300')}
+            data-testid="star-empty"
           />
         ))}
       </div>
