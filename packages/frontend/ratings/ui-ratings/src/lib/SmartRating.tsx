@@ -9,9 +9,15 @@ export interface SmartRatingProps {
   productId: number;
   size?: RatingSize;
   className?: string;
+  onCountClick?: () => void;
 }
 
-export function SmartRating({ productId, size, className }: SmartRatingProps) {
+export function SmartRating({
+  productId,
+  size,
+  className,
+  onCountClick,
+}: SmartRatingProps) {
   const [rating, setRating] = useState<ProductRating | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -56,6 +62,7 @@ export function SmartRating({ productId, size, className }: SmartRatingProps) {
       count={rating.totalRatings}
       size={size}
       className={className}
+      onCountClick={onCountClick}
     />
   );
 }

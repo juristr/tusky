@@ -1,6 +1,6 @@
 import { ShoppingCart, Heart, Share2 } from 'lucide-react';
 import { Price, Button, IconButton } from '@tusky/tusky-design';
-import { SmartRating } from '@tusky/ui-ratings';
+import { SmartRating, RatingsModal } from '@tusky/ui-ratings';
 import { useState } from 'react';
 
 interface ProductDetailProps {
@@ -19,6 +19,7 @@ interface ProductDetailProps {
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [showRatingsModal, setShowRatingsModal] = useState(false);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8" data-testid="product-detail">
@@ -68,7 +69,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </h1>
 
             {/* Rating */}
-            <SmartRating productId={product.id} className="mt-2" />
+            <SmartRating
+              productId={product.id}
+              className="mt-2"
+              onCountClick={() => setShowRatingsModal(true)}
+            />
           </div>
 
           {/* Price */}
@@ -159,6 +164,12 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
       </div>
+
+      <RatingsModal
+        isOpen={showRatingsModal}
+        onClose={() => setShowRatingsModal(false)}
+        productId={product.id}
+      />
     </div>
   );
 }

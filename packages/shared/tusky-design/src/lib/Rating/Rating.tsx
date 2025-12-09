@@ -9,6 +9,7 @@ export interface RatingProps {
   count?: number;
   size?: RatingSize;
   className?: string;
+  onCountClick?: () => void;
 }
 
 const sizeStyles: Record<RatingSize, string> = {
@@ -29,6 +30,7 @@ export function Rating({
   count,
   size = 'md',
   className,
+  onCountClick,
 }: RatingProps) {
   const fullStars = Math.floor(value);
   const hasHalfStar = value - fullStars >= 0.5;
@@ -67,7 +69,18 @@ export function Rating({
       </div>
       {showCount && count !== undefined && (
         <span className={clsx('text-gray-600', textSizeStyles[size])}>
-          {value} ({count} reviews)
+          {value}{' '}
+          {onCountClick ? (
+            <button
+              type="button"
+              onClick={onCountClick}
+              className="hover:underline cursor-pointer"
+            >
+              ({count} reviews)
+            </button>
+          ) : (
+            <>({count} reviews)</>
+          )}
         </span>
       )}
     </div>
