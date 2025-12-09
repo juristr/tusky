@@ -16,7 +16,6 @@
 @source "../../../packages/frontend/products/ui-product-detail";
 @source "../../../packages/shared/api-types";
 @source "../../../packages/shared/tusky-design";
-@source "../../../packages/shared/ui";
 
 /* Custom styles for glitch effect */
 @keyframes glitch {
