@@ -38,6 +38,9 @@
     },
     {
       "path": "../data-access-products/tsconfig.lib.json"
+    },
+    {
+      "path": "../../ratings/ui-ratings/tsconfig.lib.json"
     }
   ]
 }
