@@ -13,6 +13,9 @@
   "references": [
     {
       "path": "../../packages/backend/api-products/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/backend/api-ratings/tsconfig.lib.json"
     }
   ]
 }

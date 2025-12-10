@@ -59,6 +59,15 @@
     },
     {
       "path": "./packages/shared/api-types"
+    },
+    {
+      "path": "./packages/backend/data-ratings"
+    },
+    {
+      "path": "./packages/backend/service-ratings"
+    },
+    {
+      "path": "./packages/backend/api-ratings"
     }
   ]
 }
