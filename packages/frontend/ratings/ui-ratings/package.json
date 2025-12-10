@@ -1,5 +1,5 @@
 {
-  "name": "@tusky/feat-product-detail",
+  "name": "@tusky/ui-ratings",
   "version": "0.0.1",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -12,16 +12,14 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tusky/data-access-products": "workspace:*",
     "@tusky/data-access-ratings": "workspace:*",
     "@tusky/tusky-design": "workspace:*",
-    "@tusky/ui-product-detail": "workspace:*",
-    "@tusky/ui-ratings": "workspace:*"
+    "@tusky/api-types": "workspace:*"
   },
   "nx": {
     "tags": [
-      "scope:products",
-      "type:feature"
+      "scope:ratings",
+      "type:ui"
     ]
   }
 }

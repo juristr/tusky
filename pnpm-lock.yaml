@@ -373,12 +373,18 @@ importers:
       '@tusky/data-access-products':
         specifier: workspace:*
         version: link:../data-access-products
+      '@tusky/data-access-ratings':
+        specifier: workspace:*
+        version: link:../../ratings/data-access-ratings
       '@tusky/tusky-design':
         specifier: workspace:*
         version: link:../../../shared/tusky-design
       '@tusky/ui-product-detail':
         specifier: workspace:*
         version: link:../ui-product-detail
+      '@tusky/ui-ratings':
+        specifier: workspace:*
+        version: link:../../ratings/ui-ratings
 
   packages/frontend/products/feat-product-list:
     dependencies:
@@ -390,6 +396,24 @@ importers:
         version: link:../../../shared/tusky-design
 
   packages/frontend/products/ui-product-detail: {}
+
+  packages/frontend/ratings/data-access-ratings:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
+
+  packages/frontend/ratings/ui-ratings:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
+      '@tusky/data-access-ratings':
+        specifier: workspace:*
+        version: link:../data-access-ratings
+      '@tusky/tusky-design':
+        specifier: workspace:*
+        version: link:../../../shared/tusky-design
 
   packages/shared/api-types:
     dependencies:
