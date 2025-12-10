@@ -2,8 +2,11 @@
 
 @source "../../../apps/api";
 @source "../../../packages/backend/api-products";
+@source "../../../packages/backend/api-ratings";
 @source "../../../packages/backend/data-products";
+@source "../../../packages/backend/data-ratings";
 @source "../../../packages/backend/service-products";
+@source "../../../packages/backend/service-ratings";
 @source "../../../packages/frontend/orders/data-access-order";
 @source "../../../packages/frontend/orders/feat-cancel-order";
 @source "../../../packages/frontend/orders/feat-create-order";
@@ -14,6 +17,8 @@
 @source "../../../packages/frontend/products/feat-product-detail";
 @source "../../../packages/frontend/products/feat-product-list";
 @source "../../../packages/frontend/products/ui-product-detail";
+@source "../../../packages/frontend/ratings/data-access-ratings";
+@source "../../../packages/frontend/ratings/ui-ratings";
 @source "../../../packages/shared/api-types";
 @source "../../../packages/shared/tusky-design";
 

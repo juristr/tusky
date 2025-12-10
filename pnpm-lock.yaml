@@ -213,6 +213,9 @@ importers:
       '@tusky/api-products':
         specifier: workspace:*
         version: link:../../packages/backend/api-products
+      '@tusky/api-ratings':
+        specifier: workspace:*
+        version: link:../../packages/backend/api-ratings
       fastify:
         specifier: ^5.6.2
         version: 5.6.2
@@ -262,7 +265,31 @@ importers:
         specifier: ^2.3.0
         version: 2.8.1
 
+  packages/backend/api-ratings:
+    dependencies:
+      '@fastify/swagger':
+        specifier: ^9.6.1
+        version: 9.6.1
+      '@tusky/service-ratings':
+        specifier: workspace:*
+        version: link:../service-ratings
+      fastify:
+        specifier: ^5.6.2
+        version: 5.6.2
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
   packages/backend/data-products:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../shared/api-types
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
+  packages/backend/data-ratings:
     dependencies:
       '@tusky/api-types':
         specifier: workspace:*
@@ -279,6 +306,18 @@ importers:
       '@tusky/data-products':
         specifier: workspace:*
         version: link:../data-products
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
+  packages/backend/service-ratings:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../shared/api-types
+      '@tusky/data-ratings':
+        specifier: workspace:*
+        version: link:../data-ratings
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -334,12 +373,18 @@ importers:
       '@tusky/data-access-products':
         specifier: workspace:*
         version: link:../data-access-products
+      '@tusky/data-access-ratings':
+        specifier: workspace:*
+        version: link:../../ratings/data-access-ratings
       '@tusky/tusky-design':
         specifier: workspace:*
         version: link:../../../shared/tusky-design
       '@tusky/ui-product-detail':
         specifier: workspace:*
         version: link:../ui-product-detail
+      '@tusky/ui-ratings':
+        specifier: workspace:*
+        version: link:../../ratings/ui-ratings
 
   packages/frontend/products/feat-product-list:
     dependencies:
@@ -351,6 +396,24 @@ importers:
         version: link:../../../shared/tusky-design
 
   packages/frontend/products/ui-product-detail: {}
+
+  packages/frontend/ratings/data-access-ratings:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
+
+  packages/frontend/ratings/ui-ratings:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
+      '@tusky/data-access-ratings':
+        specifier: workspace:*
+        version: link:../data-access-ratings
+      '@tusky/tusky-design':
+        specifier: workspace:*
+        version: link:../../../shared/tusky-design
 
   packages/shared/api-types:
     dependencies:

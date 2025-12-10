@@ -7,3 +7,4 @@ packages:
   - 'tools/*'
   - 'packages/*'
   - 'packages/backend/*'
+  - 'packages/frontend/ratings/*'
