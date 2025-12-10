@@ -2,7 +2,26 @@ export interface Rating {
   id: number;
   productId: number;
   value: number;
+  comment: string;
 }
+
+const sampleComments = [
+  'Great product, exactly what I needed!',
+  'Good quality for the price.',
+  'Exceeded my expectations.',
+  'Decent but could be better.',
+  'Love it! Would buy again.',
+  'Not bad, works as expected.',
+  'Amazing quality and fast shipping.',
+  'Okay product, nothing special.',
+  'Perfect for my needs.',
+  'Highly recommend this!',
+  'Could be improved but overall satisfied.',
+  'Fantastic! Five stars all the way.',
+  'Average product, does the job.',
+  'Very happy with this purchase.',
+  'Would not recommend unfortunately.',
+];
 
 // Generate random ratings for products 1-8
 function generateMockRatings(): Rating[] {
@@ -17,6 +36,8 @@ function generateMockRatings(): Rating[] {
         id: id++,
         productId,
         value: Math.floor(Math.random() * 5) + 1, // 1-5
+        comment:
+          sampleComments[Math.floor(Math.random() * sampleComments.length)],
       });
     }
   }

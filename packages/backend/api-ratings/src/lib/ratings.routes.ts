@@ -66,6 +66,7 @@ export async function ratingsRoutes(fastify: FastifyInstance) {
               id: { type: 'number' },
               productId: { type: 'number' },
               value: { type: 'number' },
+              comment: { type: 'string' },
             },
           },
         },

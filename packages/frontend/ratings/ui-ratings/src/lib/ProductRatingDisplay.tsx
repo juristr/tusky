@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Rating, RatingSize } from '@tusky/tusky-design';
-import { ProductRating } from '@tusky/api-types';
-import { getRatingByProductId } from '@tusky/data-access-ratings';
+import { Rating, RatingSize, Modal } from '@tusky/tusky-design';
+import { ProductRating, IndividualRating } from '@tusky/api-types';
+import {
+  getRatingByProductId,
+  getAllRatingsForProduct,
+} from '@tusky/data-access-ratings';
 
 export interface ProductRatingDisplayProps {
   productId: number;
@@ -17,6 +20,9 @@ export function ProductRatingDisplay({
   const [rating, setRating] = useState<ProductRating | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [allRatings, setAllRatings] = useState<IndividualRating[]>([]);
+  const [loadingRatings, setLoadingRatings] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -47,6 +53,21 @@ export function ProductRatingDisplay({
     };
   }, [productId]);
 
+  const handleReviewsClick = async () => {
+    setModalOpen(true);
+    if (allRatings.length === 0) {
+      setLoadingRatings(true);
+      try {
+        const ratings = await getAllRatingsForProduct(productId);
+        setAllRatings(ratings);
+      } catch {
+        // Error handling - ratings stay empty
+      } finally {
+        setLoadingRatings(false);
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className={className}>
@@ -64,13 +85,36 @@ export function ProductRatingDisplay({
   }
 
   return (
-    <Rating
-      value={rating.averageRating}
-      showCount
-      count={rating.totalRatings}
-      size={size}
-      className={className}
-    />
+    <>
+      <Rating
+        value={rating.averageRating}
+        showCount
+        count={rating.totalRatings}
+        size={size}
+        className={className}
+        onReviewsClick={handleReviewsClick}
+      />
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="All Reviews"
+      >
+        {loadingRatings ? (
+          <p className="text-gray-500">Loading reviews...</p>
+        ) : allRatings.length === 0 ? (
+          <p className="text-gray-500">No reviews yet.</p>
+        ) : (
+          <div className="space-y-4">
+            {allRatings.map((r) => (
+              <div key={r.id} className="border-b pb-3 last:border-b-0">
+                <Rating value={r.value} size="sm" />
+                <p className="mt-1 text-gray-700">{r.comment}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </Modal>
+    </>
   );
 }
 

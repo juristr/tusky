@@ -3,3 +3,10 @@ export interface ProductRating {
   averageRating: number;
   totalRatings: number;
 }
+
+export interface IndividualRating {
+  id: number;
+  productId: number;
+  value: number;
+  comment: string;
+}
