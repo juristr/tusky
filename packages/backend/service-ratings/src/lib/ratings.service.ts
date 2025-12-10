@@ -1,5 +1,9 @@
 import { ProductRating } from '@tusky/api-types';
-import { Rating, RatingsRepository, ratingsRepository } from '@tusky/data-ratings';
+import {
+  Rating,
+  RatingsRepository,
+  ratingsRepository,
+} from '@tusky/data-ratings';
 
 export class RatingsService {
   constructor(private repo: RatingsRepository = ratingsRepository) {}
