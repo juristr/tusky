@@ -6,7 +6,11 @@ import {
   ReactNode,
 } from 'react';
 import { User } from '@tusky/api-types';
-import { login as apiLogin, logout as apiLogout, getMe } from '@tusky/data-access-auth';
+import {
+  login as apiLogin,
+  logout as apiLogout,
+  getMe,
+} from '@tusky/data-access-auth';
 
 interface AuthContextType {
   user: User | null;

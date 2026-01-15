@@ -26,10 +26,19 @@ export function App() {
                     <main className="grow container mx-auto px-4 py-8">
                       <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/product/:id" element={<ProductDetailPage />} />
+                        <Route
+                          path="/product/:id"
+                          element={<ProductDetailPage />}
+                        />
                         <Route path="/orders" element={<OrdersPage />} />
-                        <Route path="/orders/past" element={<PastOrdersPage />} />
-                        <Route path="/orders/create" element={<CreateOrderPage />} />
+                        <Route
+                          path="/orders/past"
+                          element={<PastOrdersPage />}
+                        />
+                        <Route
+                          path="/orders/create"
+                          element={<CreateOrderPage />}
+                        />
                       </Routes>
                     </main>
                     <Footer />

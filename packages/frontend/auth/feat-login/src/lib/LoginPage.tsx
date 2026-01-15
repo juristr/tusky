@@ -29,7 +29,9 @@ export function LoginPage() {
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
         {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
+          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+            {error}
+          </div>
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
