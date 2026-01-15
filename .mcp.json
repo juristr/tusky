@@ -1,3 +1,16 @@
 {
-  "mcpServers": {}
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "bunx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    },
+    "playwright": {
+      "command": "bunx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "playwriter": {
+      "command": "bunx",
+      "args": ["playwriter@latest"]
+    }
+  }
 }
