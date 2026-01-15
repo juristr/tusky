@@ -11,6 +11,9 @@ importers:
       '@fastify/autoload':
         specifier: ^6.3.1
         version: 6.3.1
+      '@fastify/cookie':
+        specifier: ^11.0.2
+        version: 11.0.2
       '@fastify/sensible':
         specifier: ^6.0.3
         version: 6.0.3
@@ -198,6 +201,9 @@ importers:
       '@fastify/autoload':
         specifier: ^6.3.1
         version: 6.3.1
+      '@fastify/cookie':
+        specifier: ^11.0.2
+        version: 11.0.2
       '@fastify/cors':
         specifier: ^11.1.0
         version: 11.1.0
@@ -210,6 +216,9 @@ importers:
       '@fastify/swagger-ui':
         specifier: ^5.2.3
         version: 5.2.3
+      '@tusky/api-auth':
+        specifier: workspace:*
+        version: link:../../packages/backend/api-auth
       '@tusky/api-products':
         specifier: workspace:*
         version: link:../../packages/backend/api-products
@@ -234,6 +243,9 @@ importers:
       '@tusky/feat-current-orders':
         specifier: workspace:*
         version: link:../../packages/frontend/orders/feat-current-orders
+      '@tusky/feat-login':
+        specifier: workspace:*
+        version: link:../../packages/frontend/auth/feat-login
       '@tusky/feat-past-orders':
         specifier: workspace:*
         version: link:../../packages/frontend/orders/feat-past-orders
@@ -243,12 +255,27 @@ importers:
       '@tusky/feat-product-list':
         specifier: workspace:*
         version: link:../../packages/frontend/products/feat-product-list
+      '@tusky/util-auth':
+        specifier: workspace:*
+        version: link:../../packages/frontend/auth/util-auth
 
   apps/shop-e2e:
     dependencies:
       eslint-plugin-playwright:
         specifier: ^1.6.2
         version: 1.8.3(eslint@9.39.1(jiti@2.6.1))
+
+  packages/backend/api-auth:
+    dependencies:
+      '@fastify/cookie':
+        specifier: ^11.0.2
+        version: 11.0.2
+      fastify:
+        specifier: ^5.6.2
+        version: 5.6.2
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
   packages/backend/api-products:
     dependencies:
@@ -321,6 +348,23 @@ importers:
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
+
+  packages/frontend/auth/data-access-auth: {}
+
+  packages/frontend/auth/feat-login:
+    dependencies:
+      '@tusky/util-auth':
+        specifier: workspace:*
+        version: link:../util-auth
+
+  packages/frontend/auth/util-auth:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
+      '@tusky/data-access-auth':
+        specifier: workspace:*
+        version: link:../data-access-auth
 
   packages/frontend/orders/data-access-order: {}
 
@@ -1476,6 +1520,9 @@ packages:
 
   '@fastify/autoload@6.3.1':
     resolution: {integrity: sha512-0fsG+lO3m5yEZVjXKpltCe+2eHhM6rfAPQhvlGUgLUFTw/N2wA9WqPTObMtrF3oUCUrxbSDv60HlUIoh+aFM1A==}
+
+  '@fastify/cookie@11.0.2':
+    resolution: {integrity: sha512-GWdwdGlgJxyvNv+QcKiGNevSspMQXncjMZ1J8IvuDQk0jvkzgWWZFNC2En3s+nHndZBGV8IbLwOI/sxCZw/mzA==}
 
   '@fastify/cors@11.1.0':
     resolution: {integrity: sha512-sUw8ed8wP2SouWZTIbA7V2OQtMNpLj2W6qJOYhNdcmINTu6gsxVYXjQiM9mdi8UUDlcoDDJ/W2syPo1WB2QjYA==}
@@ -6917,6 +6964,7 @@ packages:
   whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
     engines: {node: '>=12'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
@@ -8109,6 +8157,11 @@ snapshots:
       fast-uri: 3.1.0
 
   '@fastify/autoload@6.3.1': {}
+
+  '@fastify/cookie@11.0.2':
+    dependencies:
+      cookie: 1.1.0
+      fastify-plugin: 5.0.1
 
   '@fastify/cors@11.1.0':
     dependencies:

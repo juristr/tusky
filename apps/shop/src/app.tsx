@@ -7,23 +7,39 @@ import OrdersPage from './pages/OrdersPage';
 import PastOrdersPage from './pages/PastOrdersPage';
 import CreateOrderPage from './pages/CreateOrderPage';
 import { ProductDetailPage } from '@tusky/feat-product-detail';
+import { AuthProvider, ProtectedRoute } from '@tusky/util-auth';
+import { LoginPage } from '@tusky/feat-login';
 
 export function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gray-50">
-        <Navbar />
-        <main className="grow container mx-auto px-4 py-8">
+      <AuthProvider>
+        <div className="min-h-screen flex flex-col bg-gray-50">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/product/:id" element={<ProductDetailPage />} />
-            <Route path="/orders" element={<OrdersPage />} />
-            <Route path="/orders/past" element={<PastOrdersPage />} />
-            <Route path="/orders/create" element={<CreateOrderPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/*"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Navbar />
+                    <main className="grow container mx-auto px-4 py-8">
+                      <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/product/:id" element={<ProductDetailPage />} />
+                        <Route path="/orders" element={<OrdersPage />} />
+                        <Route path="/orders/past" element={<PastOrdersPage />} />
+                        <Route path="/orders/create" element={<CreateOrderPage />} />
+                      </Routes>
+                    </main>
+                    <Footer />
+                  </>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
-        </main>
-        <Footer />
-      </div>
+        </div>
+      </AuthProvider>
     </Router>
   );
 }
