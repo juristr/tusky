@@ -22,18 +22,18 @@ Monitor Nx Cloud CI pipeline execution and handle self-healing fixes.
 
 ## Status Table
 
-| Status                       | Action                                                                                                                   |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `ci_success`                 | Exit success                                                                                                             |
-| `fix_available` (verified)   | Apply via MCP (`update_self_healing_fix` action: "APPLY"). Loop.                                                         |
+| Status                       | Action                                                                                                                  |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `ci_success`                 | Exit success                                                                                                            |
+| `fix_available` (verified)   | Apply via MCP (`update_self_healing_fix` action: "APPLY"). Loop.                                                        |
 | `fix_available` (unverified) | Analyze fix. If good → apply. If needs enhancement → `nx apply-locally`, enhance, commit, push. If wrong → reject, fix. |
-| `fix_failed`                 | Attempt local fix from `taskOutputSummary`. Commit, push, loop.                                                          |
-| `environment_issue`          | MCP rerun: `update_self_healing_fix` action: "RERUN_ENVIRONMENT_STATE". Loop.                                            |
-| `no_fix`                     | Attempt local fix if possible. Otherwise exit failure.                                                                   |
-| `polling_timeout`            | Exit timeout                                                                                                             |
-| `cipe_canceled`              | Exit canceled                                                                                                            |
-| `cipe_timed_out`             | Exit timeout                                                                                                             |
-| `error`                      | Increment `no_progress_count`. If >= 3 → exit circuit breaker. Otherwise wait 60s, loop.                                 |
+| `fix_failed`                 | Attempt local fix from `taskOutputSummary`. Commit, push, loop.                                                         |
+| `environment_issue`          | MCP rerun: `update_self_healing_fix` action: "RERUN_ENVIRONMENT_STATE". Loop.                                           |
+| `no_fix`                     | Attempt local fix if possible. Otherwise exit failure.                                                                  |
+| `polling_timeout`            | Exit timeout                                                                                                            |
+| `cipe_canceled`              | Exit canceled                                                                                                           |
+| `cipe_timed_out`             | Exit timeout                                                                                                            |
+| `error`                      | Increment `no_progress_count`. If >= 3 → exit circuit breaker. Otherwise wait 60s, loop.                                |
 
 ### Verified vs Unverified
 
@@ -50,13 +50,13 @@ Monitor Nx Cloud CI pipeline execution and handle self-healing fixes.
 
 ## Exit Conditions
 
-| Condition                             | Exit Type       |
-| ------------------------------------- | --------------- |
-| `cipeStatus == 'SUCCEEDED'`           | Success         |
-| Max cycles reached                    | Timeout         |
-| Max duration reached                  | Timeout         |
-| 3 consecutive no-progress iterations  | Circuit breaker |
-| No fix available, local fix not possible | Failure      |
+| Condition                                | Exit Type       |
+| ---------------------------------------- | --------------- |
+| `cipeStatus == 'SUCCEEDED'`              | Success         |
+| Max cycles reached                       | Timeout         |
+| Max duration reached                     | Timeout         |
+| 3 consecutive no-progress iterations     | Circuit breaker |
+| No fix available, local fix not possible | Failure         |
 
 ## Main Loop
 

@@ -18,6 +18,7 @@ You are an autonomous coding agent working on a software project.
 ## Progress Report Format
 
 APPEND to progress.txt (never replace, always append):
+
 ```
 ## [Date/Time] - [Story ID]
 - What was implemented
@@ -47,6 +48,7 @@ Only add patterns that are **general and reusable**, not story-specific details.
 ## Update CLAUDE.md
 
 If you discover reusable patterns, append to project's CLAUDE.md:
+
 - API patterns or conventions
 - Gotchas or non-obvious requirements
 - Testing approaches
@@ -74,12 +76,14 @@ A frontend story is NOT complete until browser verification passes.
 After ALL stories have `passes: true`:
 
 1. Push branch and create PR:
+
    ```bash
    git push -u origin $(git branch --show-current)
    gh pr create --title "feat: [project] - [description]" --body "## Summary\n- Implemented via Ralph\n\n## Stories\n[list completed stories]"
    ```
 
 2. Monitor CI (blocking):
+
    - Spawn `nx-ci-monitor` subagent to poll CI
    - If CI fails with fix available → apply fix, push, continue monitoring
    - If CI fails without fix → report and exit (no COMPLETE)

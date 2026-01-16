@@ -44,6 +44,7 @@ Within a Claude Code session, context persists. If you Ctrl+C and re-run `/nx-ci
 ## Execution
 
 Load and execute the `ci-monitor` skill with:
+
 - Parsed configuration from arguments
 - Current branch context
 - Any user-provided instructions
