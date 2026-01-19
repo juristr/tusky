@@ -1,3 +1,17 @@
 # Ralph Progress Log
 Started: Mon Jan 19 17:41:36 CET 2026
+
+## Codebase Patterns
+- Fastify plugins use `fp()` wrapper from fastify-plugin
+- Plugins in apps/api/src/app/plugins/ are auto-loaded via @fastify/autoload
+- Use `pnpm add <pkg> -w` for workspace-root dependencies
+
+---
+
+## 2026-01-19 - US-001
+- Implemented cookie plugin with @fastify/cookie
+- Files: apps/api/src/app/plugins/cookie.ts, pnpm-lock.yaml, package.json
+- **Learnings:**
+  - PRD showed passes:true but wasn't actually done - verify before trusting
+  - Plugin auto-loads, no manual registration needed in app.ts
 ---
