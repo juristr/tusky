@@ -6,6 +6,7 @@ import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { productsRoutes } from '@tusky/api-products';
 import { ratingsRoutes } from '@tusky/api-ratings';
+import { authRoutes } from '@tusky/api-auth';
 
 /* eslint-disable-next-line */
 export interface AppOptions {}
@@ -35,6 +36,9 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
     dir: path.join(__dirname, 'plugins'),
     options: { ...opts },
   });
+
+  // Register auth routes (public, no auth preHandler)
+  await fastify.register(authRoutes);
 
   // Register product routes
   await fastify.register(productsRoutes);

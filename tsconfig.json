@@ -74,6 +74,9 @@
     },
     {
       "path": "./packages/frontend/ratings/ui-ratings"
+    },
+    {
+      "path": "./packages/backend/api-auth"
     }
   ]
 }
