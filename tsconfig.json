@@ -83,6 +83,9 @@
     },
     {
       "path": "./packages/frontend/auth/util-auth"
+    },
+    {
+      "path": "./packages/frontend/auth/feat-login"
     }
   ]
 }

@@ -63,3 +63,10 @@ Started: Mon Jan 19 17:41:36 CET 2026
 - **Learnings:**
   - Need jsx: "react-jsx" in tsconfig.lib.json for .tsx files
 ---
+
+## 2026-01-19 - US-008
+- Created ProtectedRoute component with loading state and redirect
+- Files: packages/frontend/auth/util-auth/src/lib/protected-route.tsx
+- **Learnings:**
+  - Added react-router-dom dependency for Navigate component
+---
