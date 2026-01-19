@@ -15,3 +15,11 @@ Started: Mon Jan 19 17:41:36 CET 2026
   - PRD showed passes:true but wasn't actually done - verify before trusting
   - Plugin auto-loads, no manual registration needed in app.ts
 ---
+
+## 2026-01-19 - US-002
+- Created auth plugin with authenticate preHandler decorator
+- Files: apps/api/src/app/plugins/auth.ts
+- **Learnings:**
+  - Use `declare module 'fastify'` to extend FastifyInstance interface
+  - unsignCookie returns { valid, value } - check both
+---
