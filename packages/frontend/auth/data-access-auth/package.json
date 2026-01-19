@@ -14,5 +14,14 @@
       "default": "./dist/index.js"
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "@tusky/api-types": "workspace:*"
+  },
+  "nx": {
+    "tags": [
+      "npm:private",
+      "scope:auth",
+      "type:data-access"
+    ]
+  }
 }

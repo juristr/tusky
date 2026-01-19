@@ -1,6 +1,7 @@
 {
   "name": "@tusky/util-auth",
   "version": "0.0.1",
+  "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -13,7 +14,12 @@
       "default": "./dist/index.js"
     }
   },
+  "dependencies": {
+    "@tusky/data-access-auth": "workspace:*",
+    "react-router-dom": "^7.6.3"
+  },
   "nx": {
-    "name": "util-auth"
+    "name": "util-auth",
+    "tags": ["npm:private", "scope:auth", "type:util"]
   }
 }

@@ -1,0 +1,38 @@
+{
+  "name": "@tusky/api-auth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/backend/api-auth/src",
+  "projectType": "library",
+  "tags": ["npm:private"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/backend/api-auth",
+        "command": "tsc --build tsconfig.lib.json"
+      },
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": [
+        "{projectRoot}/package.json",
+        "{workspaceRoot}/tsconfig.base.json",
+        "{projectRoot}/tsconfig.lib.json",
+        "{projectRoot}/src/**/*.ts",
+        "!{projectRoot}/src/**/*.spec.ts",
+        { "dependentTasksOutputFiles": "**/*.d.ts" }
+      ],
+      "outputs": ["{projectRoot}/dist"],
+      "syncGenerators": ["@nx/js:typescript-sync"],
+      "metadata": {
+        "technologies": ["typescript"],
+        "description": "Builds the project with `tsc`.",
+        "help": {
+          "command": "pnpm exec tsc --build --help",
+          "example": {
+            "args": ["--force"]
+          }
+        }
+      }
+    }
+  }
+}
