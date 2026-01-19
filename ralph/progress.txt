@@ -80,3 +80,14 @@ Started: Mon Jan 19 17:41:36 CET 2026
 - Added credentials: 'include' to all fetch calls
 - Files: data-access-products.ts, data-access-ratings.ts
 ---
+
+## 2026-01-19 - US-011
+- Integrated AuthProvider, ProtectedRoute, LoginPage into shop app
+- Files: apps/shop/src/app.tsx, apps/shop/package.json
+---
+
+## 2026-01-19 - US-012
+- Added username display and logout button to Navbar
+- Files: apps/shop/src/components/Navbar.tsx
+- **Note:** Browser testing skipped due to port conflict. Typecheck and lint pass.
+---
