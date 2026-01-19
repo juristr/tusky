@@ -6,14 +6,13 @@ You are an autonomous coding agent working on a software project.
 
 1. Read the PRD at `prd.json` (in the same directory as this file)
 2. Read the progress log at `progress.txt` (check Codebase Patterns section first)
-3. Check you're on the correct branch from PRD `branchName`. If not, check it out or create from main.
-4. Pick the **highest priority** user story where `passes: false`
-5. Implement that single user story
-6. Run quality checks (e.g., typecheck, lint, test - use whatever your project requires); ignore e2e tests (CI will catch them)
-7. Update CLAUDE.md if you discover reusable patterns (see below)
-8. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
-9. Update the PRD to set `passes: true` for the completed story
-10. Append your progress to `progress.txt`
+3. Pick the **highest priority** user story where `passes: false`
+4. Implement that single user story
+5. Run quality checks (e.g. build, typecheck, lint, test - use whatever your project requires); ignore e2e tests (CI will catch them)
+6. Update CLAUDE.md if you discover reusable patterns (see below)
+7. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
+8. Update the PRD to set `passes: true` for the completed story
+9. Append your progress to `progress.txt`
 
 ## Progress Report Format
 
@@ -136,3 +135,16 @@ If there are still stories with `passes: false`, end your response normally (ano
 - Commit frequently
 - Keep CI green
 - Read the Codebase Patterns section in progress.txt before starting
+
+## CRITICAL: One Story Per Iteration
+
+After completing ONE user story, you MUST STOP IMMEDIATELY.
+
+- Do NOT read the PRD again to find the next story
+- Do NOT continue to implement another story
+- Do NOT say "now let me work on the next story"
+- Simply end your response after updating progress.txt
+
+The bash loop will call you again with fresh context for the next story. This is intentional - fresh context prevents hallucinations and context overflow.
+
+If you complete a story and there are more stories remaining, just end your response normally. Do NOT output `<promise>COMPLETE</promise>` unless ALL stories pass AND CI is green.
