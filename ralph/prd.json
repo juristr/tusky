@@ -1,0 +1,190 @@
+{
+  "project": "Tusky Shop",
+  "branchName": "ralph/login-feature",
+  "description": "Cookie-based auth with hardcoded credentials (admin/password). Fastify backend + React frontend for internal demo/staging.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Backend cookie plugin",
+      "description": "As a developer, I need cookie support in Fastify so auth can use signed cookies.",
+      "acceptanceCriteria": [
+        "Install @fastify/cookie via pnpm",
+        "Create apps/api/src/app/plugins/cookie.ts with secret for signing",
+        "Register plugin in app.ts",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Backend auth plugin",
+      "description": "As a developer, I need an auth preHandler to protect routes.",
+      "acceptanceCriteria": [
+        "Create apps/api/src/app/plugins/auth.ts",
+        "Decorate fastify with authenticate preHandler",
+        "Check signed cookie validity",
+        "Return 401 if cookie invalid/missing",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Shared auth types",
+      "description": "As a developer, I need shared types for auth API contract.",
+      "acceptanceCriteria": [
+        "Create packages/shared/api-types/src/lib/auth.dto.ts",
+        "Define LoginRequest interface with username and password",
+        "Define LoginResponse interface with success and user",
+        "Define User interface with username",
+        "Export from packages/shared/api-types/src/index.ts",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Auth routes package",
+      "description": "As a user, I need login/logout/me endpoints to authenticate.",
+      "acceptanceCriteria": [
+        "Generate packages/backend/api-auth lib using nx g @nx/js:lib",
+        "POST /api/auth/login validates admin/password, sets signed cookie",
+        "POST /api/auth/logout clears cookie",
+        "GET /api/auth/me returns user if valid cookie, 401 otherwise",
+        "Register auth routes in app.ts without auth preHandler (public)",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Protect existing routes",
+      "description": "As a developer, I need product and rating routes protected.",
+      "acceptanceCriteria": [
+        "Wrap productsRoutes with auth preHandler in app.ts",
+        "Wrap ratingsRoutes with auth preHandler in app.ts",
+        "Update CORS with credentials: true",
+        "Unauthenticated requests to products/ratings return 401",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Data access auth package",
+      "description": "As a frontend developer, I need API functions for auth.",
+      "acceptanceCriteria": [
+        "Generate packages/frontend/auth/data-access-auth using nx g @nx/react:lib",
+        "Implement login(username, password) function",
+        "Implement logout() function",
+        "Implement getMe() function",
+        "All fetch calls use credentials: 'include'",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Auth context and hooks",
+      "description": "As a frontend developer, I need auth state management.",
+      "acceptanceCriteria": [
+        "Generate packages/frontend/auth/util-auth using nx g @nx/react:lib",
+        "Create AuthContext with user state",
+        "Create AuthProvider component",
+        "Create useAuth() hook exposing user, login, logout, isLoading",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Protected route component",
+      "description": "As a developer, I need a component to protect frontend routes.",
+      "acceptanceCriteria": [
+        "Create ProtectedRoute component in util-auth package",
+        "Redirect to /login if not authenticated",
+        "Show loading state while checking auth",
+        "Export from package index",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Login page",
+      "description": "As a user, I want a login form to authenticate.",
+      "acceptanceCriteria": [
+        "Generate packages/frontend/auth/feat-login using nx g @nx/react:lib",
+        "Create LoginPage with username and password inputs",
+        "Submit calls login() from data-access-auth",
+        "Redirect to home on success",
+        "Show error message on failure",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "Update existing data-access packages",
+      "description": "As a developer, I need existing API calls to include credentials.",
+      "acceptanceCriteria": [
+        "Add credentials: 'include' to all fetch calls in data-access-products",
+        "Add credentials: 'include' to all fetch calls in data-access-ratings",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "Integrate auth in app",
+      "description": "As a developer, I need to wire auth into the shop app.",
+      "acceptanceCriteria": [
+        "Wrap app in AuthProvider in apps/shop/src/app.tsx",
+        "Add /login route pointing to LoginPage",
+        "Wrap existing routes in ProtectedRoute",
+        "Handle 401 globally in AuthContext (redirect to /login)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "Navbar auth UI",
+      "description": "As a user, I want to see my username and logout button.",
+      "acceptanceCriteria": [
+        "Use useAuth() hook in Navbar component",
+        "Show username when logged in",
+        "Show logout button that calls logout()",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
