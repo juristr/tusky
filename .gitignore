@@ -48,5 +48,7 @@ vitest.config.*.timestamp*
 
 test-output
 
+# Playwright auth state
+apps/shop-e2e/.auth
 
 storybook-static
