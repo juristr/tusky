@@ -2,6 +2,7 @@ packages:
   - 'apps/*'
   - 'packages/frontend/orders/*'
   - 'packages/frontend/products/*'
+  - 'packages/frontend/auth/*'
   - 'packages/frontend/*'
   - 'packages/shared/*'
   - 'tools/*'

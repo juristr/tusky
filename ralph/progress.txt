@@ -39,3 +39,11 @@ Started: Mon Jan 19 17:41:36 CET 2026
   - Need fastify-swagger.d.ts for schema.tags type
   - Run `nx sync --yes` after adding new packages
 ---
+
+## 2026-01-19 - US-005
+- Wrapped products/ratings routes in scoped plugin with authenticate preHandler
+- Added credentials: true to CORS config
+- Files: apps/api/src/app/app.ts
+- **Learnings:**
+  - Use scoped plugin + addHook('preHandler') to protect multiple routes
+---
