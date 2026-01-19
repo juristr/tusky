@@ -9,7 +9,9 @@
     "@tusky/feat-create-order": "workspace:*",
     "@tusky/feat-current-orders": "workspace:*",
     "@tusky/feat-past-orders": "workspace:*",
-    "@tusky/feat-cancel-order": "workspace:*"
+    "@tusky/feat-cancel-order": "workspace:*",
+    "@tusky/util-auth": "workspace:*",
+    "@tusky/feat-login": "workspace:*"
   },
   "devDependencies": {},
   "nx": {

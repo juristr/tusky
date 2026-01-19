@@ -237,6 +237,9 @@ importers:
       '@tusky/feat-current-orders':
         specifier: workspace:*
         version: link:../../packages/frontend/orders/feat-current-orders
+      '@tusky/feat-login':
+        specifier: workspace:*
+        version: link:../../packages/frontend/auth/feat-login
       '@tusky/feat-past-orders':
         specifier: workspace:*
         version: link:../../packages/frontend/orders/feat-past-orders
@@ -246,6 +249,9 @@ importers:
       '@tusky/feat-product-list':
         specifier: workspace:*
         version: link:../../packages/frontend/products/feat-product-list
+      '@tusky/util-auth':
+        specifier: workspace:*
+        version: link:../../packages/frontend/auth/util-auth
 
   apps/shop-e2e:
     dependencies:

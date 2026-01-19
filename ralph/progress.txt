@@ -70,3 +70,13 @@ Started: Mon Jan 19 17:41:36 CET 2026
 - **Learnings:**
   - Added react-router-dom dependency for Navigate component
 ---
+
+## 2026-01-19 - US-009
+- Created LoginPage with form, error handling, and navigation
+- Files: packages/frontend/auth/feat-login/*
+---
+
+## 2026-01-19 - US-010
+- Added credentials: 'include' to all fetch calls
+- Files: data-access-products.ts, data-access-ratings.ts
+---
