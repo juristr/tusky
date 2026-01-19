@@ -15,6 +15,7 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
   // CORS
   await fastify.register(cors, {
     origin: true,
+    credentials: true,
   });
 
   // Swagger
@@ -40,11 +41,16 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
   // Register auth routes (public, no auth preHandler)
   await fastify.register(authRoutes);
 
-  // Register product routes
-  await fastify.register(productsRoutes);
+  // Register protected routes with auth preHandler
+  await fastify.register(async (protectedScope) => {
+    protectedScope.addHook('preHandler', fastify.authenticate);
 
-  // Register ratings routes
-  await fastify.register(ratingsRoutes);
+    // Register product routes
+    await protectedScope.register(productsRoutes);
+
+    // Register ratings routes
+    await protectedScope.register(ratingsRoutes);
+  });
 
   // Load other routes
   fastify.register(AutoLoad, {
