@@ -30,3 +30,12 @@ Started: Mon Jan 19 17:41:36 CET 2026
 - **Learnings:**
   - Exports use .js extension in index.ts (ESM)
 ---
+
+## 2026-01-19 - US-004
+- Created api-auth package with login/logout/me routes
+- Files: packages/backend/api-auth/*, apps/api/src/app/app.ts
+- **Learnings:**
+  - Need `import '@fastify/cookie'` for cookie type augmentation
+  - Need fastify-swagger.d.ts for schema.tags type
+  - Run `nx sync --yes` after adding new packages
+---
