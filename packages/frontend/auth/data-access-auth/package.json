@@ -14,5 +14,7 @@
       "default": "./dist/index.js"
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "@tusky/api-types": "workspace:*"
+  }
 }

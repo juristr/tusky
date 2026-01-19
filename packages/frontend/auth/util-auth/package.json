@@ -15,5 +15,10 @@
   },
   "nx": {
     "name": "util-auth"
+  },
+  "dependencies": {
+    "@tusky/data-access-auth": "workspace:*",
+    "react": "19.0.0",
+    "react-router-dom": "^7.6.2"
   }
 }
