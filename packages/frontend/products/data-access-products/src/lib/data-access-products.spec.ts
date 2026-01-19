@@ -39,7 +39,8 @@ describe('Products Data Access Layer', () => {
       const result = await getProducts();
       expect(result).toEqual(mockProducts);
       expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/api/products')
+        expect.stringContaining('/api/products'),
+        expect.objectContaining({ credentials: 'include' })
       );
     });
 
@@ -64,7 +65,8 @@ describe('Products Data Access Layer', () => {
       const result = await getProductById(1);
       expect(result).toEqual(mockProducts[0]);
       expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/api/products/1')
+        expect.stringContaining('/api/products/1'),
+        expect.objectContaining({ credentials: 'include' })
       );
     });
 
