@@ -1,7 +1,9 @@
-import { ShoppingCart, Search, User, Menu, Heart } from 'lucide-react';
+import { ShoppingCart, Search, User, Menu, Heart, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@tusky/util-auth';
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   return (
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4">
@@ -69,8 +71,19 @@ const Navbar = () => {
                 </span>
               </a>
               <div className="relative group">
-                <a href="#" className="text-gray-600 hover:text-indigo-600">
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-indigo-600 flex items-center gap-2"
+                >
                   <User size={22} />
+                  {user && (
+                    <span
+                      className="text-sm font-medium"
+                      data-testid="navbar-username"
+                    >
+                      {user.username}
+                    </span>
+                  )}
                 </a>
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="py-1">
@@ -89,6 +102,14 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
+              <button
+                onClick={() => logout()}
+                className="text-gray-600 hover:text-indigo-600 flex items-center gap-1"
+                data-testid="navbar-logout"
+                title="Logout"
+              >
+                <LogOut size={20} />
+              </button>
             </div>
           </div>
 

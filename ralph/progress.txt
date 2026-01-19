@@ -1,0 +1,118 @@
+# Ralph Progress Log - Login Feature
+
+## Codebase Patterns
+- Fastify plugins use `fastify-plugin` (fp) wrapper - see sensible.ts pattern
+- Plugins are auto-loaded from apps/api/src/app/plugins/ via @fastify/autoload
+- AUTH_COOKIE_NAME = 'tusky_session' - use this constant for auth cookie
+- Backend libs use dist/ exports (not src/) - check api-ratings/package.json pattern
+- Module augmentation for fastify types requires import of .d.ts file (import '../types/fastify-cookie.js')
+- Backend libs need `emitDeclarationOnly: false` in tsconfig.lib.json for JS output
+
+---
+
+## 2026-01-19 - US-008
+- Generated feat-login package using `npx nx g @nx/react:library`
+- Created LoginPage component with username/password form
+- Form uses useAuth() hook for login, useNavigate() for redirect
+- Error message displays in red alert box on invalid credentials
+- Login page is full-screen centered without navbar (nav hidden on login)
+- Wired into app.tsx with AuthProvider wrapping Router, /login route outside nav layout
+- Files changed: packages/frontend/auth/feat-login/*, apps/shop/src/app.tsx, apps/shop/package.json
+- **Learnings for future iterations:**
+  - Feature packages need workspace dep in shop's package.json for pnpm symlinks
+  - Run `pnpm install` after adding workspace deps
+  - util-auth is buildable (dist exports), feat packages are non-buildable (src exports)
+  - Pre-existing lint errors about buildable/non-buildable - not blocking
+
+---
+
+## 2026-01-19 - US-007
+- Generated util-auth package using `npx nx g @nx/react:library`
+- Created AuthContext + AuthProvider with user state, isLoading, login, logout
+- Created useAuth() hook that throws if used outside provider
+- Created setupAuthInterceptor() that wraps window.fetch to redirect on 401 (excludes /api/auth/ routes)
+- Files changed: packages/frontend/auth/util-auth/*, package.json, tsconfig.json
+- **Learnings for future iterations:**
+  - Frontend util libs export with `.js` extension in index.ts
+  - Fetch interceptor needs careful type handling for URL | Request | string input types
+  - Run `npx nx sync` after generating packages if workspace out of sync
+
+---
+
+## 2026-01-19 - US-006
+- Generated @tusky/data-access-auth lib with Nx generator
+- Implemented login(), logout(), getMe() API functions
+- All fetch calls use `credentials: 'include'` for cookie handling
+- Files changed: packages/frontend/auth/data-access-auth/*, nx.json, package.json, tsconfig.json
+- **Learnings for future iterations:**
+  - Frontend data-access libs follow pattern from data-access-products
+  - Use `import.meta.env.VITE_API_URL` for API base URL
+  - Export types from @tusky/api-types using `export type { ... }`
+
+---
+
+## 2026-01-19 - US-005
+- Created packages/shared/api-types/src/lib/auth.dto.ts
+- Defined User, LoginRequest, LoginResponse interfaces
+- Exported from package index
+- Files changed: packages/shared/api-types/src/lib/auth.dto.ts, packages/shared/api-types/src/index.ts
+- **Learnings for future iterations:**
+  - api-types exports use `.js` extension in index.ts (e.g., `./lib/auth.dto.js`)
+  - Simple type-only packages don't need special config
+
+---
+
+## 2026-01-19 - US-004
+- Updated CORS config to include `credentials: true`
+- Wrapped productsRoutes + ratingsRoutes in protected scope with addHook preHandler
+- Using `fastify.register(async (protectedScope) => { protectedScope.addHook('preHandler', fastify.authenticate); ... })` pattern
+- Unauthenticated requests now return 401
+- Files changed: apps/api/src/app/app.ts
+- **Learnings for future iterations:**
+  - Use scoped plugin registration to apply preHandler hooks to multiple routes
+  - `addHook('preHandler', handler)` applies to all routes within that scope
+
+---
+
+## 2026-01-19 - US-003
+- Generated @tusky/api-auth lib with Nx generator
+- Created auth.routes.ts with login/logout/me endpoints
+- POST /api/auth/login validates admin/password, sets signed cookie
+- POST /api/auth/logout clears cookie
+- GET /api/auth/me returns user from valid cookie or 401
+- Created fastify-cookie.d.ts for type augmentation (cookies, setCookie, clearCookie, unsignCookie)
+- Registered auth routes in apps/api/src/app/app.ts (before protected routes)
+- Files changed: packages/backend/api-auth/*, apps/api/src/app/app.ts, nx.json, tsconfig.json
+- **Learnings for future iterations:**
+  - Nx generator creates basic structure but need to match existing patterns (dist exports in package.json)
+  - Type declarations for @fastify/cookie don't work with nodenext moduleResolution - need custom .d.ts
+  - Import the .d.ts file in route file to apply augmentations
+  - Use `npx nx sync` if workspace out of sync errors occur
+
+---
+
+## 2026-01-19 - US-002
+- Created apps/api/src/app/plugins/auth.ts with authenticate preHandler
+- Decorates fastify with authenticate function that checks signed cookies
+- Returns 401 if cookie missing or invalid signature
+- Uses FastifyInstance module augmentation for TypeScript
+- Files changed: apps/api/src/app/plugins/auth.ts
+- **Learnings for future iterations:**
+  - Use `declare module 'fastify'` to augment FastifyInstance with custom decorators
+  - Cookie name 'tusky_session' will be used across auth system
+  - request.unsignCookie() returns { valid: boolean, value: string | null }
+
+---
+
+## 2026-01-19 - US-001
+- Installed @fastify/cookie package
+- Created apps/api/src/app/plugins/cookie.ts with signed cookie support
+- Plugin auto-registered via existing AutoLoad mechanism
+- Files changed: package.json, pnpm-lock.yaml, apps/api/src/app/plugins/cookie.ts
+- **Learnings for future iterations:**
+  - Use `pnpm add -w` flag for workspace root installs
+  - Plugins follow fp() wrapper pattern from fastify-plugin
+  - AutoLoad handles plugin registration automatically
+
+---
+

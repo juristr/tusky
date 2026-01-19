@@ -1,15 +1,35 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import * as path from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
   cacheDir:
-    '../../../node_modules/.vite/packages/products/data-access-products',
-  plugins: [],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
+    '../../../../node_modules/.vite/packages/frontend/products/data-access-products',
+  plugins: [
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+    }),
+  ],
+  build: {
+    outDir: './dist',
+    emptyOutDir: true,
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    lib: {
+      entry: 'src/index.ts',
+      name: 'data-access-products',
+      fileName: 'index',
+      formats: ['es' as const],
+    },
+    rollupOptions: {
+      external: [/^@tusky\//],
+    },
+  },
   test: {
     watch: false,
     globals: true,
