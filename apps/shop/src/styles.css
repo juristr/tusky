@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @source "../../../apps/api";
+@source "../../../packages/backend/api-auth";
 @source "../../../packages/backend/api-products";
 @source "../../../packages/backend/api-ratings";
 @source "../../../packages/backend/data-products";
@@ -21,6 +22,7 @@
 @source "../../../packages/frontend/ratings/ui-ratings";
 @source "../../../packages/shared/api-types";
 @source "../../../packages/shared/tusky-design";
+
 
 /* Custom styles for glitch effect */
 @keyframes glitch {

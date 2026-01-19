@@ -23,3 +23,10 @@ Started: Mon Jan 19 17:41:36 CET 2026
   - Use `declare module 'fastify'` to extend FastifyInstance interface
   - unsignCookie returns { valid, value } - check both
 ---
+
+## 2026-01-19 - US-003
+- Created auth.dto.ts with User, LoginRequest, LoginResponse interfaces
+- Files: packages/shared/api-types/src/lib/auth.dto.ts, packages/shared/api-types/src/index.ts
+- **Learnings:**
+  - Exports use .js extension in index.ts (ESM)
+---
