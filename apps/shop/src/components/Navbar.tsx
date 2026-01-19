@@ -71,9 +71,19 @@ const Navbar = () => {
                 </span>
               </a>
               <div className="relative group">
-                <a href="#" className="text-gray-600 hover:text-indigo-600 flex items-center gap-2">
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-indigo-600 flex items-center gap-2"
+                >
                   <User size={22} />
-                  {user && <span className="text-sm font-medium" data-testid="navbar-username">{user.username}</span>}
+                  {user && (
+                    <span
+                      className="text-sm font-medium"
+                      data-testid="navbar-username"
+                    >
+                      {user.username}
+                    </span>
+                  )}
                 </a>
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="py-1">

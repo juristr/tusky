@@ -15,6 +15,9 @@
     "@tusky/util-auth": "workspace:*"
   },
   "nx": {
-    "tags": ["scope:auth", "type:feature"]
+    "tags": [
+      "scope:auth",
+      "type:feature"
+    ]
   }
 }
