@@ -80,6 +80,9 @@
     },
     {
       "path": "./packages/frontend/auth/data-access-auth"
+    },
+    {
+      "path": "./packages/frontend/auth/util-auth"
     }
   ]
 }

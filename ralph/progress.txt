@@ -5,6 +5,7 @@ Started: Mon Jan 19 17:41:36 CET 2026
 - Fastify plugins use `fp()` wrapper from fastify-plugin
 - Plugins in apps/api/src/app/plugins/ are auto-loaded via @fastify/autoload
 - Use `pnpm add <pkg> -w` for workspace-root dependencies
+- New frontend package paths must be added to pnpm-workspace.yaml
 
 ---
 
@@ -46,4 +47,12 @@ Started: Mon Jan 19 17:41:36 CET 2026
 - Files: apps/api/src/app/app.ts
 - **Learnings:**
   - Use scoped plugin + addHook('preHandler') to protect multiple routes
+---
+
+## 2026-01-19 - US-006
+- Created data-access-auth with login, logout, getMe functions
+- Files: packages/frontend/auth/data-access-auth/*, pnpm-workspace.yaml
+- **Learnings:**
+  - Must add `packages/frontend/auth/*` to pnpm-workspace.yaml
+  - Frontend libs use `main: ./src/index.ts` (no dist build)
 ---

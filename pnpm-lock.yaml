@@ -346,6 +346,18 @@ importers:
         specifier: workspace:*
         version: link:../../../shared/api-types
 
+  packages/frontend/auth/util-auth:
+    dependencies:
+      '@tusky/api-types':
+        specifier: workspace:*
+        version: link:../../../shared/api-types
+      '@tusky/data-access-auth':
+        specifier: workspace:*
+        version: link:../data-access-auth
+      react:
+        specifier: ^19.0.0
+        version: 19.0.0
+
   packages/frontend/orders/data-access-order: {}
 
   packages/frontend/orders/feat-cancel-order:
