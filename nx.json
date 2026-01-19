@@ -28,8 +28,7 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      },
-      "exclude": ["packages/backend/api-auth/*"]
+      }
     },
     {
       "plugin": "@nx/vite/plugin",
@@ -77,15 +76,6 @@
         "staticStorybookTargetName": "static-storybook",
         "buildDepsTargetName": "build-deps",
         "watchDepsTargetName": "watch-deps"
-      }
-    },
-    {
-      "plugin": "@nx/js/typescript",
-      "include": ["packages/backend/api-auth/*"],
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        }
       }
     },
     {

@@ -1,14 +1,37 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import * as path from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../../node_modules/.vite/packages/orders/feat-cancel-order',
-  plugins: [],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
+  cacheDir:
+    '../../../../node_modules/.vite/packages/frontend/orders/feat-cancel-order',
+  plugins: [
+    react(),
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+    }),
+  ],
+  build: {
+    outDir: './dist',
+    emptyOutDir: true,
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    lib: {
+      entry: 'src/index.ts',
+      name: 'feat-cancel-order',
+      fileName: 'index',
+      formats: ['es' as const],
+    },
+    rollupOptions: {
+      external: [/^@tusky\//, 'react', 'react-dom', 'react/jsx-runtime'],
+    },
+  },
   test: {
     watch: false,
     globals: true,

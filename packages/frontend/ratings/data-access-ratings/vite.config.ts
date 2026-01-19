@@ -6,7 +6,7 @@ import * as path from 'path';
 export default defineConfig(() => ({
   root: __dirname,
   cacheDir:
-    '../../../../node_modules/.vite/packages/frontend/products/data-access-products',
+    '../../../../node_modules/.vite/packages/frontend/ratings/data-access-ratings',
   plugins: [
     dts({
       entryRoot: 'src',
@@ -22,7 +22,7 @@ export default defineConfig(() => ({
     },
     lib: {
       entry: 'src/index.ts',
-      name: 'data-access-products',
+      name: 'data-access-ratings',
       fileName: 'index',
       formats: ['es' as const],
     },
@@ -36,6 +36,7 @@ export default defineConfig(() => ({
     environment: 'jsdom',
     include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
+    passWithNoTests: true,
     coverage: {
       reportsDirectory: './test-output/vitest/coverage',
       provider: 'v8' as const,

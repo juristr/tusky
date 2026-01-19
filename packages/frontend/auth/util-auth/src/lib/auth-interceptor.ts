@@ -14,8 +14,8 @@ export function setupAuthInterceptor() {
         typeof input === 'string'
           ? input
           : input instanceof URL
-            ? input.href
-            : input.url;
+          ? input.href
+          : input.url;
       // Don't redirect if already on auth routes
       if (!url.includes('/api/auth/')) {
         window.location.href = '/login';
