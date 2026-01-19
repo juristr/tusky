@@ -18,6 +18,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need cookie support in Fastify so auth can use signed cookies.
 
 **Acceptance Criteria:**
+
 - [ ] Install `@fastify/cookie`
 - [ ] Create `apps/api/src/app/plugins/cookie.ts` with secret for signing
 - [ ] Register plugin in app
@@ -28,6 +29,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need an auth preHandler to protect routes.
 
 **Acceptance Criteria:**
+
 - [ ] Create `apps/api/src/app/plugins/auth.ts`
 - [ ] Decorate fastify with `authenticate` preHandler
 - [ ] Check signed cookie validity
@@ -39,6 +41,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a user, I need login/logout/me endpoints to authenticate.
 
 **Acceptance Criteria:**
+
 - [ ] Generate `packages/backend/api-auth` lib
 - [ ] `POST /api/auth/login` - validate admin/password, set signed cookie
 - [ ] `POST /api/auth/logout` - clear cookie
@@ -51,6 +54,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need product and rating routes protected.
 
 **Acceptance Criteria:**
+
 - [ ] Wrap productsRoutes + ratingsRoutes with auth preHandler
 - [ ] Update CORS with `credentials: true`
 - [ ] Unauthenticated requests return 401
@@ -61,6 +65,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need shared types for auth API contract.
 
 **Acceptance Criteria:**
+
 - [ ] Create `packages/shared/api-types/src/lib/auth.dto.ts`
 - [ ] Define `LoginRequest`, `LoginResponse`, `User` interfaces
 - [ ] Export from package index
@@ -71,6 +76,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a frontend developer, I need API functions for auth.
 
 **Acceptance Criteria:**
+
 - [ ] Generate `packages/frontend/auth/data-access-auth`
 - [ ] Implement `login()`, `logout()`, `getMe()` functions
 - [ ] All fetch calls use `credentials: 'include'`
@@ -81,6 +87,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a frontend developer, I need auth state management.
 
 **Acceptance Criteria:**
+
 - [ ] Generate `packages/frontend/auth/util-auth`
 - [ ] Create AuthContext + AuthProvider
 - [ ] Create `useAuth()` hook exposing user, login, logout, isLoading
@@ -92,6 +99,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a user, I want a login form to authenticate.
 
 **Acceptance Criteria:**
+
 - [ ] Generate `packages/frontend/auth/feat-login`
 - [ ] Create LoginPage with username/password form
 - [ ] Submit calls login() and redirects to home on success
@@ -104,6 +112,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need a component to protect frontend routes.
 
 **Acceptance Criteria:**
+
 - [ ] Create ProtectedRoute in util-auth
 - [ ] Redirect to /login if not authenticated
 - [ ] Show loading state while checking auth
@@ -114,6 +123,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need to wire auth into the shop app.
 
 **Acceptance Criteria:**
+
 - [ ] Wrap app in AuthProvider
 - [ ] Add `/login` route → LoginPage
 - [ ] Wrap existing routes in ProtectedRoute
@@ -125,6 +135,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a developer, I need existing API calls to include credentials.
 
 **Acceptance Criteria:**
+
 - [ ] Add `credentials: 'include'` to data-access-products
 - [ ] Add `credentials: 'include'` to data-access-ratings
 - [ ] Typecheck passes
@@ -134,6 +145,7 @@ Cookie-based authentication for Tusky Shop with hardcoded credentials (admin/pas
 **Description:** As a user, I want to see my username and logout button.
 
 **Acceptance Criteria:**
+
 - [ ] Use `useAuth()` in Navbar
 - [ ] Show username when logged in
 - [ ] Show logout button that calls logout()

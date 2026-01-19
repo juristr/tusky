@@ -42,17 +42,15 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
   await fastify.register(authRoutes);
 
   // Register protected routes (require authentication)
-  await fastify.register(
-    async function protectedRoutes(instance) {
-      instance.addHook('preHandler', instance.authenticate);
+  await fastify.register(async function protectedRoutes(instance) {
+    instance.addHook('preHandler', instance.authenticate);
 
-      // Register product routes
-      await instance.register(productsRoutes);
+    // Register product routes
+    await instance.register(productsRoutes);
 
-      // Register ratings routes
-      await instance.register(ratingsRoutes);
-    }
-  );
+    // Register ratings routes
+    await instance.register(ratingsRoutes);
+  });
 
   // Load other routes
   fastify.register(AutoLoad, {

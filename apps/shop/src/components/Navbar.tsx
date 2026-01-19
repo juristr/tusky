@@ -72,9 +72,7 @@ const Navbar = () => {
               </a>
               {user && (
                 <>
-                  <span className="text-gray-600 text-sm">
-                    {user.username}
-                  </span>
+                  <span className="text-gray-600 text-sm">{user.username}</span>
                   <button
                     onClick={logout}
                     className="text-gray-600 hover:text-indigo-600"
