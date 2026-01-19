@@ -16,7 +16,8 @@
   "dependencies": {
     "@tusky/api-types": "workspace:*",
     "@tusky/data-access-auth": "workspace:*",
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "react-router-dom": "^7.1.3"
   },
   "nx": {
     "tags": [

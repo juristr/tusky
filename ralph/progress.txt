@@ -56,3 +56,10 @@ Started: Mon Jan 19 17:41:36 CET 2026
   - Must add `packages/frontend/auth/*` to pnpm-workspace.yaml
   - Frontend libs use `main: ./src/index.ts` (no dist build)
 ---
+
+## 2026-01-19 - US-007
+- Created AuthContext, AuthProvider, useAuth hook
+- Files: packages/frontend/auth/util-auth/*
+- **Learnings:**
+  - Need jsx: "react-jsx" in tsconfig.lib.json for .tsx files
+---
