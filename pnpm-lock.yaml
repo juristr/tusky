@@ -213,6 +213,9 @@ importers:
       '@fastify/swagger-ui':
         specifier: ^5.2.3
         version: 5.2.3
+      '@tusky/api-auth':
+        specifier: workspace:*
+        version: link:../../packages/backend/api-auth
       '@tusky/api-products':
         specifier: workspace:*
         version: link:../../packages/backend/api-products
