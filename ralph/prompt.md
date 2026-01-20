@@ -110,22 +110,10 @@ If QA testing reveals bugs:
 
 After ALL stories have `passes: true`:
 
-1. Push branch and create PR:
+Output the implementation done signal:
+<promise>IMPLEMENTATION_DONE</promise>
 
-   ```bash
-   git push -u origin $(git branch --show-current)
-   gh pr create --title "feat: [project] - [description]" --body "## Summary\n- Implemented via Ralph\n\n## Stories\n[list completed stories]"
-   ```
-
-2. Monitor CI (blocking):
-
-   - Use the Nx "ci-monitor" skill to monitor CI
-   - If CI passes → continue to step 3
-
-3. Output completion signal:
-   <promise>COMPLETE</promise>
-
-**Important:** Do NOT output COMPLETE until CI passes.
+**Important:** Do NOT push or create a PR. The shell script handles that in a separate phase.
 
 If there are still stories with `passes: false`, end your response normally (another iteration will pick up the next story).
 
@@ -147,4 +135,4 @@ After completing ONE user story, you MUST STOP IMMEDIATELY.
 
 The bash loop will call you again with fresh context for the next story. This is intentional - fresh context prevents hallucinations and context overflow.
 
-If you complete a story and there are more stories remaining, just end your response normally. Do NOT output `<promise>COMPLETE</promise>` unless ALL stories pass AND CI is green.
+If you complete a story and there are more stories remaining, just end your response normally. Do NOT output `<promise>IMPLEMENTATION_DONE</promise>` unless ALL stories have `passes: true`.

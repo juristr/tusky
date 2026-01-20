@@ -16,8 +16,6 @@ MAX_ITERATIONS=${1:-10}
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PRD_FILE="$SCRIPT_DIR/prd.json"
 PROGRESS_FILE="$SCRIPT_DIR/progress.txt"
-ARCHIVE_DIR="$SCRIPT_DIR/archive"
-LAST_BRANCH_FILE="$SCRIPT_DIR/.last-branch"
 
 # Get PRD status: completed/total stories, current story info
 get_prd_status() {
@@ -98,39 +96,6 @@ show_iteration_summary() {
   echo -e "${CYAN}$thin_line${NC}"
 }
 
-# Archive previous run if branch changed
-if [ -f "$PRD_FILE" ] && [ -f "$LAST_BRANCH_FILE" ]; then
-  CURRENT_BRANCH=$(jq -r '.branchName // empty' "$PRD_FILE" 2>/dev/null || echo "")
-  LAST_BRANCH=$(cat "$LAST_BRANCH_FILE" 2>/dev/null || echo "")
-
-  if [ -n "$CURRENT_BRANCH" ] && [ -n "$LAST_BRANCH" ] && [ "$CURRENT_BRANCH" != "$LAST_BRANCH" ]; then
-    # Archive the previous run
-    DATE=$(date +%Y-%m-%d)
-    # Strip "ralph/" prefix from branch name for folder
-    FOLDER_NAME=$(echo "$LAST_BRANCH" | sed 's|^ralph/||')
-    ARCHIVE_FOLDER="$ARCHIVE_DIR/$DATE-$FOLDER_NAME"
-
-    echo "Archiving previous run: $LAST_BRANCH"
-    mkdir -p "$ARCHIVE_FOLDER"
-    [ -f "$PRD_FILE" ] && cp "$PRD_FILE" "$ARCHIVE_FOLDER/"
-    [ -f "$PROGRESS_FILE" ] && cp "$PROGRESS_FILE" "$ARCHIVE_FOLDER/"
-    echo "   Archived to: $ARCHIVE_FOLDER"
-
-    # Reset progress file for new run
-    echo "# Ralph Progress Log" > "$PROGRESS_FILE"
-    echo "Started: $(date)" >> "$PROGRESS_FILE"
-    echo "---" >> "$PROGRESS_FILE"
-  fi
-fi
-
-# Track current branch
-if [ -f "$PRD_FILE" ]; then
-  CURRENT_BRANCH=$(jq -r '.branchName // empty' "$PRD_FILE" 2>/dev/null || echo "")
-  if [ -n "$CURRENT_BRANCH" ]; then
-    echo "$CURRENT_BRANCH" > "$LAST_BRANCH_FILE"
-  fi
-fi
-
 # Initialize progress file if it doesn't exist
 if [ ! -f "$PROGRESS_FILE" ]; then
   echo "# Ralph Progress Log" > "$PROGRESS_FILE"
@@ -153,12 +118,11 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   # Show iteration summary
   show_iteration_summary "$prev_completed"
 
-  # Check for completion signal
-  if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
+  # Check for implementation done signal - exit loop, proceed to PR phase
+  if echo "$OUTPUT" | grep -q "<promise>IMPLEMENTATION_DONE</promise>"; then
     echo ""
-    echo -e "${GREEN}${BOLD}Ralph completed all tasks!${NC}"
-    echo "Completed at iteration $i of $MAX_ITERATIONS"
-    exit 0
+    echo -e "${GREEN}${BOLD}All stories implemented!${NC}"
+    break
   fi
 
   echo ""
@@ -166,7 +130,55 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   sleep 2
 done
 
+# Check if we exited loop due to completion or max iterations
+IFS='|' read -r completed total _ _ _ _ _ _ <<< "$(get_prd_status)"
+if [ "$completed" -lt "$total" ]; then
+  echo ""
+  echo -e "${YELLOW}Ralph reached max iterations ($MAX_ITERATIONS) without completing all tasks.${NC}"
+  echo -e "${DIM}Check $PROGRESS_FILE for status.${NC}"
+  exit 1
+fi
+
+# ═══════════════════════════════════════════════════════
+# Phase 2: PR Creation + CI Monitoring
+# ═══════════════════════════════════════════════════════
+
 echo ""
-echo -e "${YELLOW}Ralph reached max iterations ($MAX_ITERATIONS) without completing all tasks.${NC}"
-echo -e "${DIM}Check $PROGRESS_FILE for status.${NC}"
-exit 1
+echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
+echo -e "${BOLD}  Phase 2: PR Creation + CI Monitoring${NC}"
+echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
+echo ""
+
+# Generate session ID for PR+CI phase (allows spying with: claude --resume $SESSION_ID)
+CI_SESSION_ID=$(uuidgen | tr '[:upper:]' '[:lower:]')
+echo -e "${DIM}Session: ${CYAN}$CI_SESSION_ID${NC}"
+echo -e "${DIM}Spy with: claude --resume $CI_SESSION_ID${NC}"
+echo ""
+
+# Run PR creation + CI monitor
+CI_OUTPUT=$(claude --print --session-id "$CI_SESSION_ID" "$(cat <<'PROMPT'
+You are finishing a Ralph implementation run. All stories are implemented and committed.
+
+## Your Task
+
+1. Push branch and create PR:
+   ```bash
+   git push -u origin $(git branch --show-current)
+   gh pr create --title "feat: [project] - [description]" --body "## Summary\n- Implemented via Ralph\n\n## Stories\n[list completed stories]"
+   ```
+
+2. Run /nx:ci-monitor to monitor CI
+
+3. When CI passes, output: <promise>COMPLETE</promise>
+   If CI fails and cannot be fixed, output: <promise>FAILED</promise>
+PROMPT
+)" --allowedTools 'Bash(git:*) Bash(nx:*) Bash(gh:*) Read Write Edit Task mcp__nx-mcp__ci_information mcp__nx-mcp__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
+
+if echo "$CI_OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
+  echo ""
+  echo -e "${GREEN}${BOLD}Ralph completed - CI passed!${NC}"
+  exit 0
+else
+  echo -e "${YELLOW}CI monitoring ended without success${NC}"
+  exit 1
+fi
