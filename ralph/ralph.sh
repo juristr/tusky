@@ -186,9 +186,9 @@ echo ""
 # Step 2: Run CI monitor
 echo -e "${DIM}Starting CI monitor...${NC}"
 CI_OUTPUT=$(claude --print --session-id "$CI_SESSION_ID" "$(cat <<'PROMPT'
-A PR has been created and pushed. Your task is to monitor CI until it passes.
-
-Run /nx:ci-monitor to monitor the CI pipeline.
+- commit all the changes
+- push a PR (use the gh cli when available)
+- Monitor CI using the nx ci monitor skill
 
 When CI passes, output: <promise>COMPLETE</promise>
 If CI fails and cannot be fixed after self-healing attempts, output: <promise>FAILED</promise>
