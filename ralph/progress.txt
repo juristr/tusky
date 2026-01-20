@@ -1,4 +1,21 @@
 # Ralph Progress Log - Login Feature
 
+## Codebase Patterns
+- Shop app uses React Router for navigation (BrowserRouter)
+- Page components in apps/shop/src/pages/
+- Shared components in apps/shop/src/components/
+- Feature libs like @tusky/feat-product-list provide reusable UI
+
+---
+
+## 2026-01-20 - US-001
+- Verified title "Our Products" already exists in HomePage.tsx:7
+- PRD described changing from "Legit products" but that text never existed
+- Acceptance criteria satisfied - title displays correctly in browser
+- Files checked: apps/shop/src/pages/HomePage.tsx, apps/shop/src/app.tsx
+- **Learnings:**
+  - Always grep codebase before assuming text exists
+  - PRD descriptions may be outdated/inaccurate
+
 ---
 
