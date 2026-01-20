@@ -83,6 +83,7 @@ After visual verification, test the UI **like a real user would**:
 7. `wait_for` - Wait for text to appear after async actions
 
 ### Example Flow
+
 ```
 1. take_snapshot → find button uid
 2. click(uid) → trigger action
@@ -91,6 +92,7 @@ After visual verification, test the UI **like a real user would**:
 ```
 
 ### QA Checklist
+
 - [ ] Click all new buttons/links - do they work?
 - [ ] Fill all new inputs - do they accept values?
 - [ ] Submit forms - does validation work?
@@ -99,6 +101,7 @@ After visual verification, test the UI **like a real user would**:
 ### Fix Issues Before Completing
 
 If QA testing reveals bugs:
+
 1. Fix the issue in code
 2. Re-run quality checks (typecheck, lint, test)
 3. Re-test in browser until it works
