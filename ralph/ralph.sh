@@ -35,8 +35,17 @@ run_claude_stream() {
 
   > "$TEMP_OUTPUT"  # Clear temp file
 
-  # Run claude with stream-json in background, tee to fifo and stderr
-  claude --print "$prompt" --output-format stream-json --verbose --allowedTools "$tools" $session_arg 2>&1 | tee "$TEMP_FIFO" >/dev/stderr &
+  # Run claude with stream-json in background, tee to fifo, filter for clean display
+  claude --print "$prompt" --output-format stream-json --verbose --allowedTools "$tools" $session_arg 2>&1 | \
+    tee "$TEMP_FIFO" | \
+    jq -r --unbuffered '
+      if .type == "assistant" then
+        .message.content[]? | select(.type=="text") | .text
+      elif .type == "result" then
+        .result
+      else empty
+      end
+    ' 2>/dev/null &
   CLAUDE_PID=$!
 
   RESULT_RECEIVED=false
@@ -63,7 +72,7 @@ run_claude_stream() {
   OUTPUT=$(grep '"type":"assistant"' "$TEMP_OUTPUT" 2>/dev/null | jq -r '.message.content[]? | select(.type=="text") | .text' 2>/dev/null | tr '\n' ' ' || cat "$TEMP_OUTPUT")
 
   if [ "$RESULT_RECEIVED" = true ]; then
-    echo -e "${DIM}✓ Session completed (stream-json result detected)${NC}"
+    echo -e "${DIM}✓ Session completed${NC}"
   else
     echo -e "${YELLOW}⚠ No result message received${NC}"
   fi
