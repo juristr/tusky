@@ -1,11 +1,13 @@
-# Ralph Progress Log
-Started: Tue Jan 20 10:45:06 CET 2026
+## Codebase Patterns
+- Shop page titles are in individual page components (e.g., HomePage.tsx), not app.tsx
+- Use `npx nx run shop:typecheck` for type checking (no test target on shop)
+
 ---
 
 ## 2026-01-20 - US-001
-- Changed shop title from "Legit Products" to "Our products"
-- Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
-- **Learnings:**
-  - Title is in HomePage.tsx, not App.tsx
-  - Search for exact text string to locate UI text changes
+- Changed title from "Legit Products" to "Our products" in HomePage.tsx:7
+- Files changed: apps/shop/src/pages/HomePage.tsx
+- **Learnings for future iterations:**
+  - Title is in HomePage.tsx h2 element, not in app.tsx or Navbar
+  - Shop app has no test target, only build/lint/typecheck
 ---
