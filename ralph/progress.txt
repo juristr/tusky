@@ -1,11 +1,17 @@
 # Ralph Progress Log
-Started: Tue Jan 20 10:45:06 CET 2026
+Started: Tue Jan 20 11:45:47 CET 2026
+---
+
+## Codebase Patterns
+- Shop app uses HomePage.tsx for main title, not app.tsx
+- Shop app has no test target, only typecheck/lint/build/dev
+- Dev server runs on port 4200, API on port 3000
 ---
 
 ## 2026-01-20 - US-001
-- Changed shop title from "Legit Products" to "Our products"
-- Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
+- Changed title from "Legit Products" to "Our products"
+- File changed: apps/shop/src/pages/HomePage.tsx (line 7)
 - **Learnings:**
-  - Title is in HomePage.tsx, not App.tsx
-  - Search for exact text string to locate UI text changes
+  - Title text is in HomePage.tsx, not app.tsx or Navbar.tsx
+  - Search for exact text with grep across workspace when unsure of location
 ---
