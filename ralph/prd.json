@@ -5,7 +5,7 @@
     "id": "US-001",
     "title": "Change shop title to Our products",
     "priority": 1,
-    "passes": false,
+    "passes": true,
     "acceptanceCriteria": [
       "Change title from 'Legit products' to 'Our products' in apps/shop app component"
     ]

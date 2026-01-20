@@ -1,4 +1,18 @@
 # Ralph Progress Log - Login Feature
 
+## Codebase Patterns
+- Shop title displayed in `apps/shop/src/pages/HomePage.tsx` line 7
+- Navbar brand name in `apps/shop/src/components/Navbar.tsx` line 15
+
+---
+
+## 2026-01-20 - US-001
+- Verified shop title already shows "Our Products" in HomePage.tsx
+- Browser verification confirmed heading displays correctly
+- No code changes needed - acceptance criteria already met
+- Files checked: HomePage.tsx, Navbar.tsx, app.tsx
+- **Learnings for future iterations:**
+  - The product title heading is in HomePage.tsx, not app.tsx
+  - "Legit products" text referenced in PRD never existed in codebase
 ---
 
