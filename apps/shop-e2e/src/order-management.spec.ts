@@ -4,7 +4,7 @@ test('navigation bar is visible', async ({ page }) => {
   await page.goto('/');
 
   await expect(page.locator('header')).toBeVisible();
-  await expect(page.getByTestId('navbar-title')).toContainText('ShopSecure');
+  await expect(page.getByTestId('navbar-title')).toContainText('Our products');
 });
 
 test('footer is visible', async ({ page }) => {
