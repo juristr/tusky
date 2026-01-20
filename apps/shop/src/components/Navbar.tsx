@@ -12,7 +12,7 @@ const Navbar = () => {
               className="text-2xl font-bold text-indigo-600 mr-8"
               data-testid="navbar-title"
             >
-              ShopSecure
+              Our products
             </Link>
             <nav className="hidden md:flex space-x-6">
               <Link
