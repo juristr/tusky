@@ -1,13 +1,15 @@
 {
   "projectName": "shop-title-change",
   "branchName": "ralph/shop-title-change",
-  "userStories": [{
-    "id": "US-001",
-    "title": "Change shop title to Our products",
-    "priority": 1,
-    "passes": true,
-    "acceptanceCriteria": [
-      "Change title from 'Legit products' to 'Our products' in apps/shop app component"
-    ]
-  }]
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Change shop title to Our products",
+      "priority": 1,
+      "passes": true,
+      "acceptanceCriteria": [
+        "Change title from 'Legit products' to 'Our products' in apps/shop app component"
+      ]
+    }
+  ]
 }
