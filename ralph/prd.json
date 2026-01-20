@@ -7,7 +7,7 @@
     "priority": 1,
     "passes": false,
     "acceptanceCriteria": [
-      "Change title from 'Legit products' to 'Our products' in apps/shop app component"
+      "Change title from 'Legit products' to 'Our products' in apps/shop app component. Do not update e2e tests."
     ]
   }]
 }
