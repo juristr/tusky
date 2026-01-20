@@ -117,15 +117,10 @@ After ALL stories have `passes: true`:
    gh pr create --title "feat: [project] - [description]" --body "## Summary\n- Implemented via Ralph\n\n## Stories\n[list completed stories]"
    ```
 
-2. Monitor CI (blocking):
+2. Output PR created signal:
+   <promise>PR_CREATED</promise>
 
-   - Use the Nx "ci-monitor" skill to monitor CI
-   - If CI passes → continue to step 3
-
-3. Output completion signal:
-   <promise>COMPLETE</promise>
-
-**Important:** Do NOT output COMPLETE until CI passes.
+**Important:** Output PR_CREATED immediately after creating the PR. The shell script will handle CI monitoring in a separate phase.
 
 If there are still stories with `passes: false`, end your response normally (another iteration will pick up the next story).
 
@@ -147,4 +142,4 @@ After completing ONE user story, you MUST STOP IMMEDIATELY.
 
 The bash loop will call you again with fresh context for the next story. This is intentional - fresh context prevents hallucinations and context overflow.
 
-If you complete a story and there are more stories remaining, just end your response normally. Do NOT output `<promise>COMPLETE</promise>` unless ALL stories pass AND CI is green.
+If you complete a story and there are more stories remaining, just end your response normally. Do NOT output `<promise>PR_CREATED</promise>` unless ALL stories have `passes: true`.

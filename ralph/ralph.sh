@@ -153,6 +153,24 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   # Show iteration summary
   show_iteration_summary "$prev_completed"
 
+  # Check for PR created signal - start CI monitor phase
+  if echo "$OUTPUT" | grep -q "<promise>PR_CREATED</promise>"; then
+    echo ""
+    echo -e "${GREEN}${BOLD}PR created! Starting CI monitoring...${NC}"
+
+    # Run CI monitor with 60 min timeout
+    CI_OUTPUT=$(timeout 3600 claude --print "Run /nx:ci-monitor. When CI passes, output <promise>COMPLETE</promise>. If CI fails and cannot be fixed, output <promise>FAILED</promise>." \
+      --allowedTools 'Bash(git:*) Bash(nx:*) Read Write Edit Task mcp__nx-mcp__ci_information mcp__nx-mcp__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
+
+    if echo "$CI_OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
+      echo -e "${GREEN}${BOLD}Ralph completed - CI passed!${NC}"
+      exit 0
+    else
+      echo -e "${YELLOW}CI monitoring ended without success${NC}"
+      exit 1
+    fi
+  fi
+
   # Check for completion signal
   if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
     echo ""
