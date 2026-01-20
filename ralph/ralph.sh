@@ -1,6 +1,7 @@
 #!/bin/bash
 # Ralph Wiggum - Long-running AI agent loop
 # Usage: ./ralph.sh [max_iterations]
+# FIX: Uses stream-json + force-kill to handle "No messages returned" hang
 
 set -e
 
@@ -16,6 +17,57 @@ MAX_ITERATIONS=${1:-10}
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PRD_FILE="$SCRIPT_DIR/prd.json"
 PROGRESS_FILE="$SCRIPT_DIR/progress.txt"
+
+# Temp files for stream-json workaround
+TEMP_OUTPUT=$(mktemp)
+TEMP_FIFO=$(mktemp -u)
+mkfifo "$TEMP_FIFO"
+trap "rm -f $TEMP_OUTPUT $TEMP_FIFO" EXIT
+
+# Run claude with stream-json, detect completion, force-kill if hung
+# Usage: run_claude_stream "prompt" "allowed_tools" [session_id]
+# Sets OUTPUT variable with extracted text content
+run_claude_stream() {
+  local prompt="$1"
+  local tools="$2"
+  local session_arg=""
+  [ -n "$3" ] && session_arg="--session-id $3"
+
+  > "$TEMP_OUTPUT"  # Clear temp file
+
+  # Run claude with stream-json in background, tee to fifo and stderr
+  claude --print "$prompt" --output-format stream-json --verbose --allowedTools "$tools" $session_arg 2>&1 | tee "$TEMP_FIFO" >/dev/stderr &
+  CLAUDE_PID=$!
+
+  RESULT_RECEIVED=false
+  KILLER_PID=""
+
+  # Monitor output for result message
+  while IFS= read -r line; do
+    echo "$line" >> "$TEMP_OUTPUT"
+
+    # Detect completion via stream-json result message (emitted BEFORE hang)
+    if [[ "$line" == *'"type":"result"'* ]]; then
+      RESULT_RECEIVED=true
+      # Give 2s to exit gracefully, then force kill if hung
+      ( sleep 2; kill $CLAUDE_PID 2>/dev/null ) &
+      KILLER_PID=$!
+      break
+    fi
+  done < "$TEMP_FIFO"
+
+  wait $CLAUDE_PID 2>/dev/null || true
+  [ -n "$KILLER_PID" ] && kill $KILLER_PID 2>/dev/null || true
+
+  # Extract text content from assistant messages for signal detection
+  OUTPUT=$(grep '"type":"assistant"' "$TEMP_OUTPUT" 2>/dev/null | jq -r '.message.content[]? | select(.type=="text") | .text' 2>/dev/null | tr '\n' ' ' || cat "$TEMP_OUTPUT")
+
+  if [ "$RESULT_RECEIVED" = true ]; then
+    echo -e "${DIM}✓ Session completed (stream-json result detected)${NC}"
+  else
+    echo -e "${YELLOW}⚠ No result message received${NC}"
+  fi
+}
 
 # Get PRD status: completed/total stories, current story info
 get_prd_status() {
@@ -112,13 +164,13 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   # Show iteration banner with PRD status
   show_prd_status "$i" "$MAX_ITERATIONS"
 
-  # Run claude with the ralph prompt
+  # Run claude with the ralph prompt (using stream-json workaround)
   RALPH_PROMPT=$(cat "$SCRIPT_DIR/prompt.md")
   if [ -z "$RALPH_PROMPT" ]; then
     echo -e "${YELLOW}Error: prompt.md is empty or missing${NC}"
     exit 1
   fi
-  OUTPUT=$(claude --print "$RALPH_PROMPT" --allowedTools 'Bash(git:*) Bash(jq:*) Bash(pnpm:*) Bash(npm:*) Bash(nx:*) Bash(mkdir:*) Bash(gh:*) Read Write Edit Glob Grep Task mcp__nx__ci_information mcp__nx__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
+  run_claude_stream "$RALPH_PROMPT" 'Bash(git:*) Bash(jq:*) Bash(pnpm:*) Bash(npm:*) Bash(nx:*) Bash(mkdir:*) Bash(gh:*) Read Write Edit Glob Grep Task mcp__nx__ci_information mcp__nx__update_self_healing_fix'
 
   # Show iteration summary
   show_iteration_summary "$prev_completed"
@@ -170,9 +222,9 @@ CI_PROMPT="1. Commit all changes
 When CI passes, output: <promise>COMPLETE</promise>
 If CI fails and cannot be fixed after self-healing attempts, output: <promise>FAILED</promise>"
 
-CI_OUTPUT=$(claude --print --session-id "$CI_SESSION_ID" "$CI_PROMPT" --allowedTools 'Bash(git:*) Bash(nx:*) Bash(gh:*) Read Write Edit Task mcp__nx-mcp__ci_information mcp__nx-mcp__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
+run_claude_stream "$CI_PROMPT" 'Bash(git:*) Bash(nx:*) Bash(gh:*) Read Write Edit Task mcp__nx-mcp__ci_information mcp__nx-mcp__update_self_healing_fix' "$CI_SESSION_ID"
 
-if echo "$CI_OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
+if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
   echo ""
   echo -e "${GREEN}${BOLD}Ralph completed - CI passed!${NC}"
   exit 0
