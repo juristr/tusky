@@ -113,7 +113,12 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   show_prd_status "$i" "$MAX_ITERATIONS"
 
   # Run claude with the ralph prompt
-  OUTPUT=$(claude --print "$(cat "$SCRIPT_DIR/prompt.md")" --allowedTools 'Bash(git:*) Bash(jq:*) Bash(pnpm:*) Bash(npm:*) Bash(nx:*) Bash(mkdir:*) Bash(gh:*) Read Write Edit Glob Grep Task mcp__nx__ci_information mcp__nx__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
+  RALPH_PROMPT=$(cat "$SCRIPT_DIR/prompt.md")
+  if [ -z "$RALPH_PROMPT" ]; then
+    echo -e "${YELLOW}Error: prompt.md is empty or missing${NC}"
+    exit 1
+  fi
+  OUTPUT=$(claude --print "$RALPH_PROMPT" --allowedTools 'Bash(git:*) Bash(jq:*) Bash(pnpm:*) Bash(npm:*) Bash(nx:*) Bash(mkdir:*) Bash(gh:*) Read Write Edit Glob Grep Task mcp__nx__ci_information mcp__nx__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
 
   # Show iteration summary
   show_iteration_summary "$prev_completed"
@@ -156,15 +161,16 @@ echo -e "${DIM}Spy with: claude --resume $CI_SESSION_ID${NC}"
 echo ""
 
 echo -e "${DIM}Starting PR creation + CI monitor...${NC}"
-CI_OUTPUT=$(claude --print --session-id "$CI_SESSION_ID" "$(cat <<'PROMPT'
-1. Commit all changes
+echo -e "${DIM}CI Session ID: ${CYAN}$CI_SESSION_ID${NC}"
+
+CI_PROMPT="1. Commit all changes
 2. Push branch and create PR (use gh cli)
 3. Monitor CI using the nx ci monitor skill
 
 When CI passes, output: <promise>COMPLETE</promise>
-If CI fails and cannot be fixed after self-healing attempts, output: <promise>FAILED</promise>
-PROMPT
-)" --allowedTools 'Bash(git:*) Bash(nx:*) Bash(gh:*) Read Write Edit Task mcp__nx-mcp__ci_information mcp__nx-mcp__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
+If CI fails and cannot be fixed after self-healing attempts, output: <promise>FAILED</promise>"
+
+CI_OUTPUT=$(claude --print --session-id "$CI_SESSION_ID" "$CI_PROMPT" --allowedTools 'Bash(git:*) Bash(nx:*) Bash(gh:*) Read Write Edit Task mcp__nx-mcp__ci_information mcp__nx-mcp__update_self_healing_fix' 2>&1 | tee /dev/stderr) || true
 
 if echo "$CI_OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
   echo ""
