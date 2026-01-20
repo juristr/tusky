@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('displays homepage with correct heading', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.locator('h2').first()).toContainText('Our Products');
+  await expect(page.locator('h2').first()).toContainText('Legit Products');
 });
 
 test('product grid is displayed on homepage', async ({ page }) => {
