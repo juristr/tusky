@@ -1,11 +1,12 @@
 # Ralph Progress Log
-Started: Tue Jan 20 10:45:06 CET 2026
+Started: Thu Jan 22 15:09:02 CET 2026
 ---
 
-## 2026-01-20 - US-001
+## 2026-01-22 15:10 - US-001
 - Changed shop title from "Legit Products" to "Our products"
-- Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
-- **Learnings:**
-  - Title is in HomePage.tsx, not App.tsx
-  - Search for exact text string to locate UI text changes
+- Files changed: apps/shop/src/pages/HomePage.tsx
+- **Learnings for future iterations:**
+  - Title is in HomePage.tsx:7, not in app.tsx or Navbar
+  - Shop app has no `test` target, only typecheck/lint/build
+  - E2e tests reference old title but PRD said not to update them
 ---
