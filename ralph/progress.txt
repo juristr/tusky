@@ -9,3 +9,12 @@ Started: Tue Jan 20 10:45:06 CET 2026
   - Title is in HomePage.tsx, not App.tsx
   - Search for exact text string to locate UI text changes
 ---
+
+## 2026-01-22 - US-001 (re-run)
+- Re-implemented: Changed "Legit Products" to "Our products" in HomePage.tsx:7
+- Files changed: apps/shop/src/pages/HomePage.tsx
+- Verified in browser via Chrome DevTools MCP - heading shows "Our products"
+- **Learnings:**
+  - Previous iteration's commit was not preserved on branch - always verify implementation exists
+  - Use `nx run-many -t build,lint,typecheck --projects=<project>` for quality checks
+---
