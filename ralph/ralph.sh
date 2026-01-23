@@ -18,11 +18,17 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PRD_FILE="$SCRIPT_DIR/prd.json"
 PROGRESS_FILE="$SCRIPT_DIR/progress.txt"
 
-# Temp files for stream-json workaround
-TEMP_OUTPUT=$(mktemp)
-TEMP_FIFO=$(mktemp -u)
-mkfifo "$TEMP_FIFO"
-trap "rm -f $TEMP_OUTPUT $TEMP_FIFO" EXIT
+SHOW_TOOLS=${SHOW_TOOLS:-false}  # set SHOW_TOOLS=true for tool visibility
+
+# jq filters
+STREAM_TEXT='select(.type == "assistant").message.content[]? | select(.type == "text").text // empty | gsub("\n"; "\r\n") | . + "\r\n\n"'
+STREAM_WITH_TOOLS='if .type == "assistant" then
+  .message.content[]? |
+  if .type == "text" then .text | gsub("\n"; "\r\n") | . + "\r\n\n"
+  elif .type == "tool_use" then "  → " + .name + "\r\n"
+  else empty end
+else empty end'
+FINAL_RESULT='select(.type == "result").result // empty'
 
 # Run claude with stream-json, detect completion, force-kill if hung
 # Usage: run_claude_stream "prompt" "allowed_tools" [session_id]
@@ -33,49 +39,50 @@ run_claude_stream() {
   local session_arg=""
   [ -n "$3" ] && session_arg="--session-id $3"
 
-  > "$TEMP_OUTPUT"  # Clear temp file
+  local tmpfile=$(mktemp)
+  local filter="$STREAM_TEXT"
+  [ "$SHOW_TOOLS" = true ] && filter="$STREAM_WITH_TOOLS"
 
-  # Run claude with stream-json in background, tee to fifo, filter for clean display
-  claude --print "$prompt" --output-format stream-json --verbose --allowedTools "$tools" $session_arg 2>&1 | \
-    tee "$TEMP_FIFO" | \
-    jq -r --unbuffered '
-      if .type == "assistant" then
-        .message.content[]? | select(.type=="text") | .text
-      elif .type == "result" then
-        .result
-      else empty
-      end
-    ' 2>/dev/null &
-  CLAUDE_PID=$!
+  # Run pipeline in subshell for process-group kill
+  (
+    claude --print "$prompt" \
+      --output-format stream-json \
+      --verbose \
+      --allowedTools "$tools" \
+      $session_arg 2>/dev/null \
+    | grep --line-buffered '^{' \
+    | tee "$tmpfile" \
+    | jq --unbuffered -rj "$filter"
+  ) &
+  local group_pid=$!
 
-  RESULT_RECEIVED=false
-  KILLER_PID=""
+  # Watchdog: kill process group if result received but pipeline hangs
+  (
+    while kill -0 $group_pid 2>/dev/null; do
+      if grep -q '"type":"result"' "$tmpfile" 2>/dev/null; then
+        sleep 3
+        kill -- -$group_pid 2>/dev/null || kill $group_pid 2>/dev/null
+        break
+      fi
+      sleep 1
+    done
+  ) &
+  local watchdog_pid=$!
 
-  # Monitor output for result message
-  while IFS= read -r line; do
-    echo "$line" >> "$TEMP_OUTPUT"
+  wait $group_pid 2>/dev/null || true
+  kill $watchdog_pid 2>/dev/null || true
+  wait $watchdog_pid 2>/dev/null || true
 
-    # Detect completion via stream-json result message (emitted BEFORE hang)
-    if [[ "$line" == *'"type":"result"'* ]]; then
-      RESULT_RECEIVED=true
-      # Give 2s to exit gracefully, then force kill if hung
-      ( sleep 2; kill $CLAUDE_PID 2>/dev/null ) &
-      KILLER_PID=$!
-      break
-    fi
-  done < "$TEMP_FIFO"
+  # Extract result for signal detection
+  OUTPUT=$(jq -r "$FINAL_RESULT" "$tmpfile" 2>/dev/null)
 
-  wait $CLAUDE_PID 2>/dev/null || true
-  [ -n "$KILLER_PID" ] && kill $KILLER_PID 2>/dev/null || true
-
-  # Extract text content from assistant messages for signal detection
-  OUTPUT=$(grep '"type":"assistant"' "$TEMP_OUTPUT" 2>/dev/null | jq -r '.message.content[]? | select(.type=="text") | .text' 2>/dev/null | tr '\n' ' ' || cat "$TEMP_OUTPUT")
-
-  if [ "$RESULT_RECEIVED" = true ]; then
+  if [ -n "$OUTPUT" ]; then
     echo -e "${DIM}✓ Session completed${NC}"
   else
     echo -e "${YELLOW}⚠ No result message received${NC}"
   fi
+
+  rm -f "$tmpfile"
 }
 
 # Get PRD status: completed/total stories, current story info
