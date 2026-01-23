@@ -1,11 +1,17 @@
+## Codebase Patterns
+- Shop app homepage title is in `apps/shop/src/pages/HomePage.tsx`
+- Dev server: `nx run shop:serve` → localhost:4200
+- Quality checks: `nx run shop:typecheck` and `nx run shop:lint`
+
 # Ralph Progress Log
 Started: Tue Jan 20 10:45:06 CET 2026
 ---
 
-## 2026-01-20 - US-001
+## 2026-01-20 - US-001 (retry)
 - Changed shop title from "Legit Products" to "Our products"
 - Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
 - **Learnings:**
   - Title is in HomePage.tsx, not App.tsx
-  - Search for exact text string to locate UI text changes
+  - Previous iteration changed the file but didn't commit — always verify git status
+  - Dev server runs on port 4200 via `nx run shop:serve`
 ---
