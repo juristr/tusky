@@ -7,8 +7,8 @@ allowed-tools:
   - Bash
   - Read
   - Task
-  - mcp__plugin_nx_nx-mcp__ci_information
-  - mcp__plugin_nx_nx-mcp__update_self_healing_fix
+  - mcp__.*nx.*__ci_information
+  - mcp__.*nx.*__update_self_healing_fix
 ---
 
 # CI Monitor Command
