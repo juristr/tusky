@@ -2,6 +2,21 @@
 Started: Tue Jan 20 10:45:06 CET 2026
 ---
 
+## Codebase Patterns
+- Shop title in HomePage.tsx:7, not App.tsx
+- Use `pnpm nx <target> <project>` for running tasks
+
+---
+
+## 2026-01-28 - US-001
+- Changed shop title from "Legit Products" to "Our products"
+- Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
+- **Learnings:**
+  - Title is in HomePage.tsx, not App.tsx
+  - `npx nx` commands require approval; use `pnpm nx` instead
+  - Shop project has no test target configured
+---
+
 ## 2026-01-20 - US-001
 - Changed shop title from "Legit Products" to "Our products"
 - Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
