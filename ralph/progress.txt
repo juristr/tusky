@@ -9,3 +9,17 @@ Started: Tue Jan 20 10:45:06 CET 2026
   - Title is in HomePage.tsx, not App.tsx
   - Search for exact text string to locate UI text changes
 ---
+
+## Codebase Patterns
+- Title text lives in apps/shop/src/pages/HomePage.tsx
+- Use `nx run shop:build` and `nx run shop:lint` for quality checks (no test target exists)
+- Dev server: `nx serve shop --port=3000`
+
+## 2026-01-28 - US-001 (retry)
+- Changed h2 title from "Legit Products" to "Our products" in HomePage.tsx line 7
+- Files changed: apps/shop/src/pages/HomePage.tsx, ralph/prd.json
+- Browser verified: heading "Our products" confirmed via Chrome DevTools MCP
+- **Learnings:**
+  - Previous iteration ran but didn't commit; prd.json still had passes:false
+  - Build cached via Nx; used --no-open flag for headless serve
+---
