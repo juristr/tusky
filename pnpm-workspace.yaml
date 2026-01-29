@@ -8,3 +8,4 @@ packages:
   - 'packages/*'
   - 'packages/backend/*'
   - 'packages/frontend/ratings/*'
+  - 'packages/frontend/auth/*'

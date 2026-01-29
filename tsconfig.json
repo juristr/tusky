@@ -74,6 +74,18 @@
     },
     {
       "path": "./packages/frontend/ratings/ui-ratings"
+    },
+    {
+      "path": "./packages/backend/api-auth"
+    },
+    {
+      "path": "./packages/frontend/auth/data-access-auth"
+    },
+    {
+      "path": "./packages/frontend/auth/util-auth"
+    },
+    {
+      "path": "./packages/frontend/auth/feat-login"
     }
   ]
 }

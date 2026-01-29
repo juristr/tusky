@@ -6,6 +6,7 @@ import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { productsRoutes } from '@tusky/api-products';
 import { ratingsRoutes } from '@tusky/api-ratings';
+import { authRoutes } from '@tusky/api-auth';
 
 /* eslint-disable-next-line */
 export interface AppOptions {}
@@ -14,6 +15,7 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
   // CORS
   await fastify.register(cors, {
     origin: true,
+    credentials: true,
   });
 
   // Swagger
@@ -36,11 +38,15 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
     options: { ...opts },
   });
 
-  // Register product routes
-  await fastify.register(productsRoutes);
+  // Register auth routes (public - no authentication required)
+  await fastify.register(authRoutes);
 
-  // Register ratings routes
-  await fastify.register(ratingsRoutes);
+  // Register protected routes
+  await fastify.register(async function protectedRoutes(scopedFastify) {
+    scopedFastify.addHook('preHandler', fastify.authenticate);
+    await scopedFastify.register(productsRoutes);
+    await scopedFastify.register(ratingsRoutes);
+  });
 
   // Load other routes
   fastify.register(AutoLoad, {
