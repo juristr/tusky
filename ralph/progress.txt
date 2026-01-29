@@ -1,11 +1,3 @@
 # Ralph Progress Log
-Started: Tue Jan 20 10:45:06 CET 2026
----
-
-## 2026-01-20 - US-001
-- Changed shop title from "Legit Products" to "Our products"
-- Files changed: apps/shop/src/pages/HomePage.tsx (line 7)
-- **Learnings:**
-  - Title is in HomePage.tsx, not App.tsx
-  - Search for exact text string to locate UI text changes
+Started: Wed Jan 28 16:34:47 CET 2026
 ---
