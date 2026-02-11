@@ -11,10 +11,6 @@
     "playwriter": {
       "command": "bunx",
       "args": ["playwriter@latest"]
-    },
-    "nx-mcp": {
-      "command": "bunx",
-      "args": ["nx-mcp@latest"]
     }
   }
 }
