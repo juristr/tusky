@@ -1,20 +1,34 @@
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Rating } from '@tusky/tusky-design';
 import { UserRating } from '@tusky/api-types';
+import { getAllRatings } from '@tusky/data-access-ratings';
 
 export interface ReviewsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  reviews: UserRating[];
+  productId: number;
   productName?: string;
 }
 
 export function ReviewsModal({
   isOpen,
   onClose,
-  reviews,
+  productId,
   productName,
 }: ReviewsModalProps) {
+  const [reviews, setReviews] = useState<UserRating[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setLoading(true);
+    getAllRatings(productId)
+      .then((data) => setReviews(data))
+      .catch(() => setReviews([]))
+      .finally(() => setLoading(false));
+  }, [isOpen, productId]);
+
   if (!isOpen) return null;
 
   return (
@@ -42,7 +56,9 @@ export function ReviewsModal({
           </button>
         </div>
         <div className="overflow-y-auto flex-1 p-4">
-          {reviews.length === 0 ? (
+          {loading ? (
+            <p className="text-gray-500 text-center py-8">Loading reviews...</p>
+          ) : reviews.length === 0 ? (
             <p className="text-gray-500 text-center py-8">No reviews yet.</p>
           ) : (
             <ul className="space-y-4">

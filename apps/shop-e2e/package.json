@@ -6,6 +6,7 @@
     "eslint-plugin-playwright": "^1.6.2"
   },
   "nx": {
+    "tags": ["type:e2e"],
     "implicitDependencies": [
       "@tusky/shop"
     ]

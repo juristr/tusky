@@ -2,7 +2,6 @@ import { ShoppingCart, Heart, Share2 } from 'lucide-react';
 import { Price, Button, IconButton } from '@tusky/tusky-design';
 import { useState } from 'react';
 import { ProductRating, ReviewsModal } from '@tusky/ui-ratings';
-import { getAllRatings, UserRating } from '@tusky/data-access-ratings';
 
 interface ProductDetailProps {
   product: {
@@ -21,21 +20,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showReviewsModal, setShowReviewsModal] = useState(false);
-  const [reviews, setReviews] = useState<UserRating[]>([]);
-  const [loadingReviews, setLoadingReviews] = useState(false);
-
-  const handleReviewCountClick = async () => {
-    setLoadingReviews(true);
-    try {
-      const data = await getAllRatings(product.id);
-      setReviews(data);
-      setShowReviewsModal(true);
-    } catch {
-      setReviews([]);
-    } finally {
-      setLoadingReviews(false);
-    }
-  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8" data-testid="product-detail">
@@ -87,12 +71,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
             {/* Rating - now using smart ProductRating component */}
             <ProductRating
               productId={product.id}
-              onReviewCountClick={handleReviewCountClick}
+              onReviewCountClick={() => setShowReviewsModal(true)}
               className="mt-2"
             />
-            {loadingReviews && (
-              <span className="text-sm text-gray-500 ml-2">Loading...</span>
-            )}
           </div>
 
           {/* Price */}
@@ -188,7 +169,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
       <ReviewsModal
         isOpen={showReviewsModal}
         onClose={() => setShowReviewsModal(false)}
-        reviews={reviews}
+        productId={product.id}
         productName={product.name}
       />
     </div>
