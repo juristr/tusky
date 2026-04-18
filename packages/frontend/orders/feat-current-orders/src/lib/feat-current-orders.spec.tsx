@@ -112,7 +112,7 @@ describe('FeatCurrentOrders Component', () => {
 
     it('should estimate delivery time', async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
-      const orderDate = new Date('2024-01-15');
+      const orderDate = new Date(2024, 0, 15);
       const estimatedDays = 5;
       const deliveryDate = new Date(orderDate);
       deliveryDate.setDate(deliveryDate.getDate() + estimatedDays);

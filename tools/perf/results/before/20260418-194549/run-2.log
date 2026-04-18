@@ -1,0 +1,180 @@
+
+ NX   --skip-nx-cache disables the connection to Nx Cloud for the current run.
+
+The remote cache will not be read from or written to during this run.
+
+
+ NX   Running target lint for 24 projects:
+
+- @tusky/data-access-products
+- @tusky/feat-product-detail
+- @tusky/data-access-ratings
+- @tusky/feat-current-orders
+- @tusky/feat-product-list
+- @tusky/ui-product-detail
+- @tusky/data-access-order
+- @tusky/feat-cancel-order
+- @tusky/feat-create-order
+- @tusky/feat-past-orders
+- @tusky/ui-order-detail
+- @tusky/ui-ratings
+- @tusky/service-products
+- @tusky/service-ratings
+- @tusky/data-products
+- @tusky/api-products
+- @tusky/data-ratings
+- @tusky/api-ratings
+- @tusky/tusky-design
+- @tusky/tailwind-sync-plugin
+- @tusky/api-types
+- @tusky/shop-e2e
+- @tusky/shop
+- @tusky/api
+
+
+
+> nx run @tusky/api-types:lint
+
+> eslint .
+
+
+> nx run @tusky/data-access-order:lint
+
+> eslint .
+
+
+> nx run @tusky/ui-order-detail:lint
+
+> eslint .
+
+
+> nx run @tusky/data-ratings:lint
+
+> eslint .
+
+
+> nx run @tusky/data-products:lint
+
+> eslint .
+
+(node:79978) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 14 exit listeners added to [process]. MaxListeners is 13. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> nx run @tusky/tusky-design:lint
+
+> eslint .
+
+[0m[0m
+[0m[4m/Users/juri/nrwl/content/nx-core/tusky-shop/packages/shared/tusky-design/.storybook/main.ts[24m[0m
+[0m  [2m19:42[22m  [33mwarning[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[33m[1m✖ 1 problem (0 errors, 1 warning)[22m[39m[0m
+[0m[33m[1m[22m[39m[0m
+
+> nx run @tusky/service-ratings:lint
+
+> eslint .
+
+
+> nx run @tusky/data-access-ratings:lint
+
+> eslint .
+
+
+> nx run @tusky/data-access-products:lint
+
+> eslint .
+
+
+> nx run @tusky/api-ratings:lint
+
+> eslint .
+
+(node:79978) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 14 SIGINT listeners added to [process]. MaxListeners is 13. Use emitter.setMaxListeners() to increase limit
+(node:79978) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 14 SIGTERM listeners added to [process]. MaxListeners is 13. Use emitter.setMaxListeners() to increase limit
+(node:79978) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 14 SIGHUP listeners added to [process]. MaxListeners is 13. Use emitter.setMaxListeners() to increase limit
+
+> nx run @tusky/service-products:lint
+
+> eslint .
+
+
+> nx run @tusky/api-products:lint
+
+> eslint .
+
+
+> nx run @tusky/ui-ratings:lint
+
+> eslint .
+
+
+> nx run @tusky/ui-product-detail:lint
+
+> eslint .
+
+
+> nx run @tusky/api:lint
+
+> eslint .
+
+
+> nx run @tusky/feat-past-orders:lint
+
+> eslint .
+
+
+> nx run @tusky/feat-cancel-order:lint
+
+> eslint .
+
+
+> nx run @tusky/feat-current-orders:lint
+
+> eslint .
+
+
+> nx run @tusky/feat-create-order:lint
+
+> eslint .
+
+
+> nx run @tusky/feat-product-list:lint
+
+> eslint .
+
+
+> nx run @tusky/feat-product-detail:lint
+
+> eslint .
+
+
+> nx run @tusky/tailwind-sync-plugin:lint
+
+> eslint .
+
+[0m[0m
+[0m[4m/Users/juri/nrwl/content/nx-core/tusky-shop/tools/tailwind-sync-plugin/src/generators/update-tailwind-globs.ts[24m[0m
+[0m  [2m85:36[22m  [33mwarning[39m  Forbidden non-null assertion  [2m@typescript-eslint/no-non-null-assertion[22m[0m
+[0m  [2m85:36[22m  [33mwarning[39m  Forbidden non-null assertion  [2m@typescript-eslint/no-non-null-assertion[22m[0m
+[0m[0m
+[0m[33m[1m✖ 2 problems (0 errors, 2 warnings)[22m[39m[0m
+[0m[33m[1m[22m[39m[0m
+
+> nx run @tusky/shop:lint
+
+> eslint .
+
+
+> nx run @tusky/shop-e2e:lint
+
+> eslint .
+
+
+
+
+ NX   Successfully ran target lint for 24 projects
+
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+

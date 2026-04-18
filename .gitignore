@@ -16,6 +16,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+.superset
 
 # IDE - VSCode
 .vscode/*
@@ -50,3 +51,6 @@ test-output
 
 
 storybook-static
+.claude/worktrees
+.claude/settings.local.json
+*.bak.codex

@@ -1,0 +1,10 @@
+{
+  "label": "before",
+  "timestamp": "20260418-194549",
+  "runs": 3,
+  "parallel": 3,
+  "wall_seconds": [8, 9, 9],
+  "min": 8,
+  "max": 9,
+  "mean": 8.67
+}
