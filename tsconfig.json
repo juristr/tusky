@@ -75,5 +75,8 @@
     {
       "path": "./packages/frontend/ratings/ui-ratings"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  }
 }

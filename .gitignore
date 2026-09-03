@@ -54,3 +54,7 @@ storybook-static
 .claude/worktrees
 .claude/settings.local.json
 *.bak.codex
+
+.nx/polygraph
+.nx/self-healing
+.nx/migrate-runs

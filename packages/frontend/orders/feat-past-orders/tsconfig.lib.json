@@ -10,7 +10,8 @@
     "rootDir": "src",
     "jsx": "react-jsx",
     "outDir": "dist",
-    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
+    "ignoreDeprecations": "6.0"
   },
   "exclude": [
     "out-tsc",
