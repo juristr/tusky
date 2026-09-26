@@ -32,18 +32,34 @@ export default defineConfig({
   },
   projects: [
     {
+      name: 'setup',
+      testMatch: /global-setup\.ts/,
+    },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'apps/shop-e2e/storageState.json',
+      },
+      dependencies: ['setup'],
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'apps/shop-e2e/storageState.json',
+      },
+      dependencies: ['setup'],
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'apps/shop-e2e/storageState.json',
+      },
+      dependencies: ['setup'],
     },
 
     // Uncomment for mobile browsers support

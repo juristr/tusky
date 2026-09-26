@@ -4,12 +4,14 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@tusky/feat-login": "workspace:*",
     "@tusky/feat-product-detail": "workspace:*",
     "@tusky/feat-product-list": "workspace:*",
     "@tusky/feat-create-order": "workspace:*",
     "@tusky/feat-current-orders": "workspace:*",
     "@tusky/feat-past-orders": "workspace:*",
-    "@tusky/feat-cancel-order": "workspace:*"
+    "@tusky/feat-cancel-order": "workspace:*",
+    "@tusky/util-auth": "workspace:*"
   },
   "devDependencies": {},
   "nx": {

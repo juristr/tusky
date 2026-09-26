@@ -49,6 +49,8 @@ vitest.config.*.timestamp*
 
 test-output
 
+# Playwright authenticated storage state
+apps/shop-e2e/storageState.json
 
 storybook-static
 .claude/worktrees

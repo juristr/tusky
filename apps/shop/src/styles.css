@@ -1,12 +1,16 @@
 @import 'tailwindcss';
 
 @source "../../../apps/api";
+@source "../../../packages/backend/api-auth";
 @source "../../../packages/backend/api-products";
 @source "../../../packages/backend/api-ratings";
 @source "../../../packages/backend/data-products";
 @source "../../../packages/backend/data-ratings";
 @source "../../../packages/backend/service-products";
 @source "../../../packages/backend/service-ratings";
+@source "../../../packages/frontend/auth/data-access-auth";
+@source "../../../packages/frontend/auth/feat-login";
+@source "../../../packages/frontend/auth/util-auth";
 @source "../../../packages/frontend/orders/data-access-order";
 @source "../../../packages/frontend/orders/feat-cancel-order";
 @source "../../../packages/frontend/orders/feat-create-order";
